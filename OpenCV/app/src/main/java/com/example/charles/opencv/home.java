@@ -6,6 +6,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.content.Intent;
+import android.widget.Button;
+import android.view.View;
+
+
+
 
 public class home extends AppCompatActivity {
 
@@ -28,15 +34,6 @@ public class home extends AppCompatActivity {
         }
     };
 
-    Button btn = (Button)findViewById(R.id.open_activity_button);
-
-    btn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
-        }
-    });
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +42,16 @@ public class home extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+        Button button = (Button) findViewById(R.id.button);
+
+        button.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick (View v){
+                startActivity(new Intent(home.this, MainActivity.class));
+            }
+        });
     }
 
 }
