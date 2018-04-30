@@ -28,6 +28,15 @@ public class home extends AppCompatActivity {
         }
     };
 
+    Button btn = (Button)findViewById(R.id.open_activity_button);
+
+    btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
+        }
+    });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,14 +29,14 @@
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="219"
+            android:layout_height="219dp"
             android:background="#8794B3"
             android:text="Take a Photo" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
-            android:layout_height="219"
+            android:layout_height="219dp"
             android:text="Upload from Camera Roll"
             tools:background="#BDC9E4" />
     </LinearLayout>
