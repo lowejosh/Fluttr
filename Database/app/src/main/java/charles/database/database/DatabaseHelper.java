@@ -11,6 +11,7 @@ import java.util.List;
 
 import charles.database.model.Duck;
 import charles.database.model.Feature;
+import charles.database.model.FeatureOptions;
 import charles.database.model.Question;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -125,36 +126,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param duckIDs List of DuckIDs to refine search
      */
     public void updateDuckIDs(int goalFeature, String feature, List<Integer> duckIDs) {
+
         //SELECT DuckID FROM table WHERE feature = goalFeature AND DuckID IN (VALUE (duckID), (duckID))
         StringBuilder query = new StringBuilder();
         query.append("SELECT duckID FROM ");
         query.append(feature);
         query.append(" WHERE ");
-        query.append(feature);
-        query.append(" = ");
-        query.append(goalFeature);
-        query.append(" AND DuckID IN (VALUES");
+
+        if (!isUnknown(goalFeature)) {
+            query.append(feature);
+            query.append(" = ");
+            query.append(goalFeature);
+            query.append(" AND ");
+        }
+
+        query.append("DuckID IN (VALUES");
 
         for (Integer duckID : duckIDs) {
             query.append("(");
             query.append(duckID.toString());
             query.append("),");
         }
+
         query.deleteCharAt(query.length() - 1);
         query.append(")");
 
         duckIDs.clear();
+
         openDatabase();
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         cursor.moveToFirst();
 
+        Log.i("DatabaseHelper", "DuckID Size: " + duckIDs.size());
+
         while (!cursor.isAfterLast()) {
-            duckIDs.add(cursor.getInt(0));
+            if (isUnknown(goalFeature)) {
+                duckIDs.remove((Integer)(cursor.getInt(0)));
+            } else {
+                duckIDs.add(cursor.getInt(0));
+            }
             cursor.moveToNext();
         }
 
+        Log.i("DatabaseHelper", "DuckID Size: " + duckIDs.size());
+
         cursor.close();
         closeDatabase();
+
     }
 
     /**
@@ -188,6 +206,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         closeDatabase();
+
+        //Add UNKNOWN feature
+        featureList.add(0);
 
         return featureList;
     }
@@ -297,6 +318,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         query.deleteCharAt(query.length() - 1);
 
         return query.toString();
+    }
+
+    private boolean isUnknown(int feature) {
+        return feature == 0;
     }
 
     /*public int getDuckIDCount(List<Integer> duckIDList, String TABLE, Feature feature, FeatureOptions goalFeature) {

@@ -1,11 +1,10 @@
 package charles.database.adapter;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,64 +15,50 @@ import charles.database.model.Duck;
 import charles.database.model.FeatureOptions;
 import charles.database.model.Question;
 
-public class QuestionAdapter extends AppCompatActivity {
-    private Context context;
+public class QuestionAdapter {
     private DatabaseHelper dbHandler;
-    private View v;
+    ViewFlipper flipper;
+    private TextView tvQuestion;
+    private TextView tvQuestionNo;
+    private TextView tvResultDuck;
     private int questionNo;
-    Question question;
-    private List<Button> buttons = new ArrayList<>();
-    private List<Integer> duckIDs = new ArrayList<>();
-    private List<Question> questions = new ArrayList<>();
+    private Question question;
+    private List<Button> buttons;
+    private List<Integer> duckIDs;
+    private List<Question> questions;
     private List<Integer> features = new ArrayList<>();
 
-    public QuestionAdapter(Context context, DatabaseHelper dbHandler) {
-        this.context = context;
+    public QuestionAdapter(DatabaseHelper dbHandler, ViewFlipper flipper, TextView tvQuestion, TextView tvQuestionNo, TextView tvResultDuck, List<Button> buttons) {
         this.dbHandler = dbHandler;
+        this.flipper = flipper;
+        this.tvQuestion = tvQuestion;
+        this.tvQuestionNo = tvQuestionNo;
+        this.tvResultDuck = tvResultDuck;
+        this.buttons = buttons;
 
         duckIDs = dbHandler.getDuckIDs();
         questions = dbHandler.getListQuestions();
         questionNo = 0;
 
-        v = View.inflate(context, R.layout.tq_question, null);
-        if (buttons.size() == 0) {
-            buttons.add((Button) v.findViewById(R.id.btn_option_1));
-            buttons.add((Button) v.findViewById(R.id.btn_option_2));
-            buttons.add((Button) v.findViewById(R.id.btn_option_3));
-            buttons.add((Button) v.findViewById(R.id.btn_option_4));
-            buttons.add((Button) v.findViewById(R.id.btn_option_5));
-            buttons.add((Button) v.findViewById(R.id.btn_option_6));
-            buttons.add((Button) v.findViewById(R.id.btn_option_7));
-            buttons.add((Button) v.findViewById(R.id.btn_option_8));
-            buttons.add((Button) v.findViewById(R.id.btn_option_9));
-            buttons.add((Button) v.findViewById(R.id.btn_option_10));
-            buttons.add((Button) v.findViewById(R.id.btn_option_11));
-            buttons.add((Button) v.findViewById(R.id.btn_option_12));
-            buttons.add((Button) v.findViewById(R.id.btn_option_13));
-            buttons.add((Button) v.findViewById(R.id.btn_option_14));
-
-            for (Button btn : buttons) {
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        btnNextQuestion();
-                    }
-                });
-            }
+        for (Button btn : buttons) {
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnNextQuestion(v);
+                }
+            });
         }
 
         nextQuestion();
     }
 
-    public View nextQuestion() {
+    private void nextQuestion() {
         questionNo++;
         features.clear();
         question = dbHandler.getBestOption(duckIDs, questions);
         features = dbHandler.getListFeatures(question.getTable(), duckIDs);
 
         //Get and set Question and Question No
-        TextView tvQuestionNo = (TextView) v.findViewById(R.id.tv_question_no);
-        TextView tvQuestion = (TextView) v.findViewById(R.id.tv_question);
         tvQuestionNo.setText(String.format("%s.", String.valueOf(questionNo)));
         tvQuestion.setText(question.getQuestion());
 
@@ -85,35 +70,24 @@ public class QuestionAdapter extends AppCompatActivity {
 
             //Change button to show feature
             if (i < features.size()) {
-                Log.i("MainActivity", String.valueOf(i));
                 btn.setText(FeatureOptions.getValue(features.get(i)));
                 btn.setVisibility(View.VISIBLE);
                 //} else if (i == features.size()) {
-                //    btn.setText(R.string.unknown);
-                //    btn.setVisibility(View.VISIBLE);
-                //} else if (i == features.size() + 1) {
                 //    btn.setText(R.string.none_of_the_above);
                 //    btn.setVisibility(View.VISIBLE);
             } else {
                 btn.setVisibility(View.INVISIBLE);
             }
         }
-
-        return v;
     }
 
-    public void showAnswer() {
+    private void showAnswer() {
         Duck duck = dbHandler.getDuck(duckIDs.get(0));
-        v = View.inflate(context, R.layout.tq_result, null);
-        setContentView(v);
-
-        TextView tvBirdName = (TextView)v.findViewById(R.id.tv_result_duck_name);
-        tvBirdName.setText(duck.getName());
-
-        setContentView(v);
+        tvResultDuck.setText(duck.getName());
+        flipper.setDisplayedChild(1);
     }
 
-    private void btnNextQuestion() {
+    private void btnNextQuestion(View v) {
         //Get new DuckID list
         int btn_id = 0;
         switch (v.getId()) {
@@ -166,6 +140,7 @@ public class QuestionAdapter extends AppCompatActivity {
         if (duckIDs.size() == 1) {
             showAnswer();
         } else {
+            Log.i("QuestionAdapter", "Size: " + String.valueOf(duckIDs.size()));
             nextQuestion();
         }
     }
