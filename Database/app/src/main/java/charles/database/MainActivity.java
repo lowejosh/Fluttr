@@ -61,19 +61,10 @@ public class MainActivity extends AppCompatActivity {
         questions = dbHandler.getListQuestions();
         questionNo = 0;
         nextQuestion();
-
-        /*QuestionAdapter questionAdapter = new QuestionAdapter(this,
-                dbHandler,
-                (ViewFlipper)findViewById(R.id.vf_question),
-                (TextView)findViewById(R.id.tv_question),
-                (TextView)findViewById(R.id.tv_question_no),
-                (TextView)findViewById(R.id.tv_result_duck_name),
-                (TextView)findViewById(R.id.tv_result_duck_name),
-                (ImageView)findViewById(R.id.iv_result_image),
-                buttons);*/
     }
 
     private void setButtons() {
+        buttons.clear();
         buttons.add((Button)findViewById(R.id.btn_option_1));
         buttons.add((Button)findViewById(R.id.btn_option_2));
         buttons.add((Button)findViewById(R.id.btn_option_3));
@@ -154,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.tq_question);
+                setButtons();
+                duckIDs.clear();
+                questions.clear();
                 duckIDs = dbHandler.getDuckIDs();
                 questions = dbHandler.getListQuestions();
                 questionNo = 0;
