@@ -11,7 +11,7 @@ public final class FeatureOptions {
     private static SparseArray<String> OPTION = new SparseArray<String>();
 
     static {
-        OPTION.put(0, "Unknown");
+        OPTION.put(0, "Other");
         OPTION.put(1, "Prominent");
         OPTION.put(2, "Curved");
         OPTION.put(3, "Long");

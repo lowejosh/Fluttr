@@ -157,8 +157,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         cursor.moveToFirst();
 
-        Log.i("DatabaseHelper", "DuckID Size: " + duckIDs.size());
-
         while (!cursor.isAfterLast()) {
             if (isUnknown(goalFeature)) {
                 duckIDs.remove((Integer)(cursor.getInt(0)));
@@ -167,8 +165,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
             cursor.moveToNext();
         }
-
-        Log.i("DatabaseHelper", "DuckID Size: " + duckIDs.size());
 
         cursor.close();
         closeDatabase();

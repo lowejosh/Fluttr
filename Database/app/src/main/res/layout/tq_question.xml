@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:id="@+id/tv_question"
+        android:id="@+id/tv_question_question"
         android:text="Question"
         android:textColor="#000"
         android:textSize="26sp"
@@ -55,168 +55,183 @@
         android:layout_height="2dp"
         android:background="?android:attr/listDivider" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_1"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_2"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_1"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_3"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_2"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_4"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_5"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_3"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_6"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_4"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_7"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_5"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_8"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_6"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_9"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_10"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_7"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_8"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_11"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_12"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_9"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_13"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_10"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:id="@+id/btn_option_14"
-            android:background="#ddd"
-            android:visibility="invisible"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_11"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_12"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_13"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:id="@+id/btn_option_14"
+                    android:background="#ddd"
+                    android:visibility="invisible"
+                    style="?android:attr/borderlessButtonStyle"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

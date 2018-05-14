@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d1d1d1"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Testing"/>
+
+    <ListView
+        android:id="@+id/lv_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#d1d1d1"
+        android:dividerHeight="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Testing"/>
+</LinearLayout>
