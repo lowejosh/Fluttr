@@ -18,6 +18,7 @@ import charles.database.model.Duck;
 public class ResultListAdapter extends BaseAdapter {
     private Context context;
     private List<Duck> ducklist;
+    LayoutInflater inflter;
 
     /**
      * Creates a list of duck results
@@ -28,6 +29,7 @@ public class ResultListAdapter extends BaseAdapter {
     public ResultListAdapter(Context context, List<Duck> ducklist) {
         this.context = context;
         this.ducklist = ducklist;
+        this.inflter = (LayoutInflater.from(context));
     }
 
     /**
@@ -72,7 +74,7 @@ public class ResultListAdapter extends BaseAdapter {
      *
      * @param position    The position of the item within the adapter's data set of the item whose view
      *                    we want.
-     * @param convertView The old view to reuse, if possible. Note: You should check that this view
+     * @param v The old view to reuse, if possible. Note: You should check that this view
      *                    is non-null and of an appropriate type before using. If it is not possible to convert
      *                    this view to display the correct data, this method can create a new view.
      *                    Heterogeneous lists can specify their number of view types, so that this View is
@@ -82,8 +84,8 @@ public class ResultListAdapter extends BaseAdapter {
      * @return A View corresponding to the data at the specified position.
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(context, R.layout.tq_result_item, null);
+    public View getView(int position, View v, ViewGroup parent) {
+        v = inflter.inflate(R.layout.tq_result_item, null);
 
         //Get Duck and Image
         Log.i("ResultListAdapter", "Duck: " + ducklist.get(position).getName());
@@ -91,10 +93,10 @@ public class ResultListAdapter extends BaseAdapter {
 
         //Get TextViews
         TextView tv_duckName = (TextView)v.findViewById(R.id.result_item_bird_name);
-        ImageView iv_duckImage = (ImageView)v.findViewById(R.id.result_item_image);
+        //ImageView iv_duckImage = (ImageView)v.findViewById(R.id.result_item_image);
 
         tv_duckName.setText(ducklist.get(position).getName());
-        iv_duckImage.setImageResource(duckImage);
+        //iv_duckImage.setImageResource(duckImage);
 
         Log.i("ResultListAdapter", "Return View");
         return v;

@@ -18,7 +18,7 @@ public class Duck {
      * @param minSize Duck Minimum Size (cm)
      * @param maxSize Duck Maximum Size (cm)
      */
-    public Duck(int duckID, String name, String image, short atlasNo, byte minSize, byte maxSize) throws Exception {
+    public Duck(int duckID, String name, String image, short atlasNo, byte minSize, byte maxSize) {
         this.duckID = duckID;
         this.name = name;
         this.image = image;
@@ -26,6 +26,7 @@ public class Duck {
         this.minSize = minSize;
         this.maxSize = maxSize;
 
+        /*
         //Check DuckID is positive
         if (duckID < 0) {
             throw new Exception("DuckID Cannot be a Negative Number.");
@@ -51,7 +52,7 @@ public class Duck {
         //Check maximum size is positive
         if (maxSize <= 0) {
             throw new Exception("Maximum size Cannot be a Negative/Zero Number.");
-        }
+        }*/
     }
 
     /**

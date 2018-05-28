@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -167,6 +168,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAnswerList() {
+        /*List<String> ducks = new ArrayList<>();
+        for (Integer duckID : duckIDs) {
+            ducks.add(dbHandler.getDuck(duckID).getName());
+        }
+
+        setContentView(R.layout.activity_list);
+
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, ducks);
+        ListView listView = (ListView)findViewById(R.id.mobile_list);
+        listView.setAdapter(adapter);*/
+
         //Get List of Ducks
         List<Duck> ducks = new ArrayList<>();
         for (Integer duckID : duckIDs) {
@@ -174,8 +186,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         setContentView(R.layout.tq_result_list);
+
         ListView lvResultList = (ListView)findViewById(R.id.lv_result_list);
-        ResultListAdapter adapter = new ResultListAdapter(this, ducks);
+        ResultListAdapter adapter = new ResultListAdapter(getApplicationContext(), ducks);
         lvResultList.setAdapter(adapter);
 
     }

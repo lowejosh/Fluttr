@@ -5,20 +5,10 @@
     android:background="#d1d1d1"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Testing"/>
-
     <ListView
         android:id="@+id/lv_result_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#d1d1d1"
-        android:dividerHeight="10dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Testing"/>
+        android:divider="#000"
+        android:dividerHeight="2dp" />
 </LinearLayout>
