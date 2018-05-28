@@ -3,6 +3,7 @@ package charles.database;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import charles.database.adapter.ResultListAdapter;
 import charles.database.database.DatabaseHelper;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> duckIDs;
     private List<Question> questions;
     private List<Integer> features = new ArrayList<>();
+    private Map<Question, Question> answers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtons() {
+        Log.i("MainActivity", "setButtons");
         buttons.clear();
         buttons.add((Button)findViewById(R.id.btn_option_1));
         buttons.add((Button)findViewById(R.id.btn_option_2));
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
+        Log.i("MainActivity", "nextQuestion");
         questionNo++;
         features.clear();
         question = dbHandler.getBestOption(duckIDs, questions);
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             if (i < features.size()) {
                 btn.setText(FeatureOptions.getValue(features.get(i)));
                 btn.setVisibility(View.VISIBLE);
+
                 //} else if (i == features.size()) {
                 //    btn.setText(R.string.none_of_the_above);
                 //    btn.setVisibility(View.VISIBLE);
@@ -132,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAnswer() {
+        Log.i("MainActivity", "showAnswer");
         Duck duck = dbHandler.getDuck(duckIDs.get(0));
         setContentView(R.layout.tq_result);
 
@@ -168,17 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAnswerList() {
-        /*List<String> ducks = new ArrayList<>();
-        for (Integer duckID : duckIDs) {
-            ducks.add(dbHandler.getDuck(duckID).getName());
-        }
-
-        setContentView(R.layout.activity_list);
-
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, ducks);
-        ListView listView = (ListView)findViewById(R.id.mobile_list);
-        listView.setAdapter(adapter);*/
-
+        Log.i("MainActivity", "showAnswerList");
         //Get List of Ducks
         List<Duck> ducks = new ArrayList<>();
         for (Integer duckID : duckIDs) {
@@ -194,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getBtnID(int id) {
+        Log.i("MainActivity", "getBtnID");
         switch (id) {
             case R.id.btn_option_1:
                 return 0;
@@ -224,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_option_14:
                 return 13;
             default:
+                Log.d("MainActivity", "getBtnID: Unknown Button Pressed.");
                 return -1;
         }
     }

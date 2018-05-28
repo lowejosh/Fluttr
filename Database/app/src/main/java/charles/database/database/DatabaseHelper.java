@@ -79,6 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Duck matching the DuckID
      */
     public Duck getDuck(int duckID) {
+        Log.i("DatabaseHelper", "getDuck");
         Duck duck;
 
         openDatabase();
@@ -102,6 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of DuckIDs
      */
     public List<Integer> getDuckIDs() {
+        Log.i("DatabaseHelper", "getDuckIDs");
         List<Integer> duckIDs = new ArrayList<>();
 
         openDatabase();
@@ -126,10 +128,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param duckIDs List of DuckIDs to refine search
      */
     public void updateDuckIDs(int goalFeature, String feature, List<Integer> duckIDs) {
-
+        Log.i("DatabaseHelper", "updateDuckIDs");
+        Log.i("DatabaseHelper", "updateDuckIDs: goalFeature: " + FeatureOptions.getValue(goalFeature));
+        Log.i("DatabaseHelper", "updateDuckIDs: feature: " + feature);
+        Log.i("DatabaseHelper", "updateDuckIDs: duckIDs: " + duckIDs);
         //SELECT DuckID FROM table WHERE feature = goalFeature AND DuckID IN (VALUE (duckID), (duckID))
         StringBuilder query = new StringBuilder();
-        query.append("SELECT duckID FROM ");
+        query.append("SELECT DISTINCT duckID FROM ");
         query.append(feature);
         query.append(" WHERE ");
 
@@ -150,17 +155,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         query.deleteCharAt(query.length() - 1);
         query.append(")");
+        Log.i("DatabaseHelper", "updateDuckIDs: Query: " + query.toString());
 
-        duckIDs.clear();
+        if (!isUnknown(goalFeature)) {
+            duckIDs.clear();
+        }
 
         openDatabase();
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
+            Log.i("DatabaseHelper", "updateDuckIDs: Duck Found");
             if (isUnknown(goalFeature)) {
-                duckIDs.remove((Integer)(cursor.getInt(0)));
+                Log.i("DatabaseHelper", "updateDuckIDs: Duck Removed: " + cursor.getInt(0));
+                duckIDs.remove((Integer)cursor.getInt(0));
             } else {
+                Log.i("DatabaseHelper", "updateDuckIDs: Duck Added: " + cursor.getInt(0));
                 duckIDs.add(cursor.getInt(0));
             }
             cursor.moveToNext();
@@ -179,8 +190,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Features
      */
     public List<Integer> getListFeatures(String feature, List<Integer> duckIDs) {
+        Log.i("DatabaseHelper", "getListFeatures");
+        Log.i("DatabaseHelper", "getListFeatures: feature: " + feature);
+        Log.i("DatabaseHelper", "getListFeatures: duckIDs: " + duckIDs);
         List<Integer> featureList = new ArrayList<>();
 
+        //Create query to find all features that any duck in the list of duckIDs has
         StringBuilder query = new StringBuilder();
         query.append("SELECT DISTINCT(");
         query.append(feature);
@@ -191,20 +206,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         query.append(") ORDER BY ");
         query.append(feature);
 
+        //Open Database and create cursor
         openDatabase();
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         cursor.moveToFirst();
 
+        //Add each feature available
         while (!cursor.isAfterLast()) {
             featureList.add(cursor.getInt(0));
             cursor.moveToNext();
         }
 
+        //Close cursor
+        cursor.close();
+
+        //Determine if a duck has none of the listed features
+        cursor = mDatabase.rawQuery("SELECT duckID FROM Ducks WHERE duckID NOT IN (SELECT duckID FROM " + feature + ")", null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            //If one duckID matches any duckID in the list of duckIDs
+            if (duckIDs.contains(cursor.getInt(0))) {
+                //Add other to featureList
+                featureList.add(0);
+                break;
+            }
+            cursor.moveToNext();
+        }
+
+        //Close cursor and database
         cursor.close();
         closeDatabase();
-
-        //Add UNKNOWN feature
-        featureList.add(0);
 
         return featureList;
     }
@@ -215,6 +247,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Questions containing the table name and question
      */
     public List<Question> getListQuestions() {
+        Log.i("DatabaseHelper", "getListQuestions");
         List<Question> questionList = new ArrayList<>();
         Question question;
 
@@ -242,6 +275,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Most optimal question to reduce the number of DuckID's
      */
     public Question getBestOption(List<Integer> duckIDs, List<Question> questions) {
+        Log.i("DatabaseHelper", "getBestOption");
+        Log.i("DatabaseHelper", "getBestOption: duckIDs: " + duckIDs);
+        Log.i("DatabaseHelper", "getBestOption: questions Size: " + questions.size());
+
         Question bestOption = null;
         String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs) + ")";
         Cursor cursor = null;
@@ -272,6 +309,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return bestOption;
     }
 
+    /**
+     * Get the full list of ducks
+     *
+     * @return List<Duck> of all ducks stored in the database
+     */
     public List<Duck> getListDucks() {
         Duck duck;
         List<Duck> duckList = new ArrayList<>();
@@ -316,40 +358,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return query.toString();
     }
 
+    /**
+     * Returns true if the feature is an unknown feature
+     *
+     * @param feature Index of feature in FeatureOption
+     * @return True if the feature is an unknown feature
+     */
     private boolean isUnknown(int feature) {
         return feature == 0;
     }
-
-    /*public int getDuckIDCount(List<Integer> duckIDList, String TABLE, Feature feature, FeatureOptions goalFeature) {
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT duckID FROM ");
-        query.append(TABLE);
-        query.append(" WHERE ");
-        query.append(feature.getFeatureName());
-        query.append(" = ");
-        query.append(goalFeature.)
-        query.append(TABLE);
-        query.append(".DuckID IN (VALUES");
-
-        for (Integer duckID : duckIDList) {
-            query.append("(");
-            query.append(duckID.toString());
-            query.append("),");
-        }
-        query.deleteCharAt(query.length() - 1);
-        query.append(")");
-
-        duckIDList = new ArrayList<>();
-
-        openDatabase();
-        Cursor cursor = mDatabase.rawQuery(query.toString(), null);
-
-        while (!cursor.isAfterLast()) {
-            duckIDList.add(cursor.getInt(0));
-            cursor.moveToNext();
-        }
-
-        cursor.close();
-        closeDatabase();
-    }*/
 }

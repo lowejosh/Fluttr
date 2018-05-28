@@ -88,7 +88,6 @@ public class ResultListAdapter extends BaseAdapter {
         v = inflter.inflate(R.layout.tq_result_item, null);
 
         //Get Duck and Image
-        Log.i("ResultListAdapter", "Duck: " + ducklist.get(position).getName());
         int duckImage = context.getResources().getIdentifier("ibis.jpg", "drawable", context.getPackageName());
 
         //Get TextViews
@@ -98,7 +97,6 @@ public class ResultListAdapter extends BaseAdapter {
         tv_duckName.setText(ducklist.get(position).getName());
         //iv_duckImage.setImageResource(duckImage);
 
-        Log.i("ResultListAdapter", "Return View");
         return v;
     }
 }
