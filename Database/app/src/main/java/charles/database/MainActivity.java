@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Integer> duckIDs;
     private List<Question> questions;
     private List<Integer> features = new ArrayList<>();
-    private Map<Question, Question> answers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButtons() {
-        Log.i("MainActivity", "setButtons");
+        Log.d("MainActivity", "setButtons");
         buttons.clear();
         buttons.add((Button)findViewById(R.id.btn_option_1));
         buttons.add((Button)findViewById(R.id.btn_option_2));
@@ -92,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     dbHandler.updateDuckIDs(features.get(getBtnID(v.getId())), question.getTable(), duckIDs);
 
+                    //Append answer to array and remove old question
+                    //answers.put(question, features.get(getBtnID(v.getId())));
+                    questions.remove(question);
+
                     if (duckIDs.size() == 1) {
                         showAnswer();
                     } else if (questions.size() == 0) {
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void nextQuestion() {
-        Log.i("MainActivity", "nextQuestion");
+        Log.d("MainActivity", "nextQuestion");
         questionNo++;
         features.clear();
         question = dbHandler.getBestOption(duckIDs, questions);
@@ -116,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
         TextView tvQuestion = (TextView)findViewById(R.id.tv_question_question);
         tvQuestionNo.setText(String.format("%s.", String.valueOf(questionNo)));
         tvQuestion.setText(question.getQuestion());
-
-        questions.remove(question);
 
         //Create Feature Options
         for (int i = 0; i < 14; i++) {
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAnswer() {
-        Log.i("MainActivity", "showAnswer");
+        Log.d("MainActivity", "showAnswer");
         Duck duck = dbHandler.getDuck(duckIDs.get(0));
         setContentView(R.layout.tq_result);
 
@@ -153,7 +154,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.tq_question);
+
+                //Output to console answers
+                //Log.d("MainAcitivity", "Answers: " + answers);
+
                 setButtons();
+                //answers.clear();
                 duckIDs.clear();
                 questions.clear();
                 duckIDs = dbHandler.getDuckIDs();
@@ -175,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAnswerList() {
-        Log.i("MainActivity", "showAnswerList");
+        Log.d("MainActivity", "showAnswerList");
         //Get List of Ducks
         List<Duck> ducks = new ArrayList<>();
         for (Integer duckID : duckIDs) {
@@ -191,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getBtnID(int id) {
-        Log.i("MainActivity", "getBtnID");
+        Log.d("MainActivity", "getBtnID");
         switch (id) {
             case R.id.btn_option_1:
                 return 0;
@@ -227,32 +233,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*
-    private void test20Q() {
-        List<Integer> duckIDList = dbHandler.getDuckIDs();
-        List<Question> questionList = dbHandler.getListQuestions();
-
-        Random rand = new Random();
-
-        for (int i = 0; i < questionList.size(); i++) {
-            Question question = dbHandler.getBestOption(duckIDList, questionList);
-            if (question == null || duckIDList.size() == 1) {
-                break;
-            }
-
-            //Select a random answer
-            List<Integer> listFeatures = dbHandler.getListFeatures(question.getTable(), duckIDList);
-            int random = rand.nextInt(listFeatures.size());
-
-            Log.i("MainActivity", question.getQuestion() + " " + FeatureOptions.getValue(listFeatures.get(random)));
-
-            questionList.remove(question);
-            dbHandler.updateDuckIDs(listFeatures.get(random), question.getTable(), duckIDList);
-        }
-        for (Integer duckID : duckIDList) {
-            Log.i("MainActivity", "Bird: " + dbHandler.getDuck(duckID).getName());
-        }
-    }*/
+    static public void onClickResult(String duckName) {
+        Log.d("ResultListAdapter", "ImageView has been Clicked: " + duckName);
+    }
 
     private boolean copyDatabase(Context context) {
         try {

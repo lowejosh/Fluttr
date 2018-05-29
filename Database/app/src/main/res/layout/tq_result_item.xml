@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
-        android:src="@drawable/ibis" />
+        android:clickable="true"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/result_item_bird_name"
@@ -25,8 +26,9 @@
         android:layout_toEndOf="@+id/result_item_image"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:text="Bird Name"
         android:textAlignment="viewStart"
         android:textColor="#000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"/>
 </RelativeLayout>

@@ -79,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Duck matching the DuckID
      */
     public Duck getDuck(int duckID) {
-        Log.i("DatabaseHelper", "getDuck");
+        Log.d("DatabaseHelper", "getDuck");
         Duck duck;
 
         openDatabase();
@@ -103,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of DuckIDs
      */
     public List<Integer> getDuckIDs() {
-        Log.i("DatabaseHelper", "getDuckIDs");
+        Log.d("DatabaseHelper", "getDuckIDs");
         List<Integer> duckIDs = new ArrayList<>();
 
         openDatabase();
@@ -128,10 +128,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param duckIDs List of DuckIDs to refine search
      */
     public void updateDuckIDs(int goalFeature, String feature, List<Integer> duckIDs) {
-        Log.i("DatabaseHelper", "updateDuckIDs");
-        Log.i("DatabaseHelper", "updateDuckIDs: goalFeature: " + FeatureOptions.getValue(goalFeature));
-        Log.i("DatabaseHelper", "updateDuckIDs: feature: " + feature);
-        Log.i("DatabaseHelper", "updateDuckIDs: duckIDs: " + duckIDs);
+        Log.d("DatabaseHelper", "updateDuckIDs");
+        Log.d("DatabaseHelper", "updateDuckIDs: goalFeature: " + FeatureOptions.getValue(goalFeature));
+        Log.d("DatabaseHelper", "updateDuckIDs: feature: " + feature);
+        Log.d("DatabaseHelper", "updateDuckIDs: duckIDs: " + duckIDs);
         //SELECT DuckID FROM table WHERE feature = goalFeature AND DuckID IN (VALUE (duckID), (duckID))
         StringBuilder query = new StringBuilder();
         query.append("SELECT DISTINCT duckID FROM ");
@@ -155,7 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         query.deleteCharAt(query.length() - 1);
         query.append(")");
-        Log.i("DatabaseHelper", "updateDuckIDs: Query: " + query.toString());
+        Log.d("DatabaseHelper", "updateDuckIDs: Query: " + query.toString());
 
         if (!isUnknown(goalFeature)) {
             duckIDs.clear();
@@ -166,12 +166,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            Log.i("DatabaseHelper", "updateDuckIDs: Duck Found");
+            Log.d("DatabaseHelper", "updateDuckIDs: Duck Found");
             if (isUnknown(goalFeature)) {
-                Log.i("DatabaseHelper", "updateDuckIDs: Duck Removed: " + cursor.getInt(0));
+                Log.d("DatabaseHelper", "updateDuckIDs: Duck Removed: " + cursor.getInt(0));
                 duckIDs.remove((Integer)cursor.getInt(0));
             } else {
-                Log.i("DatabaseHelper", "updateDuckIDs: Duck Added: " + cursor.getInt(0));
+                Log.d("DatabaseHelper", "updateDuckIDs: Duck Added: " + cursor.getInt(0));
                 duckIDs.add(cursor.getInt(0));
             }
             cursor.moveToNext();
@@ -190,9 +190,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Features
      */
     public List<Integer> getListFeatures(String feature, List<Integer> duckIDs) {
-        Log.i("DatabaseHelper", "getListFeatures");
-        Log.i("DatabaseHelper", "getListFeatures: feature: " + feature);
-        Log.i("DatabaseHelper", "getListFeatures: duckIDs: " + duckIDs);
+        Log.d("DatabaseHelper", "getListFeatures");
+        Log.d("DatabaseHelper", "getListFeatures: feature: " + feature);
+        Log.d("DatabaseHelper", "getListFeatures: duckIDs: " + duckIDs);
         List<Integer> featureList = new ArrayList<>();
 
         //Create query to find all features that any duck in the list of duckIDs has
@@ -247,7 +247,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Questions containing the table name and question
      */
     public List<Question> getListQuestions() {
-        Log.i("DatabaseHelper", "getListQuestions");
+        Log.d("DatabaseHelper", "getListQuestions");
         List<Question> questionList = new ArrayList<>();
         Question question;
 
@@ -275,9 +275,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Most optimal question to reduce the number of DuckID's
      */
     public Question getBestOption(List<Integer> duckIDs, List<Question> questions) {
-        Log.i("DatabaseHelper", "getBestOption");
-        Log.i("DatabaseHelper", "getBestOption: duckIDs: " + duckIDs);
-        Log.i("DatabaseHelper", "getBestOption: questions Size: " + questions.size());
+        Log.d("DatabaseHelper", "getBestOption");
+        Log.d("DatabaseHelper", "getBestOption: duckIDs: " + duckIDs);
+        Log.d("DatabaseHelper", "getBestOption: questions Size: " + questions.size());
 
         Question bestOption = null;
         String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs) + ")";
