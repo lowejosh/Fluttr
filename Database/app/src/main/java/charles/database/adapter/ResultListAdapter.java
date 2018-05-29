@@ -91,20 +91,13 @@ public class ResultListAdapter extends BaseAdapter {
     public View getView(int position, View v, ViewGroup parent) {
         v = inflter.inflate(R.layout.tq_result_item, null);
 
-        //Get TextViews
+        //Get Views
         final TextView tv_duckName = (TextView)v.findViewById(R.id.result_item_bird_name);
         final ImageView iv_duckImage = (ImageView)v.findViewById(R.id.result_item_image);
 
-        //Set text and image
+        //Set duck name and image
         tv_duckName.setText(ducklist.get(position).getName());
-
-        try {
-            Bitmap image = BitmapFactory.decodeStream(context.getAssets().open("ibis.jpg"));
-            iv_duckImage.setImageBitmap(image);
-        } catch (IOException ex) {
-            //TODO If the image does not exist, display a backup image stating no image
-            Log.e("ResultListAdapter", ex.getMessage());
-        }
+        iv_duckImage.setImageBitmap(MainActivity.getBirdImage(context, "ibis.jpg"));
 
         //Set on click listeners for image and text
         iv_duckImage.setOnClickListener(new View.OnClickListener() {

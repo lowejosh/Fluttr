@@ -1,18 +1,22 @@
 package charles.database;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -144,10 +148,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.tq_result);
 
         TextView tvDuckName = (TextView)findViewById(R.id.tv_result_duck_name);
+        ImageView ivDuckImage = (ImageView)findViewById(R.id.iv_result_image);
         Button btnAccept = (Button)findViewById(R.id.btn_result_yes);
         Button btnDeny = (Button)findViewById(R.id.btn_result_no);
 
         tvDuckName.setText(duck.getName());
+        ivDuckImage.setImageBitmap(MainActivity.getBirdImage(this, "ibis.jpg"));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +241,26 @@ public class MainActivity extends AppCompatActivity {
 
     static public void onClickResult(String duckName) {
         Log.d("ResultListAdapter", "ImageView has been Clicked: " + duckName);
+    }
+
+    static public Bitmap getBirdImage(Context context, String filePath) {
+        //Update image for ImageView
+        try {
+            Bitmap image = BitmapFactory.decodeStream(context.getAssets().open(filePath));
+            return image;
+        } catch (IOException unused) {
+            //If duck image does not exist, display noImage file
+            try {
+                Bitmap image = BitmapFactory.decodeStream(context.getAssets().open("noImage.jpg"));
+                return image;
+            } catch (IOException ex){
+                Log.e("ResultListAdapter", ex.getMessage());
+            }
+
+            Log.e("ResultListAdapter", "Failed to load image: " + filePath);
+        }
+
+        return null;
     }
 
     private boolean copyDatabase(Context context) {

@@ -22,7 +22,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:id="@+id/tv_result_duck_name"
-        android:text="Bird Name"
         android:textColor="#000"
         android:textSize="20sp"
         android:textAlignment="center"/>
@@ -32,9 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="Ibis"
-        android:cropToPadding="false"
-        android:src="@drawable/ibis" />
+        android:cropToPadding="false" />
 
     <RelativeLayout
         android:layout_width="match_parent"
