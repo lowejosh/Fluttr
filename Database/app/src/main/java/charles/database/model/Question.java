@@ -13,6 +13,8 @@ public class Question {
         return table;
     }
 
+    public String getFeature() {return getTable(); }
+
     public String getQuestion() {
         return question;
     }

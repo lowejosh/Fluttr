@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:isScrollContainer="true"
+    android:weightSum="1">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/top_result_image_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/duck_image_alt"
+            android:scaleType="fitXY"
+            android:layout_weight="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/top_result_text_0"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Working"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/top_result_image_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/duck_image_alt"
+            android:scaleType="fitXY"
+            android:layout_weight="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/top_result_text_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/top_result_image_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/duck_image_alt"
+            android:scaleType="fitXY"
+            android:layout_weight="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/top_result_text_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/top_result_image_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/duck_image_alt"
+            android:scaleType="fitXY"
+            android:layout_weight="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/top_result_text_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:layout_weight="0.2">
+
+        <ImageView
+            android:id="@+id/top_result_image_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/duck_image_alt"
+            android:scaleType="fitXY"
+            android:layout_weight="0.5"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:id="@+id/top_result_text_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:clickable="true"
+                android:focusable="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

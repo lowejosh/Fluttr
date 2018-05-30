@@ -7,12 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,9 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import charles.database.adapter.ResultListAdapter;
 import charles.database.database.DatabaseHelper;
 import charles.database.model.Duck;
 import charles.database.model.FeatureOptions;
@@ -31,147 +26,134 @@ import charles.database.model.Question;
 
 public class MainActivity extends AppCompatActivity {
     private DatabaseHelper dbHandler;
+    private List<Integer> duckIDs, featureList, answers;
+    private List<Question> questionsAsked, questionsLeft;
+    private Question currentQuestion;
     private int questionNo;
-    private Question question;
-    private List<Button> buttons = new ArrayList<>();
-    private List<Integer> duckIDs;
-    private List<Question> questions;
-    private List<Integer> features = new ArrayList<>();
+    private final int MAX_NUM_FEATURES = 14;
+    private final int TOP_RESULT_NUM_DUCKS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.tq_question);
+        setContentView(R.layout.activity_main);
         dbHandler = new DatabaseHelper(this);
 
         //Check database exists
         File database = getApplicationContext().getDatabasePath(DatabaseHelper.DBNAME);
 
+        //If database does not exist, create it
         if (!database.exists()) {
             dbHandler.getReadableDatabase();
-
-            if (copyDatabase(this)) {
-                Toast.makeText(this, "Copy database success", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            copyDatabase(this);
         }
 
-        //test20Q();
-
-        setContentView(R.layout.tq_question);
-
-        setButtons();
-        duckIDs = dbHandler.getDuckIDs();
-        questions = dbHandler.getListQuestions();
-        questionNo = 0;
-        nextQuestion();
+        //Begin Twenty Question Game
+        twentyQuestions();
     }
 
-    private void setButtons() {
-        Log.d("MainActivity", "setButtons");
-        buttons.clear();
-        buttons.add((Button)findViewById(R.id.btn_option_1));
-        buttons.add((Button)findViewById(R.id.btn_option_2));
-        buttons.add((Button)findViewById(R.id.btn_option_3));
-        buttons.add((Button)findViewById(R.id.btn_option_4));
-        buttons.add((Button)findViewById(R.id.btn_option_5));
-        buttons.add((Button)findViewById(R.id.btn_option_6));
-        buttons.add((Button)findViewById(R.id.btn_option_7));
-        buttons.add((Button)findViewById(R.id.btn_option_8));
-        buttons.add((Button)findViewById(R.id.btn_option_9));
-        buttons.add((Button)findViewById(R.id.btn_option_10));
-        buttons.add((Button)findViewById(R.id.btn_option_11));
-        buttons.add((Button)findViewById(R.id.btn_option_12));
-        buttons.add((Button)findViewById(R.id.btn_option_13));
-        buttons.add((Button)findViewById(R.id.btn_option_14));
+    /**
+     * Begin the Twenty Question Game
+     */
+    private void twentyQuestions() {
+        //Change view to twenty questions
+        setContentView(R.layout.tq_home);
 
-        for (Button btn : buttons) {
-            //Add onClick listener
+        //Get full list of ducks and questions
+        duckIDs = dbHandler.getDuckIDs();
+        questionsLeft = dbHandler.getListQuestions();
+        questionsAsked = new ArrayList<>();
+        answers = new ArrayList<>();
+        questionNo = 0;
+
+        //Set Onclick Events for Option Buttons
+        for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
+            Button btn = findViewById(getHomeButtonID(btnOption));
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dbHandler.updateDuckIDs(features.get(getBtnID(v.getId())), question.getTable(), duckIDs);
+                    //Get Selected Feature
+                    Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
 
-                    //Append answer to array and remove old question
-                    //answers.put(question, features.get(getBtnID(v.getId())));
-                    questions.remove(question);
+                    //Update DuckIDs and answers List
+                    dbHandler.updateDuckIDs(selectedFeature, currentQuestion.getFeature(), duckIDs);
+                    answers.add(selectedFeature);
 
-                    if (duckIDs.size() == 1) {
-                        showAnswer();
-                    } else if (questions.size() == 0) {
-                        showAnswerList();
-                    } else {
-                        nextQuestion();
-                    }
+                    //Move to Next Stage
+                    nextStage();
                 }
             });
         }
+
+        //Ask question
+        nextQuestion();
     }
 
+    /**
+     * Ask the next question for twenty questions
+     */
     private void nextQuestion() {
-        Log.d("MainActivity", "nextQuestion");
+        //Increment Question Number
         questionNo++;
-        features.clear();
-        question = dbHandler.getBestOption(duckIDs, questions);
-        features = dbHandler.getListFeatures(question.getTable(), duckIDs);
 
-        //Get and set Question and Question No
-        TextView tvQuestionNo = (TextView)findViewById(R.id.tv_question_no);
-        TextView tvQuestion = (TextView)findViewById(R.id.tv_question_question);
-        tvQuestionNo.setText(String.format("%s.", String.valueOf(questionNo)));
-        tvQuestion.setText(question.getQuestion());
+        //Get new question and feature list
+        currentQuestion = dbHandler.getBestOption(duckIDs, questionsLeft);
+        featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), duckIDs);
 
-        //Create Feature Options
-        for (int i = 0; i < 14; i++) {
-            Button btn = buttons.get(i);
+        //Move question from questionsLeft to questionsAsked
+        questionsLeft.remove(currentQuestion);
+        questionsAsked.add(currentQuestion);
 
-            //Change button to show feature
-            if (i < features.size()) {
-                btn.setText(FeatureOptions.getValue(features.get(i)));
+        //Get Views in tq_home
+        TextView tv_question_no = findViewById(R.id.tv_home_question_no);
+        TextView tv_question = findViewById(R.id.tv_home_question);
+
+        //Update Views in tq_home
+        tv_question_no.setText(String.format("%s.", questionNo));
+        tv_question.setText(currentQuestion.getQuestion());
+
+        //Make relevant buttons visible
+        for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
+            Button btn = findViewById(getHomeButtonID(btnOption));
+
+            //If there is a feature for the button, show the feature and make it visible
+            if (btnOption < featureList.size()) {
+                btn.setText(FeatureOptions.getValue(featureList.get(btnOption)));
                 btn.setVisibility(View.VISIBLE);
-
-                //} else if (i == features.size()) {
-                //    btn.setText(R.string.none_of_the_above);
-                //    btn.setVisibility(View.VISIBLE);
             } else {
                 btn.setVisibility(View.INVISIBLE);
             }
         }
     }
 
+    /**
+     * If one duck is left, this will display the bird in tq_result
+     */
     private void showAnswer() {
-        Log.d("MainActivity", "showAnswer");
-        Duck duck = dbHandler.getDuck(duckIDs.get(0));
+        //Change the View to tq_result
         setContentView(R.layout.tq_result);
 
-        TextView tvDuckName = (TextView)findViewById(R.id.tv_result_duck_name);
-        ImageView ivDuckImage = (ImageView)findViewById(R.id.iv_result_image);
-        Button btnAccept = (Button)findViewById(R.id.btn_result_yes);
-        Button btnDeny = (Button)findViewById(R.id.btn_result_no);
+        //Get the final Duck
+        Duck duck = dbHandler.getDuck(duckIDs.get(0));
 
+        //Get Views
+        TextView tvDuckName = findViewById(R.id.tv_result_duck_name);
+        ImageView ivDuckImage = findViewById(R.id.iv_result_image);
+
+        //Get Buttons
+        Button btnAccept = findViewById(R.id.btn_result_yes);
+        Button btnDeny = findViewById(R.id.btn_result_no);
+
+        //Update Views
         tvDuckName.setText(duck.getName());
-        ivDuckImage.setImageBitmap(MainActivity.getBirdImage(this, "ibis.jpg"));
+        ivDuckImage.setImageBitmap(getBirdImage(duck.getImage()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.tq_question);
-
-                //Output to console answers
-                //Log.d("MainAcitivity", "Answers: " + answers);
-
-                setButtons();
-                //answers.clear();
-                duckIDs.clear();
-                questions.clear();
-                duckIDs = dbHandler.getDuckIDs();
-                questions = dbHandler.getListQuestions();
-                questionNo = 0;
-                nextQuestion();
+                twentyQuestions();
             }
         });
 
@@ -179,97 +161,184 @@ public class MainActivity extends AppCompatActivity {
         btnDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO Make this find the 5 closest ducks
                 duckIDs.clear();
                 duckIDs = dbHandler.getDuckIDs();
-                showAnswerList();
+                showMultiAnswer();
             }
         });
     }
 
-    private void showAnswerList() {
-        Log.d("MainActivity", "showAnswerList");
-        //Get List of Ducks
-        List<Duck> ducks = new ArrayList<>();
-        for (Integer duckID : duckIDs) {
-            ducks.add(dbHandler.getDuck(duckID));
-        }
+    /**
+     * If multiple ducks are left, this will display the top 5 ducks
+     */
+    private void showMultiAnswer() {
+        final int IMAGE = 0;
+        final int TEXT = 1;
 
-        setContentView(R.layout.tq_result_list);
+        setContentView(R.layout.tq_topresults);
 
-        ListView lvResultList = (ListView)findViewById(R.id.lv_result_list);
-        ResultListAdapter adapter = new ResultListAdapter(getApplicationContext(), ducks);
-        lvResultList.setAdapter(adapter);
+        //For each result in tq_topresults
+        for (int duckOption = 0; duckOption < TOP_RESULT_NUM_DUCKS; duckOption++) {
+            //Get image and text view
+            View[] result = getTopResultViews(duckOption);
+            Log.d("MainActivity", String.valueOf(result[IMAGE].getId()));
 
-    }
+            if (duckOption < duckIDs.size()) {
+                Duck duck = dbHandler.getDuck(duckIDs.get(duckOption));
 
-    private int getBtnID(int id) {
-        Log.d("MainActivity", "getBtnID");
-        switch (id) {
-            case R.id.btn_option_1:
-                return 0;
-            case R.id.btn_option_2:
-                return 1;
-            case R.id.btn_option_3:
-                return 2;
-            case R.id.btn_option_4:
-                return 3;
-            case R.id.btn_option_5:
-                return 4;
-            case R.id.btn_option_6:
-                return 5;
-            case R.id.btn_option_7:
-                return 6;
-            case R.id.btn_option_8:
-                return 7;
-            case R.id.btn_option_9:
-                return 8;
-            case R.id.btn_option_10:
-                return 9;
-            case R.id.btn_option_11:
-                return 10;
-            case R.id.btn_option_12:
-                return 11;
-            case R.id.btn_option_13:
-                return 12;
-            case R.id.btn_option_14:
-                return 13;
-            default:
-                Log.d("MainActivity", "getBtnID: Unknown Button Pressed.");
-                return -1;
+                //Update Views
+                ((ImageView) result[IMAGE]).setImageBitmap(getBirdImage(duck.getImage()));
+                ((TextView) result[TEXT]).setText(duck.getName());
+
+                //Add onclick events
+                result[IMAGE].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        multiAnswerOnClick(v);
+                    }
+                });
+                result[TEXT].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        multiAnswerOnClick(v);
+                    }
+                });
+
+                //Set Visibility
+                result[IMAGE].setVisibility(View.VISIBLE);
+                result[TEXT].setVisibility(View.VISIBLE);
+            } else {
+                //Set Invisible
+                result[IMAGE].setVisibility(View.INVISIBLE);
+                result[TEXT].setVisibility(View.INVISIBLE);
+            }
         }
     }
 
-    static public void onClickResult(String duckName) {
-        Log.d("ResultListAdapter", "ImageView has been Clicked: " + duckName);
+    /**
+     * Determine which screen twenty questions should show
+     */
+    private void nextStage() {
+        if (duckIDs.size() == 1) {
+            //Show Answer
+            showAnswer();
+        } else if (questionsLeft.size() == 0){
+            //Show Answer List
+            showMultiAnswer();
+        } else {
+            //Show Next Question
+            nextQuestion();
+        }
     }
 
-    static public Bitmap getBirdImage(Context context, String filePath) {
+    /**
+     * OnClick function for image and text views in tq_topresults
+     *
+     * @param v View attached to the onclick
+     */
+    private void multiAnswerOnClick(View v) {
+        int option = getTopResultOption(v.getId());
+        Integer duckID = duckIDs.get(option);
+
+        Log.i("MainActivity", "Option Selected: " + dbHandler.getDuck(duckID).getName());
+
+        duckIDs.clear();
+        duckIDs.add(duckID);
+
+        showAnswer();
+    }
+
+    /**
+     * Get the ID of the button from its option number in tq_home
+     *
+     * @param optionNo Option number (0-13)
+     * @return ID for use in findViewById()
+     */
+    private int getHomeButtonID(int optionNo) {
+        return getResources().getIdentifier("btn_option_" + optionNo, "id", getPackageName());
+    }
+
+    /**
+     * Get the Option number of the button from its ID in tq_home
+     *
+     * @param id ID of the btn used in findViewById()
+     * @return Option Number of the button
+     */
+    private int getHomeButtonOption(int id) {
+        //Match id against all option buttons and return option number
+        for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
+            if (id == getHomeButtonID(btnOption)) {
+                return btnOption;
+            }
+        }
+
+        //Failed to find button
+        return -1;
+    }
+
+    /**
+     * Get the image and text view for the option number from tq_topresult, array output is View[imageView, textView]
+     *
+     * @param optionNo Option number (0-4)
+     * @return Array containing image and text view
+     */
+    private View[] getTopResultViews(int optionNo) {
+        ImageView imageView = findViewById(getResources().getIdentifier("top_result_image_" + optionNo, "id", getPackageName()));
+        TextView textView = findViewById(getResources().getIdentifier("top_result_text_" + optionNo, "id", getPackageName()));
+
+        return new View[] {imageView, textView};
+    }
+
+    /**
+     * Get the Option number of the view from its ID in tq_topresults
+     *
+     * @param id ID of the btn used in findViewById()
+     * @return Option Number of the button
+     */
+    private int getTopResultOption(int id) {
+        //Match id against all result options and return option number
+        for (int btnOption = 0; btnOption < TOP_RESULT_NUM_DUCKS; btnOption++) {
+            View[] views = getTopResultViews(btnOption);
+            if (id == views[0].getId() || id == views[1].getId()) {
+                return btnOption;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Get the Bitmap Image of a Picture in the assets folder
+     *
+     * @param file Name of the image inside assets including extension
+     * @return Image from file path in Bitmap form
+     */
+    public Bitmap getBirdImage(String file) {
         //Update image for ImageView
         try {
-            Bitmap image = BitmapFactory.decodeStream(context.getAssets().open(filePath));
-            return image;
+            return BitmapFactory.decodeStream(this.getAssets().open(file));
         } catch (IOException unused) {
             //If duck image does not exist, display noImage file
             try {
-                Bitmap image = BitmapFactory.decodeStream(context.getAssets().open("noImage.jpg"));
-                return image;
+                return BitmapFactory.decodeStream(this.getAssets().open("noImage.jpg"));
             } catch (IOException ex){
-                Log.e("ResultListAdapter", ex.getMessage());
+                Log.e("MainActivity", "noImage Failed to Load");
+                Log.e("MainActivity", ex.getMessage());
             }
-
-            Log.e("ResultListAdapter", "Failed to load image: " + filePath);
+            Log.e("MainActivity", "Failed to load image: " + file);
         }
 
         return null;
     }
 
-    private boolean copyDatabase(Context context) {
+    private void copyDatabase(Context context) {
         try {
             InputStream inputStream = context.getAssets().open(DatabaseHelper.DBNAME);
             String outFileName = DatabaseHelper.DBLOCATION + DatabaseHelper.DBNAME;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[] buff = new byte[1024];
-            int length = 0;
+            int length;
 
             while ((length = inputStream.read(buff)) > 0) {
                 outputStream.write(buff, 0, length);
@@ -277,10 +346,8 @@ public class MainActivity extends AppCompatActivity {
 
             outputStream.flush();
             outputStream.close();
-            return true;
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
     }
 }
