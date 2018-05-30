@@ -1,8 +1,7 @@
 package charles.database.adapter;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.List;
 
 import charles.database.MainActivity;
 import charles.database.R;
-import charles.database.database.DatabaseHelper;
 import charles.database.model.Duck;
 
 public class ResultListAdapter extends BaseAdapter {
@@ -88,32 +85,40 @@ public class ResultListAdapter extends BaseAdapter {
      * @return A View corresponding to the data at the specified position.
      */
     @Override
-    public View getView(int position, View v, ViewGroup parent) {
+    public View getView(final int position, View v, ViewGroup parent) {
         v = inflter.inflate(R.layout.tq_result_item, null);
 
         //Get Views
-        final TextView tv_duckName = (TextView)v.findViewById(R.id.result_item_bird_name);
-        final ImageView iv_duckImage = (ImageView)v.findViewById(R.id.result_item_image);
+        TextView tv_duckName = (TextView)v.findViewById(R.id.result_item_bird_name);
+        ImageView iv_duckImage = (ImageView)v.findViewById(R.id.result_item_image);
 
         //Set duck name and image
         tv_duckName.setText(ducklist.get(position).getName());
         iv_duckImage.setImageBitmap(MainActivity.getBirdImage(context, "ibis.jpg"));
 
+
         //Set on click listeners for image and text
         iv_duckImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.onClickResult(tv_duckName.getText().toString());
+                onClickResult(ducklist.get(position));
             }
         });
 
         tv_duckName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.onClickResult(tv_duckName.getText().toString());
+                onClickResult(ducklist.get(position));
             }
         });
 
         return v;
+    }
+
+    private void onClickResult(Duck duck) {
+        Log.d("ResultListAdapter", "ImageView has been Clicked: " + duck.getName());
+        View v = inflter.inflate(R.layout.tq_result_list, null);
+        TextView tv_output = (TextView)v.findViewById(R.id.result_list_selected_duck);
+        tv_output.setText(duck.getDuckID());
     }
 }
