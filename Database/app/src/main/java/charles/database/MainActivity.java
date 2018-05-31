@@ -266,14 +266,12 @@ public class MainActivity extends AppCompatActivity {
      * Determine which screen twenty questions should show
      */
     private void nextStage() {
-        Log.d("MainActivity", "nextStage: QuestionsLeft: " + questionsLeft.size());
         if (duckIDs.size() == 1) {
             //Show Answer
             showAnswer();
         } else if (questionsLeft.size() == 0) {
-            Log.d("MainAcitivity", "Questions Asked: " + questionsAsked.size());
-            //Check if any questions were asked
-            if (questionsAsked.size() > 0) {
+            //Check if any questions were asked and if the search has been refined far enough
+            if (questionsAsked.size() > 0 && duckIDs.size() <= TOP_RESULT_NUM_DUCKS) {
                 //Show Answer List
                 showMultiAnswer();
             } else {
