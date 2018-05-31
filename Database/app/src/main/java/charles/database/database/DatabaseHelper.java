@@ -84,7 +84,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Duck matching the DuckID
      */
     public Duck getDuck(int duckID) {
-        Log.d("DatabaseHelper", "getDuck");
         Duck duck;
 
         openDatabase();
@@ -108,7 +107,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of DuckIDs
      */
     public List<Integer> getDuckIDs() {
-        Log.d("DatabaseHelper", "getDuckIDs");
         List<Integer> duckIDs = new ArrayList<>();
 
         openDatabase();
@@ -264,6 +262,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs);
         Question bestOption = null;
         int maxNumDucks = 0;
+        List<Question> questionsToRemove = new ArrayList<>();
 
         openDatabase();
         for (Question question : questions) {
@@ -273,15 +272,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             int count = cursor.getInt(0);
 
-            if (count > maxNumDucks) {
+            //If no ducks exist in the table
+            if (count == 0) {
+                questionsToRemove.add(question);
+            }
+
+            //If table is the new best table
+            else if (count > maxNumDucks) {
                 bestOption = question;
                 maxNumDucks = count;
             }
 
             cursor.close();
         }
-
         closeDatabase();
+
+        //Update list of questions
+        questions.removeAll(questionsToRemove);
+        questionsToRemove.clear();
+
         return bestOption;
     }
 
@@ -293,10 +302,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param wrongDuckID ID of the Duck which has been Identified as Incorrect by the User
      * @return List of at most 5 duckIDs matching closest to the duck
      */
-    public List<Integer> getClosestDucks(List<Question> questions, List<Integer> answers, Integer wrongDuckID)
-    {
+    public List<Integer> getClosestDucks(List<Question> questions, List<Integer> answers, Integer wrongDuckID) {
         List<Integer> duckIDs;
         List<List<Integer>> duckMatches; //Stores all the ducks for each question that match the answer
+
+        if (questions.size() == 1) {
+            return new ArrayList<>();
+        }
 
         //Populate duck matches
         duckMatches = getMatchingDuckIDs(questions, answers, wrongDuckID);
@@ -307,6 +319,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return duckIDs;
     }
 
+    /**
+     * Get a list of ducks that match all but one question is the list of questions
+     *
+     * @param questions List of Questions Asked
+     * @param duckMatches List of Ducks which are Linked to each Question
+     * @return List of duckIDs matching all but one question
+     */
     private List<Integer> getSimilarDucks(List<Question> questions, List<List<Integer>> duckMatches) {
         List<Integer> duckIDs = new ArrayList<>();
 

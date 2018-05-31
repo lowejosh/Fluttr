@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +12,6 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:id="@+id/tv_home_question_no"
-        android:text="1."
         android:textColor="#000"
         android:textSize="14sp"/>
 
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingBottom="3dp"
         android:id="@+id/tv_home_question"
-        android:text="Question"
         android:textColor="#000"
         android:textSize="26sp"
         android:textAlignment="center"/>
@@ -30,8 +30,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
-
+        android:background="#000"/>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ScrollView01"
@@ -39,7 +38,7 @@
         android:layout_height="fill_parent" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -49,7 +48,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_0"
                     android:background="#ddd"
@@ -58,14 +57,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_1"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +71,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_2"
                     android:background="#ddd"
@@ -82,14 +80,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_3"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,7 +94,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_4"
                     android:background="#ddd"
@@ -106,14 +103,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_5"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +117,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_6"
                     android:background="#ddd"
@@ -130,14 +126,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_7"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,7 +140,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_8"
                     android:background="#ddd"
@@ -154,14 +149,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_9"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +163,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_10"
                     android:background="#ddd"
@@ -178,14 +172,13 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_11"
                     android:background="#ddd"
                     android:visibility="invisible"
                     style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -193,7 +186,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_12"
                     android:background="#ddd"
@@ -202,7 +195,7 @@
 
                 <Button
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_weight="0.5"
                     android:id="@+id/btn_option_13"
                     android:background="#ddd"

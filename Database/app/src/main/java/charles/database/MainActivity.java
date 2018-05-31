@@ -102,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = dbHandler.getBestOption(duckIDs, questionsLeft);
         featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), duckIDs);
 
+        if (featureList.size() == 1) {
+            questionsLeft.remove(currentQuestion);
+            nextStage();
+            return;
+        }
+
         //Move question from questionsLeft to questionsAsked
         questionsLeft.remove(currentQuestion);
         questionsAsked.add(currentQuestion);
@@ -228,8 +234,6 @@ public class MainActivity extends AppCompatActivity {
         for (int duckOption = 0; duckOption < TOP_RESULT_NUM_DUCKS; duckOption++) {
             //Get image and text view
             View[] result = getTopResultViews(duckOption);
-            Log.d("MainActivity", String.valueOf(result[IMAGE].getId()));
-
             if (duckOption < duckIDs.size()) {
                 Duck duck = dbHandler.getDuck(duckIDs.get(duckOption));
 
@@ -259,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
      * Determine which screen twenty questions should show
      */
     private void nextStage() {
+        Log.d("MainActivity", "nextStage: QuestionsLeft: " + questionsLeft.size());
         if (duckIDs.size() == 1) {
             //Show Answer
             showAnswer();
