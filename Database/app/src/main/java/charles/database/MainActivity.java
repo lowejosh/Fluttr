@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -167,14 +168,56 @@ public class MainActivity extends AppCompatActivity {
                 showMultiAnswer();
             }
         });
+
+        Log.d("MainActivity", "Questions Asked: " + questionsAsked);
+        Log.d("MainActivity", "Answers: " + answers);
+    }
+
+    /**
+     * Display result page against, deny button displays tq_failure instead of tq_topresults
+     */
+    private void showFinalAnswer() {
+        //Change the View to tq_result
+        setContentView(R.layout.tq_result);
+
+        //Get the final Duck
+        Duck duck = dbHandler.getDuck(duckIDs.get(0));
+
+        //Get Views
+        TextView tvDuckName = findViewById(R.id.tv_result_duck_name);
+        ImageView ivDuckImage = findViewById(R.id.iv_result_image);
+
+        //Get Buttons
+        Button btnAccept = findViewById(R.id.btn_result_yes);
+        Button btnDeny = findViewById(R.id.btn_result_no);
+
+        //Update Views
+        tvDuckName.setText(duck.getName());
+        ivDuckImage.setImageBitmap(getBirdImage(duck.getImage()));
+
+        //Restart Game
+        btnAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                twentyQuestions();
+            }
+        });
+
+        //Show List
+        btnDeny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFailure();
+            }
+        });
     }
 
     /**
      * If multiple ducks are left, this will display the top 5 ducks
      */
     private void showMultiAnswer() {
-        final int IMAGE = 0;
-        final int TEXT = 1;
+        final int IMAGE = 1;
+        final int TEXT = 2;
 
         setContentView(R.layout.tq_topresults);
 
@@ -191,20 +234,6 @@ public class MainActivity extends AppCompatActivity {
                 ((ImageView) result[IMAGE]).setImageBitmap(getBirdImage(duck.getImage()));
                 ((TextView) result[TEXT]).setText(duck.getName());
 
-                //Add onclick events
-                result[IMAGE].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        multiAnswerOnClick(v);
-                    }
-                });
-                result[TEXT].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        multiAnswerOnClick(v);
-                    }
-                });
-
                 //Set Visibility
                 result[IMAGE].setVisibility(View.VISIBLE);
                 result[TEXT].setVisibility(View.VISIBLE);
@@ -214,6 +243,13 @@ public class MainActivity extends AppCompatActivity {
                 result[TEXT].setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    /**
+     * Display tq_failure
+     */
+    private void showFailure() {
+        setContentView(R.layout.tq_failure);
     }
 
     /**
@@ -230,23 +266,6 @@ public class MainActivity extends AppCompatActivity {
             //Show Next Question
             nextQuestion();
         }
-    }
-
-    /**
-     * OnClick function for image and text views in tq_topresults
-     *
-     * @param v View attached to the onclick
-     */
-    private void multiAnswerOnClick(View v) {
-        int option = getTopResultOption(v.getId());
-        Integer duckID = duckIDs.get(option);
-
-        Log.i("MainActivity", "Option Selected: " + dbHandler.getDuck(duckID).getName());
-
-        duckIDs.clear();
-        duckIDs.add(duckID);
-
-        showAnswer();
     }
 
     /**
@@ -278,16 +297,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the image and text view for the option number from tq_topresult, array output is View[imageView, textView]
+     * Get the image and text view for the option number from tq_topresult, array output is View[linearLayout, imageView, textView]
      *
      * @param optionNo Option number (0-4)
-     * @return Array containing image and text view
+     * @return Array containing linear layout, image and text view
      */
     private View[] getTopResultViews(int optionNo) {
         ImageView imageView = findViewById(getResources().getIdentifier("top_result_image_" + optionNo, "id", getPackageName()));
         TextView textView = findViewById(getResources().getIdentifier("top_result_text_" + optionNo, "id", getPackageName()));
+        LinearLayout linearLayout = findViewById(getResources().getIdentifier("top_result_" + optionNo, "id", getPackageName()));
 
-        return new View[] {imageView, textView};
+        return new View[] {linearLayout, imageView, textView};
     }
 
     /**
@@ -300,12 +320,38 @@ public class MainActivity extends AppCompatActivity {
         //Match id against all result options and return option number
         for (int btnOption = 0; btnOption < TOP_RESULT_NUM_DUCKS; btnOption++) {
             View[] views = getTopResultViews(btnOption);
-            if (id == views[0].getId() || id == views[1].getId()) {
+            if (id == views[0].getId()) {
                 return btnOption;
             }
         }
 
         return -1;
+    }
+
+    /**
+     * OnClick function for image and text views in tq_topresults
+     *
+     * @param v View attached to the onclick
+     */
+    public void multiAnswerOnClick(View v) {
+        int option = getTopResultOption(v.getId());
+        Integer duckID = duckIDs.get(option);
+
+        Log.i("MainActivity", "Option Selected: " + dbHandler.getDuck(duckID).getName());
+
+        //Clear duckIDs and insert
+        duckIDs.clear();
+        duckIDs.add(duckID);
+
+        showFinalAnswer();
+    }
+
+    /**
+     * OnClick function for tq_failure button and tq_topresults button
+     * @param v View attached to the onclick
+     */
+    public void backOnClick(View v) {
+        twentyQuestions();
     }
 
     /**
@@ -332,6 +378,11 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * On initialisation of the app, copy the database into system files
+     *
+     * @param context Context of the application
+     */
     private void copyDatabase(Context context) {
         try {
             InputStream inputStream = context.getAssets().open(DatabaseHelper.DBNAME);

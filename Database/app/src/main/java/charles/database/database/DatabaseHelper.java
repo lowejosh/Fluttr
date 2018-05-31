@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import charles.database.model.Duck;
-import charles.database.model.Feature;
 import charles.database.model.FeatureOptions;
 import charles.database.model.Question;
 
@@ -27,10 +26,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DBNAME, null, 1);
         this.mContext = context;
+        //DBLOCATION = context.getDatabasePath(DBNAME).getParentFile().getPath();
+        //Log.d("DatabaseHelper", DBLOCATION);
     }
 
     /**
      * Not implemented
+     *
      * @param db Database
      */
     @Override
@@ -53,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Open the sqlite database
      */
-    public void openDatabase() {
+    private void openDatabase() {
         String dbPath = mContext.getDatabasePath(DBNAME).getPath();
 
         if (mDatabase != null && mDatabase.isOpen()) {
@@ -66,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Close the sqlite database if open
      */
-    public void closeDatabase() {
+    private void closeDatabase() {
         if (mDatabase != null) {
             mDatabase.close();
         }
@@ -146,15 +148,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         query.append("DuckID IN (VALUES");
+        query.append(listIDs(duckIDs));
 
-        for (Integer duckID : duckIDs) {
-            query.append("(");
-            query.append(duckID.toString());
-            query.append("),");
-        }
-
-        query.deleteCharAt(query.length() - 1);
-        query.append(")");
         Log.d("DatabaseHelper", "updateDuckIDs: Query: " + query.toString());
 
         if (!isUnknown(goalFeature)) {
@@ -196,19 +191,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Integer> featureList = new ArrayList<>();
 
         //Create query to find all features that any duck in the list of duckIDs has
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT DISTINCT(");
-        query.append(feature);
-        query.append(") FROM ");
-        query.append(feature);
-        query.append(" WHERE DuckID IN (VALUES");
-        query.append(listIDs(duckIDs));
-        query.append(") ORDER BY ");
-        query.append(feature);
+        String query = "SELECT DISTINCT(" + feature + ") FROM " + feature +
+                " WHERE DuckID IN (VALUES" + listIDs(duckIDs) + " ORDER BY " + feature;
 
         //Open Database and create cursor
         openDatabase();
-        Cursor cursor = mDatabase.rawQuery(query.toString(), null);
+        Cursor cursor = mDatabase.rawQuery(query, null);
         cursor.moveToFirst();
 
         //Add each feature available
@@ -279,63 +267,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("DatabaseHelper", "getBestOption: duckIDs: " + duckIDs);
         Log.d("DatabaseHelper", "getBestOption: questions Size: " + questions.size());
 
-        Question bestOption = null;
-        String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs) + ")";
-        Cursor cursor = null;
-        int maxNumDucks = 0;
-        int count;
-
+        //Check if question exists
         if (questions.size() == 0) {
             Log.d("DatabaseHelper", "getBestOption: No Question Given");
-            return bestOption;
+            return null;
         }
+
+        //Create SQL statement, track best table option, and number of ducks in the best table
+        String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs);
+        Question bestOption = null;
+        int maxNumDucks = 0;
 
         openDatabase();
         for (Question question : questions) {
-            cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() + ")) FROM " + question.getTable() + whereStatement, null);
+            Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
+                    ")) FROM " + question.getTable() + whereStatement, null);
+
             cursor.moveToFirst();
-            count = cursor.getInt(0);
+            int count = cursor.getInt(0);
 
             if (count > maxNumDucks) {
                 bestOption = question;
                 maxNumDucks = count;
             }
 
-            cursor.moveToNext();
+            cursor.close();
         }
 
-        cursor.close();
         closeDatabase();
         return bestOption;
-    }
-
-    /**
-     * Get the full list of ducks
-     *
-     * @return List<Duck> of all ducks stored in the database
-     */
-    public List<Duck> getListDucks() {
-        Duck duck;
-        List<Duck> duckList = new ArrayList<>();
-        openDatabase();
-
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Ducks", null);
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-            duck = new Duck(cursor.getInt(0),
-                                cursor.getString(1),
-                                cursor.getString(2),
-                                cursor.getShort(3),
-                                (byte)cursor.getInt(4),
-                                (byte)cursor.getInt(5));
-            duckList.add(duck);
-            cursor.moveToNext();
-        }
-
-        cursor.close();
-        closeDatabase();
-        return duckList;
     }
 
     /**
@@ -354,6 +314,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         query.deleteCharAt(query.length() - 1);
+        query.append(")");
 
         return query.toString();
     }

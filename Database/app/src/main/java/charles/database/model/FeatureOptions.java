@@ -3,10 +3,6 @@ package charles.database.model;
 import android.util.Log;
 import android.util.SparseArray;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public final class FeatureOptions {
     private static SparseArray<String> OPTION = new SparseArray<String>();
 
@@ -64,11 +60,20 @@ public final class FeatureOptions {
         OPTION.put(50, "Small Bird with Tail Up");
     }
 
+    /**
+     * Get Value of Option, ie 0->"Other"
+     *
+     * @param option Feature Option
+     * @return Value of the Feature
+     */
     public static String getValue(Integer option) {
+        //If option is too large, return UNKNOWN
         if (option >= OPTION.size()) {
             Log.d("FeatureOptions", "Value Not Found");
             return "UNKNOWN";
         }
+
+        //Return Value of the Feature, if None Exists Return UNKNOWN
         return OPTION.get(option, "UNKNOWN");
     }
 }

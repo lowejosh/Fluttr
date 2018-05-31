@@ -25,34 +25,6 @@ public class Duck {
         this.atlasNo = atlasNo;
         this.minSize = minSize;
         this.maxSize = maxSize;
-
-        /*
-        //Check DuckID is positive
-        if (duckID < 0) {
-            throw new Exception("DuckID Cannot be a Negative Number.");
-        }
-
-        //Check Duck has a name
-        if (name.trim().length() == 0) {
-            throw new Exception("Duck Cannot have an Empty Name.");
-        }
-
-        //Check duck image path exists (TODO)
-
-        //Check Atlas Number is positive
-        if (atlasNo < 0) {
-            throw new Exception("Atlas Number cannot be a Negative Number.");
-        }
-
-        //Check minimum size is positive and smaller than maximum size
-        if (minSize <= 0 || minSize < maxSize) {
-            throw new Exception("Minimum Size Cannot be a Negative/Zero Number or Smaller than the Maximum Size.");
-        }
-
-        //Check maximum size is positive
-        if (maxSize <= 0) {
-            throw new Exception("Maximum size Cannot be a Negative/Zero Number.");
-        }*/
     }
 
     /**
