@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Question currentQuestion;
     private int questionNo;
     private final int MAX_NUM_FEATURES = 14;
-    private final int TOP_RESULT_NUM_DUCKS = 5;
+    public static final int TOP_RESULT_NUM_DUCKS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,10 +162,13 @@ public class MainActivity extends AppCompatActivity {
         btnDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Make this find the 5 closest ducks
-                duckIDs.clear();
-                duckIDs = dbHandler.getDuckIDs();
-                showMultiAnswer();
+                duckIDs = dbHandler.getClosestDucks(questionsAsked, answers, duckIDs.get(0));
+
+                if (duckIDs.size() == 0) {
+                    showFailure();
+                } else {
+                    showMultiAnswer();
+                }
             }
         });
 
@@ -239,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
                 result[TEXT].setVisibility(View.VISIBLE);
             } else {
                 //Set Invisible
-                result[IMAGE].setVisibility(View.INVISIBLE);
-                result[TEXT].setVisibility(View.INVISIBLE);
+                result[IMAGE].setVisibility(View.GONE);
+                result[TEXT].setVisibility(View.GONE);
             }
         }
     }
