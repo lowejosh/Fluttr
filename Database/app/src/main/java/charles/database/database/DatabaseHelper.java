@@ -15,7 +15,7 @@ import charles.database.model.Question;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "database.sqlite";
-    public static final String DBLOCATION = "/data/data/charles.database/databases/";
+    public static String DBLOCATION;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
@@ -26,8 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DBNAME, null, 1);
         this.mContext = context;
-        //DBLOCATION = context.getDatabasePath(DBNAME).getParentFile().getPath();
-        //Log.d("DatabaseHelper", DBLOCATION);
+        DBLOCATION = context.getDatabasePath(DBNAME).getParentFile().getPath() + "/";
     }
 
     /**
@@ -296,6 +295,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         closeDatabase();
         return bestOption;
+    }
+
+    /**
+     * Get a list of at most 5 ducks closest in attributes to the wrong duck
+     *
+     * @param questions List of Questions Asked
+     * @param answers List of Answers to the Questions Asked
+     * @param wrongDuckID ID of the Duck which has been Identified as Incorrect by the User
+     * @return List of at most 5 duckIDs matching closest to the duck
+     */
+    public List<Integer> getClosestDucks(List<Question> questions, List<Integer> answers, Integer wrongDuckID)
+    {
+        List<Integer> duckIDs = new ArrayList<>();
+
+
+
+        return duckIDs;
     }
 
     /**
