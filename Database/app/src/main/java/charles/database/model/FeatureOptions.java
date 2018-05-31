@@ -5,8 +5,11 @@ import android.util.SparseArray;
 
 public final class FeatureOptions {
     private static SparseArray<String> OPTION = new SparseArray<String>();
+    public static final Integer UNKNOWN = -1;
+    public static final Integer OTHER = 0;
 
     static {
+        OPTION.put(-1, "Unknown");
         OPTION.put(0, "Other");
         OPTION.put(1, "Prominent");
         OPTION.put(2, "Curved");
@@ -66,14 +69,34 @@ public final class FeatureOptions {
      * @param option Feature Option
      * @return Value of the Feature
      */
-    public static String getValue(Integer option) {
+    public static String valueOf(Integer option) {
         //If option is too large, return UNKNOWN
         if (option >= OPTION.size()) {
             Log.d("FeatureOptions", "Value Not Found");
-            return "UNKNOWN";
+            return "Unknown";
         }
 
         //Return Value of the Feature, if None Exists Return UNKNOWN
-        return OPTION.get(option, "UNKNOWN");
+        return OPTION.get(option, "Unknown");
+    }
+
+    /**
+     * Returns true if the feature is an "unknown" feature
+     *
+     * @param feature Index of feature in FeatureOption
+     * @return True if the feature is an "unknown" feature
+     */
+    public static boolean isUnknown(Integer feature) {
+        return feature.equals(UNKNOWN);
+    }
+
+    /**
+     * Returns true if the feature is an "other" feature
+     *
+     * @param feature Index of feature in FeatureOption
+     * @return True if the feature is an "other" feature
+     */
+    public static boolean isOther(Integer feature) {
+        return feature.equals(OTHER);
     }
 }

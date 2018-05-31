@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -131,13 +130,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param duckIDs List of DuckIDs to refine search
      */
     public void updateDuckIDs(int goalFeature, String feature, List<Integer> duckIDs) {
+        if (FeatureOptions.isUnknown(goalFeature)) {
+            return;
+        }
+
         //SELECT DuckID FROM table WHERE feature = goalFeature AND DuckID IN (VALUE (duckID), (duckID))
         StringBuilder query = new StringBuilder();
         query.append("SELECT DISTINCT duckID FROM ");
         query.append(feature);
         query.append(" WHERE ");
 
-        if (!isUnknown(goalFeature)) {
+        if (!FeatureOptions.isOther(goalFeature)) {
             query.append(feature);
             query.append(" = ");
             query.append(goalFeature);
@@ -147,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         query.append("DuckID IN (VALUES");
         query.append(listIDs(duckIDs));
 
-        if (!isUnknown(goalFeature)) {
+        if (!FeatureOptions.isOther(goalFeature)) {
             duckIDs.clear();
         }
 
@@ -156,7 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            if (isUnknown(goalFeature)) {
+            if (FeatureOptions.isOther(goalFeature)) {
                 duckIDs.remove((Integer)cursor.getInt(0));
             } else {
                 duckIDs.add(cursor.getInt(0));
@@ -166,7 +169,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         closeDatabase();
-
     }
 
     /**
@@ -178,6 +180,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public List<Integer> getListFeatures(String feature, List<Integer> duckIDs) {
         List<Integer> featureList = new ArrayList<>();
+
+        //Add Unknown to Feature List
+        featureList.add(FeatureOptions.UNKNOWN);
 
         //Create query to find all features that any duck in the list of duckIDs has
         String query = "SELECT DISTINCT(" + feature + ") FROM " + feature +
@@ -205,7 +210,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             //If one duckID matches any duckID in the list of duckIDs
             if (duckIDs.contains(cursor.getInt(0))) {
                 //Add other to featureList
-                featureList.add(0);
+                featureList.add(FeatureOptions.OTHER);
                 break;
             }
             cursor.moveToNext();
@@ -426,15 +431,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         query.append(")");
 
         return query.toString();
-    }
-
-    /**
-     * Returns true if the feature is an unknown feature
-     *
-     * @param feature Index of feature in FeatureOption
-     * @return True if the feature is an unknown feature
-     */
-    private boolean isUnknown(int feature) {
-        return feature == 0;
     }
 }

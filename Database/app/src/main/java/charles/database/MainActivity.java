@@ -3,8 +3,8 @@ package charles.database;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -77,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
                     //Get Selected Feature
                     Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
 
+                    //Move question from questionsLeft to questionsAsked
+                    questionsLeft.remove(currentQuestion);
+                    if (!FeatureOptions.isUnknown(selectedFeature)) {
+                        questionsAsked.add(currentQuestion);
+                    }
+
                     //Update DuckIDs and answers List
                     dbHandler.updateDuckIDs(selectedFeature, currentQuestion.getFeature(), duckIDs);
                     answers.add(selectedFeature);
@@ -102,15 +108,12 @@ public class MainActivity extends AppCompatActivity {
         currentQuestion = dbHandler.getBestOption(duckIDs, questionsLeft);
         featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), duckIDs);
 
+        //Check if enough features exist to warrant a question
         if (featureList.size() == 1) {
             questionsLeft.remove(currentQuestion);
             nextStage();
             return;
         }
-
-        //Move question from questionsLeft to questionsAsked
-        questionsLeft.remove(currentQuestion);
-        questionsAsked.add(currentQuestion);
 
         //Get Views in tq_home
         TextView tv_question_no = findViewById(R.id.tv_home_question_no);
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
             //If there is a feature for the button, show the feature and make it visible
             if (btnOption < featureList.size()) {
-                btn.setText(FeatureOptions.getValue(featureList.get(btnOption)));
+                btn.setText(FeatureOptions.valueOf(featureList.get(btnOption)));
                 btn.setVisibility(View.VISIBLE);
             } else {
                 btn.setVisibility(View.INVISIBLE);
@@ -267,9 +270,15 @@ public class MainActivity extends AppCompatActivity {
         if (duckIDs.size() == 1) {
             //Show Answer
             showAnswer();
-        } else if (questionsLeft.size() == 0){
-            //Show Answer List
-            showMultiAnswer();
+        } else if (questionsLeft.size() == 0) {
+            Log.d("MainAcitivity", "Questions Asked: " + questionsAsked.size());
+            //Check if any questions were asked
+            if (questionsAsked.size() > 0) {
+                //Show Answer List
+                showMultiAnswer();
+            } else {
+                showFailure();
+            }
         } else {
             //Show Next Question
             nextQuestion();
