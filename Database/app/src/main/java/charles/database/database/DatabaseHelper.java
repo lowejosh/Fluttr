@@ -7,16 +7,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
+import charles.database.MainActivity;
 import charles.database.model.Duck;
-import charles.database.model.Feature;
 import charles.database.model.FeatureOptions;
 import charles.database.model.Question;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "database.sqlite";
-    public static final String DBLOCATION = "/data/data/charles.database/databases/";
+    public static String DBLOCATION;
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
@@ -27,10 +30,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DBNAME, null, 1);
         this.mContext = context;
+        DBLOCATION = context.getDatabasePath(DBNAME).getParentFile().getPath() + "/";
     }
 
     /**
      * Not implemented
+     *
      * @param db Database
      */
     @Override
@@ -53,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Open the sqlite database
      */
-    public void openDatabase() {
+    private void openDatabase() {
         String dbPath = mContext.getDatabasePath(DBNAME).getPath();
 
         if (mDatabase != null && mDatabase.isOpen()) {
@@ -66,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Close the sqlite database if open
      */
-    public void closeDatabase() {
+    private void closeDatabase() {
         if (mDatabase != null) {
             mDatabase.close();
         }
@@ -128,10 +133,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param duckIDs List of DuckIDs to refine search
      */
     public void updateDuckIDs(int goalFeature, String feature, List<Integer> duckIDs) {
-        Log.d("DatabaseHelper", "updateDuckIDs");
-        Log.d("DatabaseHelper", "updateDuckIDs: goalFeature: " + FeatureOptions.getValue(goalFeature));
-        Log.d("DatabaseHelper", "updateDuckIDs: feature: " + feature);
-        Log.d("DatabaseHelper", "updateDuckIDs: duckIDs: " + duckIDs);
         //SELECT DuckID FROM table WHERE feature = goalFeature AND DuckID IN (VALUE (duckID), (duckID))
         StringBuilder query = new StringBuilder();
         query.append("SELECT DISTINCT duckID FROM ");
@@ -146,16 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         query.append("DuckID IN (VALUES");
-
-        for (Integer duckID : duckIDs) {
-            query.append("(");
-            query.append(duckID.toString());
-            query.append("),");
-        }
-
-        query.deleteCharAt(query.length() - 1);
-        query.append(")");
-        Log.d("DatabaseHelper", "updateDuckIDs: Query: " + query.toString());
+        query.append(listIDs(duckIDs));
 
         if (!isUnknown(goalFeature)) {
             duckIDs.clear();
@@ -166,12 +158,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            Log.d("DatabaseHelper", "updateDuckIDs: Duck Found");
             if (isUnknown(goalFeature)) {
-                Log.d("DatabaseHelper", "updateDuckIDs: Duck Removed: " + cursor.getInt(0));
                 duckIDs.remove((Integer)cursor.getInt(0));
             } else {
-                Log.d("DatabaseHelper", "updateDuckIDs: Duck Added: " + cursor.getInt(0));
                 duckIDs.add(cursor.getInt(0));
             }
             cursor.moveToNext();
@@ -190,25 +179,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Features
      */
     public List<Integer> getListFeatures(String feature, List<Integer> duckIDs) {
-        Log.d("DatabaseHelper", "getListFeatures");
-        Log.d("DatabaseHelper", "getListFeatures: feature: " + feature);
-        Log.d("DatabaseHelper", "getListFeatures: duckIDs: " + duckIDs);
         List<Integer> featureList = new ArrayList<>();
 
         //Create query to find all features that any duck in the list of duckIDs has
-        StringBuilder query = new StringBuilder();
-        query.append("SELECT DISTINCT(");
-        query.append(feature);
-        query.append(") FROM ");
-        query.append(feature);
-        query.append(" WHERE DuckID IN (VALUES");
-        query.append(listIDs(duckIDs));
-        query.append(") ORDER BY ");
-        query.append(feature);
+        String query = "SELECT DISTINCT(" + feature + ") FROM " + feature +
+                " WHERE DuckID IN (VALUES" + listIDs(duckIDs) + " ORDER BY " + feature;
 
         //Open Database and create cursor
         openDatabase();
-        Cursor cursor = mDatabase.rawQuery(query.toString(), null);
+        Cursor cursor = mDatabase.rawQuery(query, null);
         cursor.moveToFirst();
 
         //Add each feature available
@@ -247,7 +226,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return List of Questions containing the table name and question
      */
     public List<Question> getListQuestions() {
-        Log.d("DatabaseHelper", "getListQuestions");
         List<Question> questionList = new ArrayList<>();
         Question question;
 
@@ -275,67 +253,139 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return Most optimal question to reduce the number of DuckID's
      */
     public Question getBestOption(List<Integer> duckIDs, List<Question> questions) {
-        Log.d("DatabaseHelper", "getBestOption");
-        Log.d("DatabaseHelper", "getBestOption: duckIDs: " + duckIDs);
-        Log.d("DatabaseHelper", "getBestOption: questions Size: " + questions.size());
 
-        Question bestOption = null;
-        String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs) + ")";
-        Cursor cursor = null;
-        int maxNumDucks = 0;
-        int count;
-
+        //Check if question exists
         if (questions.size() == 0) {
             Log.d("DatabaseHelper", "getBestOption: No Question Given");
-            return bestOption;
+            return null;
         }
+
+        //Create SQL statement, track best table option, and number of ducks in the best table
+        String whereStatement = " WHERE DuckID IN(VALUES " + listIDs(duckIDs);
+        Question bestOption = null;
+        int maxNumDucks = 0;
 
         openDatabase();
         for (Question question : questions) {
-            cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() + ")) FROM " + question.getTable() + whereStatement, null);
+            Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
+                    ")) FROM " + question.getTable() + whereStatement, null);
+
             cursor.moveToFirst();
-            count = cursor.getInt(0);
+            int count = cursor.getInt(0);
 
             if (count > maxNumDucks) {
                 bestOption = question;
                 maxNumDucks = count;
             }
 
-            cursor.moveToNext();
+            cursor.close();
         }
 
-        cursor.close();
         closeDatabase();
         return bestOption;
     }
 
     /**
-     * Get the full list of ducks
+     * Get a list of at most 5 ducks closest in attributes to the wrong duck
      *
-     * @return List<Duck> of all ducks stored in the database
+     * @param questions List of Questions Asked
+     * @param answers List of Answers to the Questions Asked
+     * @param wrongDuckID ID of the Duck which has been Identified as Incorrect by the User
+     * @return List of at most 5 duckIDs matching closest to the duck
      */
-    public List<Duck> getListDucks() {
-        Duck duck;
-        List<Duck> duckList = new ArrayList<>();
-        openDatabase();
+    public List<Integer> getClosestDucks(List<Question> questions, List<Integer> answers, Integer wrongDuckID)
+    {
+        List<Integer> duckIDs;
+        List<List<Integer>> duckMatches; //Stores all the ducks for each question that match the answer
 
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Ducks", null);
-        cursor.moveToFirst();
+        //Populate duck matches
+        duckMatches = getMatchingDuckIDs(questions, answers, wrongDuckID);
 
-        while (!cursor.isAfterLast()) {
-            duck = new Duck(cursor.getInt(0),
-                                cursor.getString(1),
-                                cursor.getString(2),
-                                cursor.getShort(3),
-                                (byte)cursor.getInt(4),
-                                (byte)cursor.getInt(5));
-            duckList.add(duck);
-            cursor.moveToNext();
+        //Get Birds that Match Multiple Questions
+        duckIDs = getSimilarDucks(questions, duckMatches);
+
+        return duckIDs;
+    }
+
+    private List<Integer> getSimilarDucks(List<Question> questions, List<List<Integer>> duckMatches) {
+        List<Integer> duckIDs = new ArrayList<>();
+
+        //Find all values that match between all arrays bar one
+        int[] questionMatch = new int[questions.size() - 1];
+        for (int skip = 0; skip < questions.size(); skip++) {
+            //Get List of Questions to Compare Against Where the Questions with the largest number of ducks attached is added to duck matches first
+            int index = 0;
+            for (int questionNo = questions.size() - 1; questionNo > 0; questionNo--) {
+                if (skip == questionNo) {
+                    continue;
+                }
+
+                questionMatch[index] = questionNo;
+            }
+
+            //Compare list of Questions
+            Collection<Integer> similar = new HashSet<>(duckMatches.get(questionMatch[0]));
+            for (int i = 0; i < questionMatch.length - 1; i++) {
+                Collection<Integer> list = new HashSet<>(duckMatches.get(questionMatch[i + 1]));
+
+                similar.retainAll(list);
+            }
+
+            //Add matching ducks to list
+            for (Integer duckID : similar) {
+                if (duckIDs.size() < MainActivity.TOP_RESULT_NUM_DUCKS && !duckIDs.contains(duckID)) {
+                    duckIDs.add(duckID);
+                } else {
+                    break;
+                }
+            }
+            Log.d("DatabaseHelper", "Similar Ducks: " + similar);
         }
 
-        cursor.close();
+        return duckIDs;
+    }
+
+    /**
+     * Returns a list containing a list of all duckIDs matching the answer of one of the questions
+     *
+     * @param questions List of Questions to Match Against
+     * @param answers List of Answers to the Questions
+     * @param wrongDuckID ID of the Duck which has been Identified as Incorrect by the User
+     */
+    private List<List<Integer>> getMatchingDuckIDs(List<Question> questions, List<Integer> answers, Integer wrongDuckID) {
+        List<List<Integer>> duckMatches = new ArrayList<>();
+        openDatabase();
+
+        //For each question and answer
+        for (int questionNo = 0; questionNo < questions.size(); questionNo++) {
+            Question question = questions.get(questionNo);
+            Integer answer = answers.get(questionNo);
+
+            //Stores all matching duckIDs
+            List<Integer> match = new ArrayList<>();
+
+            //EG. SELECT duckID FROM Colour WHERE Colour == 24
+            Cursor cursor = mDatabase.rawQuery("SELECT duckID FROM " + question.getTable() +
+                    " WHERE " + question.getFeature() + " == " + answer, null);
+
+            //Add all matching duckIDs
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                match.add((Integer)cursor.getInt(0));
+
+                cursor.moveToNext();
+            }
+            cursor.close();
+
+            //Remove wrong duck and add list to duck matches
+            match.remove(wrongDuckID);
+            duckMatches.add(match);
+
+            Log.d("DatabaseHelper", "Matches: " + match);
+        }
+
         closeDatabase();
-        return duckList;
+        return duckMatches;
     }
 
     /**
@@ -354,6 +404,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         query.deleteCharAt(query.length() - 1);
+        query.append(")");
 
         return query.toString();
     }
