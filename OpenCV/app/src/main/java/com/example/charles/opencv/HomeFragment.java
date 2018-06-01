@@ -27,12 +27,10 @@ public class HomeFragment extends Fragment {
 
         ImageView bird1 = new ImageView(slideShow.getContext());
         bird1.setImageBitmap(getBirdImage(v.getContext(),"australasian_grebe.jpg"));
-        bird1.setScaleType(ImageView.ScaleType.FIT_XY);
         slideShow.addView(bird1);
 
         ImageView bird2 = new ImageView(slideShow.getContext());
         bird2.setImageBitmap(getBirdImage(v.getContext(),"australasian_shoveler.jpg"));
-        bird2.setScaleType(ImageView.ScaleType.FIT_XY);
         slideShow.addView(bird2);
 
         slideShow.setFlipInterval(5000);

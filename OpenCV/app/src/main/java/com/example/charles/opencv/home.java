@@ -22,8 +22,8 @@ public class home extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
+        //BottomNavigationView navigation = findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(this);
 
         // Switch to camera activity upon click of button
         /*Button button = (Button) findViewById(R.id.button);
