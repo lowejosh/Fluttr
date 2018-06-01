@@ -28,7 +28,7 @@ public class Bird {
     public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize) {
         this.birdID = birdID;
         this.name = name;
-        this.image = image;
+        this.image = "images/" + image;
         this.atlasNo = atlasNo;
         this.minSize = minSize;
         this.maxSize = maxSize;
@@ -97,7 +97,7 @@ public class Bird {
         } catch (IOException unused) {
             //If bird image does not exist, display noImage file
             try {
-                return BitmapFactory.decodeStream(context.getAssets().open("noImage.jpg"));
+                return BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg"));
             } catch (IOException ex){
                 Log.e("MainActivity", "noImage Failed to Load");
                 Log.e("MainActivity", ex.getMessage());

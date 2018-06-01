@@ -28,11 +28,11 @@ public class HomeFragment extends Fragment {
         ViewFlipper slideShow = v.findViewById(R.id.slide_show);
 
         ImageView bird1 = new ImageView(slideShow.getContext());
-        bird1.setImageBitmap(getBirdImage(v.getContext(),"australasian_grebe.jpg"));
+        bird1.setImageBitmap(getBirdImage(v.getContext(),"images/australasian_grebe.jpg"));
         slideShow.addView(bird1);
 
         ImageView bird2 = new ImageView(slideShow.getContext());
-        bird2.setImageBitmap(getBirdImage(v.getContext(),"australasian_shoveler.jpg"));
+        bird2.setImageBitmap(getBirdImage(v.getContext(),"images/australasian_shoveler.jpg"));
         slideShow.addView(bird2);
 
         slideShow.setFlipInterval(5000);
