@@ -14,6 +14,7 @@ import android.view.View;
 import com.example.charles.opencv.Fragments.BirdBankFragment;
 import com.example.charles.opencv.Fragments.HomeFragment;
 import com.example.charles.opencv.Fragments.SearchFragment;
+import com.example.charles.opencv.Fragments.TwentyQuestionFragment;
 
 public class HomeScreen extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -79,7 +80,7 @@ public class HomeScreen extends AppCompatActivity
      * @param v Attached View Object (Unused)
      */
     public void finderOnClick(View v) {
-        loadFragment(new HomeFragment());
+        loadFragment(new TwentyQuestionFragment());
     }
 
     /**

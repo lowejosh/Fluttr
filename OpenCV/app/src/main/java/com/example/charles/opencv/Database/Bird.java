@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import com.example.charles.opencv.R;
 
 import java.io.IOException;
 
@@ -14,6 +18,7 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
+    private Context mContext;
 
     /**
      * Bird object which contains all information stored inside the birds table.
@@ -105,6 +110,13 @@ public class Bird {
             Log.e("MainActivity", "Failed to load image: " + image);
         }
 
+        return null;
+    }
+
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v = View.inflate(mContext, R.layout.bird_listview, null);
+        TextView birdName = (TextView)v.findViewById(R.id.bird_name);
+        TextView birdSeen = (TextView)v.findViewById(R.id.bird_name);
         return null;
     }
 }

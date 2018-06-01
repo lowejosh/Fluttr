@@ -1,10 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
-<<<<<<< HEAD
  * Original file: /home/timp/Documents/projects/capstone/team3432-capstone/OpenCV/openCVLibrary341/src/main/aidl/org/opencv/engine/OpenCVEngineInterface.aidl
-=======
- * Original file: D:\\Documents\\GitHub\\team3432-capstone\\OpenCV\\openCVLibrary341\\src\\main\\aidl\\org\\opencv\\engine\\OpenCVEngineInterface.aidl
->>>>>>> a22a24fbe4ba23ba1a5d0eb4aca644f8d8b2d24a
  */
 package org.opencv.engine;
 /**
