@@ -1,7 +1,19 @@
 <resources>
-    <string name="app_name">PLACEHOLDER</string>
-    <string name="title_activity_home">PLACEHOLDER</string>
+    <string name="app_name">Assignment</string>
+    <string name="title_activity_home">Assignment</string>
+    <string name="app_title">Fluttr</string>
     <string name="title_home">Recognise</string>
     <string name="title_search">Search</string>
     <string name="title_birdBank">Bird Bank</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="unknown">Unknown</string>
+    <string name="none_of_the_above">None of the Above</string>
+    <string name="are_you_thinking_of">Are you thinking of this bird?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="bird_image_alt">Image of Duck</string>
+    <string name="bird_finder_btn">Bird Finder</string>
+    <string name="bird_identifier_btn">Bird Identifier</string>
+    <string name="bird_bank_btn">Bird Bank</string>
 </resources>

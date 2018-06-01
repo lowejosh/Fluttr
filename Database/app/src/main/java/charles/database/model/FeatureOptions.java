@@ -3,14 +3,13 @@ package charles.database.model;
 import android.util.Log;
 import android.util.SparseArray;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 public final class FeatureOptions {
-    private static SparseArray<String> OPTION = new SparseArray<String>();
+    private static SparseArray<String> OPTION = new SparseArray<>();
+    public static final Integer UNKNOWN = -1;
+    public static final Integer OTHER = 0;
 
     static {
+        OPTION.put(-1, "Unknown");
         OPTION.put(0, "Other");
         OPTION.put(1, "Prominent");
         OPTION.put(2, "Curved");
@@ -47,7 +46,7 @@ public final class FeatureOptions {
         OPTION.put(33, "Metallic Sheen");
         OPTION.put(34, "White");
         OPTION.put(35, "Yellow");
-        OPTION.put(36, "Duck");
+        OPTION.put(36, "Bird");
         OPTION.put(37, "Fowl");
         OPTION.put(38, "Heavyset");
         OPTION.put(39, "Heron");
@@ -64,11 +63,40 @@ public final class FeatureOptions {
         OPTION.put(50, "Small Bird with Tail Up");
     }
 
-    public static String getValue(Integer option) {
+    /**
+     * Get Value of Option, ie 0->"Other"
+     *
+     * @param option Feature Option
+     * @return Value of the Feature
+     */
+    public static String valueOf(Integer option) {
+        //If option is too large, return UNKNOWN
         if (option >= OPTION.size()) {
             Log.d("FeatureOptions", "Value Not Found");
-            return "UNKNOWN";
+            return "Unknown";
         }
-        return OPTION.get(option, "UNKNOWN");
+
+        //Return Value of the Feature, if None Exists Return UNKNOWN
+        return OPTION.get(option, "Unknown");
+    }
+
+    /**
+     * Returns true if the feature is an "unknown" feature
+     *
+     * @param feature Index of feature in FeatureOption
+     * @return True if the feature is an "unknown" feature
+     */
+    public static boolean isUnknown(Integer feature) {
+        return feature.equals(UNKNOWN);
+    }
+
+    /**
+     * Returns true if the feature is an "other" feature
+     *
+     * @param feature Index of feature in FeatureOption
+     * @return True if the feature is an "other" feature
+     */
+    public static boolean isOther(Integer feature) {
+        return feature.equals(OTHER);
     }
 }
