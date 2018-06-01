@@ -1,19 +1,12 @@
-package com.example.charles.opencv.Fragments;
+package com.example.charles.opencv;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.charles.opencv.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,28 +16,7 @@ import com.example.charles.opencv.Database.Bird;
 import com.example.charles.opencv.Database.Question;
 import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
 
-
-
-public class TwentyQuestionFragment extends Fragment {
-
-    Context context;
-    LayoutInflater inflater;
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        this.inflater = inflater;
-        context = inflater.getContext();
-        dbHandler = new Database(context);
-
-        //Begin Twenty Question Game
-        twentyQuestions();
-
-        return inflater.inflate(R.layout.tq_home, null);
-    }
-
+public class TwentyQuestionActivity extends AppCompatActivity {
     private Database dbHandler;
     private List<Integer> birdIDs, featureList, answers;
     private List<Question> questionsAsked, questionsLeft;
@@ -53,13 +25,23 @@ public class TwentyQuestionFragment extends Fragment {
     private final int MAX_NUM_FEATURES = 14;
     public static final int TOP_RESULT_NUM_BIRDS = 5;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_main);
+        dbHandler = new Database(this);
+
+        //Begin Twenty Question Game
+        twentyQuestions();
+    }
 
     /**
      * Begin the Twenty Question Game
      */
     private void twentyQuestions() {
         //Change view to twenty questions
-        inflater.inflate(R.layout.tq_home, null);
+        setContentView(R.layout.tq_home);
 
         //Get full list of birds and questions
         birdIDs = dbHandler.getBirdIDs();
@@ -70,7 +52,7 @@ public class TwentyQuestionFragment extends Fragment {
 
         //Set Onclick Events for Option Buttons
         for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
-            Button btn = getView().findViewById(getHomeButtonID(btnOption));
+            Button btn = findViewById(getHomeButtonID(btnOption));
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,8 +98,8 @@ public class TwentyQuestionFragment extends Fragment {
         }
 
         //Get Views in tq_home
-        TextView tv_question_no = getView().findViewById(R.id.tv_home_question_no);
-        TextView tv_question = getView().findViewById(R.id.tv_home_question);
+        TextView tv_question_no = findViewById(R.id.tv_home_question_no);
+        TextView tv_question = findViewById(R.id.tv_home_question);
 
         //Update Views in tq_home
         tv_question_no.setText(String.format("%s.", questionNo));
@@ -125,7 +107,7 @@ public class TwentyQuestionFragment extends Fragment {
 
         //Make relevant buttons visible
         for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
-            Button btn = getView().findViewById(getHomeButtonID(btnOption));
+            Button btn = findViewById(getHomeButtonID(btnOption));
 
             //If there is a feature for the button, show the feature and make it visible
             if (btnOption < featureList.size()) {
@@ -142,22 +124,22 @@ public class TwentyQuestionFragment extends Fragment {
      */
     private void showAnswer() {
         //Change the View to tq_result
-        inflater.inflate(R.layout.tq_result, null);
+        setContentView(R.layout.tq_result);
 
         //Get the final Bird
         Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
-        TextView tvBirdName = getView().findViewById(R.id.tv_result_bird_name);
-        ImageView ivBirdImage = getView().findViewById(R.id.iv_result_image);
+        TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
+        ImageView ivBirdImage = findViewById(R.id.iv_result_image);
 
         //Get Buttons
-        Button btnAccept = getView().findViewById(R.id.btn_result_yes);
-        Button btnDeny = getView().findViewById(R.id.btn_result_no);
+        Button btnAccept = findViewById(R.id.btn_result_yes);
+        Button btnDeny = findViewById(R.id.btn_result_no);
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(context));
+        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -187,22 +169,22 @@ public class TwentyQuestionFragment extends Fragment {
      */
     private void showFinalAnswer() {
         //Change the View to tq_result
-        inflater.inflate(R.layout.tq_result, null);
+        setContentView(R.layout.tq_result);
 
         //Get the final Bird
         Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
-        TextView tvBirdName = getView().findViewById(R.id.tv_result_bird_name);
-        ImageView ivBirdImage = getView().findViewById(R.id.iv_result_image);
+        TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
+        ImageView ivBirdImage = findViewById(R.id.iv_result_image);
 
         //Get Buttons
-        Button btnAccept = getView().findViewById(R.id.btn_result_yes);
-        Button btnDeny = getView().findViewById(R.id.btn_result_no);
+        Button btnAccept = findViewById(R.id.btn_result_yes);
+        Button btnDeny = findViewById(R.id.btn_result_no);
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(context));
+        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -228,7 +210,7 @@ public class TwentyQuestionFragment extends Fragment {
         final int IMAGE = 1;
         final int TEXT = 2;
 
-        inflater.inflate(R.layout.tq_topresults, null);
+        setContentView(R.layout.tq_topresults);
 
         //For each result in tq_topresults
         for (int birdOption = 0; birdOption < TOP_RESULT_NUM_BIRDS; birdOption++) {
@@ -238,7 +220,7 @@ public class TwentyQuestionFragment extends Fragment {
                 Bird bird = dbHandler.getBird(birdIDs.get(birdOption));
 
                 //Update Views
-                ((ImageView) result[IMAGE]).setImageBitmap(bird.getBirdImage(context));
+                ((ImageView) result[IMAGE]).setImageBitmap(bird.getBirdImage(getApplicationContext()));
                 ((TextView) result[TEXT]).setText(bird.getName());
 
                 //Set Visibility
@@ -256,7 +238,7 @@ public class TwentyQuestionFragment extends Fragment {
      * Display tq_failure
      */
     private void showFailure() {
-        inflater.inflate(R.layout.tq_failure, null);
+        setContentView(R.layout.tq_failure);
     }
 
     /**
@@ -287,7 +269,7 @@ public class TwentyQuestionFragment extends Fragment {
      * @return ID for use in findViewById()
      */
     private int getHomeButtonID(int optionNo) {
-        return getResources().getIdentifier("btn_option_" + optionNo, "id", context.getPackageName());
+        return getResources().getIdentifier("btn_option_" + optionNo, "id", getPackageName());
     }
 
     /**
@@ -315,9 +297,9 @@ public class TwentyQuestionFragment extends Fragment {
      * @return Array containing linear layout, image and text view
      */
     private View[] getTopResultViews(int optionNo) {
-        ImageView imageView = getView().findViewById(getResources().getIdentifier("top_result_image_" + optionNo, "id", context.getPackageName()));
-        TextView textView = getView().findViewById(getResources().getIdentifier("top_result_text_" + optionNo, "id", context.getPackageName()));
-        LinearLayout linearLayout = getView().findViewById(getResources().getIdentifier("top_result_" + optionNo, "id", context.getPackageName()));
+        ImageView imageView = findViewById(getResources().getIdentifier("top_result_image_" + optionNo, "id", getPackageName()));
+        TextView textView = findViewById(getResources().getIdentifier("top_result_text_" + optionNo, "id", getPackageName()));
+        LinearLayout linearLayout = findViewById(getResources().getIdentifier("top_result_" + optionNo, "id", getPackageName()));
 
         return new View[] {linearLayout, imageView, textView};
     }
@@ -366,4 +348,3 @@ public class TwentyQuestionFragment extends Fragment {
 
 
 }
-

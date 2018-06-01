@@ -1,20 +1,18 @@
 package com.example.charles.opencv;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+
 
 import com.example.charles.opencv.Fragments.BirdBankFragment;
 import com.example.charles.opencv.Fragments.HomeFragment;
 import com.example.charles.opencv.Fragments.SearchFragment;
-import com.example.charles.opencv.Fragments.TwentyQuestionFragment;
 
 public class HomeScreen extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -80,7 +78,10 @@ public class HomeScreen extends AppCompatActivity
      * @param v Attached View Object (Unused)
      */
     public void finderOnClick(View v) {
-        loadFragment(new TwentyQuestionFragment());
+        startActivity(new Intent(HomeScreen.this, TwentyQuestionActivity.class));
+
+
+
     }
 
     /**
