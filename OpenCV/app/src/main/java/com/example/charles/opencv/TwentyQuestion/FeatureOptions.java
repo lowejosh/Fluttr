@@ -1,4 +1,4 @@
-package charles.database.model;
+package com.example.charles.opencv.TwentyQuestion;
 
 import android.util.Log;
 import android.util.SparseArray;

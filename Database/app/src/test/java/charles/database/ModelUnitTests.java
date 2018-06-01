@@ -2,13 +2,13 @@ package charles.database;
 
 import org.junit.Test;
 
-import charles.database.model.Duck;
+import charles.database.model.Bird;
 
 import static junit.framework.Assert.assertTrue;
 
 public class ModelUnitTests {
     final int validID = 1;
-    final String validName = "Duck";
+    final String validName = "Bird";
     final String validPath = "";
     final short validAtlasNo = 1;
     final byte validMinSize = 10;
@@ -16,43 +16,43 @@ public class ModelUnitTests {
 
     @Test
     public void duck_validID() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getDuckID() == 1);
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getDuckID() == 1);
     }
 
     /*@Test
     public void duck_invalidID() {
-        Duck duck = new Duck(-1, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        Bird duck = new Bird(-1, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
         assertTrue(duck.getDuckID() == 1);
     }*/
 
     @Test
     public void duck_validName() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getName().equals(validName));
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getName().equals(validName));
     }
 
     @Test
     public void duck_validPath() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getImage().equals(validPath));
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getImage().equals(validPath));
     }
 
     @Test
     public void duck_validAtlasNo() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getAtlasNo() == validAtlasNo);
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getAtlasNo() == validAtlasNo);
     }
 
     @Test
     public void duck_validMinSize() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getMinSize() == validMinSize);
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getMinSize() == validMinSize);
     }
 
     @Test
     public void duck_validMaxSize() {
-        Duck duck = new Duck(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
-        assertTrue(duck.getMaxSize() == validMaxSize);
+        Bird bird = new Bird(validID, validName, validPath, validAtlasNo, validMinSize, validMaxSize);
+        assertTrue(bird.getMaxSize() == validMaxSize);
     }
 }

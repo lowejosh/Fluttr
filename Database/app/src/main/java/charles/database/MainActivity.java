@@ -1,54 +1,36 @@
 package charles.database;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import charles.database.database.DatabaseHelper;
-import charles.database.model.Duck;
+import charles.database.database.Database;
+import charles.database.model.Bird;
 import charles.database.model.FeatureOptions;
 import charles.database.model.Question;
 
 public class MainActivity extends AppCompatActivity {
-    private DatabaseHelper dbHandler;
-    private List<Integer> duckIDs, featureList, answers;
+    private Database dbHandler;
+    private List<Integer> birdIDs, featureList, answers;
     private List<Question> questionsAsked, questionsLeft;
     private Question currentQuestion;
     private int questionNo;
     private final int MAX_NUM_FEATURES = 14;
-    public static final int TOP_RESULT_NUM_DUCKS = 5;
+    public static final int TOP_RESULT_NUM_BIRDS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        dbHandler = new DatabaseHelper(this);
-
-        //Check database exists
-        File database = getApplicationContext().getDatabasePath(DatabaseHelper.DBNAME);
-
-        //If database does not exist, create it
-        if (!database.exists()) {
-            dbHandler.getReadableDatabase();
-            copyDatabase(this);
-        }
+        dbHandler = new Database(this);
 
         //Begin Twenty Question Game
         twentyQuestions();
@@ -61,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         //Change view to twenty questions
         setContentView(R.layout.tq_home);
 
-        //Get full list of ducks and questions
-        duckIDs = dbHandler.getDuckIDs();
+        //Get full list of birds and questions
+        birdIDs = dbHandler.getBirdIDs();
         questionsLeft = dbHandler.getListQuestions();
         questionsAsked = new ArrayList<>();
         answers = new ArrayList<>();
@@ -83,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
                         questionsAsked.add(currentQuestion);
                     }
 
-                    //Update DuckIDs and answers List
-                    dbHandler.updateDuckIDs(selectedFeature, currentQuestion.getFeature(), duckIDs);
+                    //Update BirdIDs and answers List
+                    dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getFeature(), birdIDs);
                     answers.add(selectedFeature);
 
                     //Move to Next Stage
@@ -105,8 +87,8 @@ public class MainActivity extends AppCompatActivity {
         questionNo++;
 
         //Get new question and feature list
-        currentQuestion = dbHandler.getBestOption(duckIDs, questionsLeft);
-        featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), duckIDs);
+        currentQuestion = dbHandler.getBestOption(birdIDs, questionsLeft);
+        featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), birdIDs);
 
         //Check if enough features exist to warrant a question
         if (featureList.size() == 1) {
@@ -138,26 +120,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * If one duck is left, this will display the bird in tq_result
+     * If one bird is left, this will display the bird in tq_result
      */
     private void showAnswer() {
         //Change the View to tq_result
         setContentView(R.layout.tq_result);
 
-        //Get the final Duck
-        Duck duck = dbHandler.getDuck(duckIDs.get(0));
+        //Get the final Bird
+        Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
-        TextView tvDuckName = findViewById(R.id.tv_result_duck_name);
-        ImageView ivDuckImage = findViewById(R.id.iv_result_image);
+        TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
+        ImageView ivBirdImage = findViewById(R.id.iv_result_image);
 
         //Get Buttons
         Button btnAccept = findViewById(R.id.btn_result_yes);
         Button btnDeny = findViewById(R.id.btn_result_no);
 
         //Update Views
-        tvDuckName.setText(duck.getName());
-        ivDuckImage.setImageBitmap(getBirdImage(duck.getImage()));
+        tvBirdName.setText(bird.getName());
+        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -171,18 +153,15 @@ public class MainActivity extends AppCompatActivity {
         btnDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                duckIDs = dbHandler.getClosestDucks(questionsAsked, answers, duckIDs.get(0));
+                birdIDs = dbHandler.getClosestBirds(questionsAsked, answers, birdIDs.get(0));
 
-                if (duckIDs.size() == 0) {
+                if (birdIDs.size() == 0) {
                     showFailure();
                 } else {
                     showMultiAnswer();
                 }
             }
         });
-
-        Log.d("MainActivity", "Questions Asked: " + questionsAsked);
-        Log.d("MainActivity", "Answers: " + answers);
     }
 
     /**
@@ -192,20 +171,20 @@ public class MainActivity extends AppCompatActivity {
         //Change the View to tq_result
         setContentView(R.layout.tq_result);
 
-        //Get the final Duck
-        Duck duck = dbHandler.getDuck(duckIDs.get(0));
+        //Get the final Bird
+        Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
-        TextView tvDuckName = findViewById(R.id.tv_result_duck_name);
-        ImageView ivDuckImage = findViewById(R.id.iv_result_image);
+        TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
+        ImageView ivBirdImage = findViewById(R.id.iv_result_image);
 
         //Get Buttons
         Button btnAccept = findViewById(R.id.btn_result_yes);
         Button btnDeny = findViewById(R.id.btn_result_no);
 
         //Update Views
-        tvDuckName.setText(duck.getName());
-        ivDuckImage.setImageBitmap(getBirdImage(duck.getImage()));
+        tvBirdName.setText(bird.getName());
+        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -225,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * If multiple ducks are left, this will display the top 5 ducks
+     * If multiple birds are left, this will display the top 5 birds
      */
     private void showMultiAnswer() {
         final int IMAGE = 1;
@@ -234,15 +213,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.tq_topresults);
 
         //For each result in tq_topresults
-        for (int duckOption = 0; duckOption < TOP_RESULT_NUM_DUCKS; duckOption++) {
+        for (int birdOption = 0; birdOption < TOP_RESULT_NUM_BIRDS; birdOption++) {
             //Get image and text view
-            View[] result = getTopResultViews(duckOption);
-            if (duckOption < duckIDs.size()) {
-                Duck duck = dbHandler.getDuck(duckIDs.get(duckOption));
+            View[] result = getTopResultViews(birdOption);
+            if (birdOption < birdIDs.size()) {
+                Bird bird = dbHandler.getBird(birdIDs.get(birdOption));
 
                 //Update Views
-                ((ImageView) result[IMAGE]).setImageBitmap(getBirdImage(duck.getImage()));
-                ((TextView) result[TEXT]).setText(duck.getName());
+                ((ImageView) result[IMAGE]).setImageBitmap(bird.getBirdImage(getApplicationContext()));
+                ((TextView) result[TEXT]).setText(bird.getName());
 
                 //Set Visibility
                 result[IMAGE].setVisibility(View.VISIBLE);
@@ -266,12 +245,12 @@ public class MainActivity extends AppCompatActivity {
      * Determine which screen twenty questions should show
      */
     private void nextStage() {
-        if (duckIDs.size() == 1) {
+        if (birdIDs.size() == 1) {
             //Show Answer
             showAnswer();
         } else if (questionsLeft.size() == 0) {
             //Check if any questions were asked and if the search has been refined far enough
-            if (questionsAsked.size() > 0 && duckIDs.size() <= TOP_RESULT_NUM_DUCKS) {
+            if (questionsAsked.size() > 0 && birdIDs.size() <= TOP_RESULT_NUM_BIRDS) {
                 //Show Answer List
                 showMultiAnswer();
             } else {
@@ -312,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the image and text view for the option number from tq_topresult, array output is View[linearLayout, imageView, textView]
+     * Get the image and text view for the option number from tq_topresults, array output is View[linearLayout, imageView, textView]
      *
      * @param optionNo Option number (0-4)
      * @return Array containing linear layout, image and text view
@@ -333,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private int getTopResultOption(int id) {
         //Match id against all result options and return option number
-        for (int btnOption = 0; btnOption < TOP_RESULT_NUM_DUCKS; btnOption++) {
+        for (int btnOption = 0; btnOption < TOP_RESULT_NUM_BIRDS; btnOption++) {
             View[] views = getTopResultViews(btnOption);
             if (id == views[0].getId()) {
                 return btnOption;
@@ -350,13 +329,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void multiAnswerOnClick(View v) {
         int option = getTopResultOption(v.getId());
-        Integer duckID = duckIDs.get(option);
+        Integer birdID = birdIDs.get(option);
 
-        Log.i("MainActivity", "Option Selected: " + dbHandler.getDuck(duckID).getName());
-
-        //Clear duckIDs and insert
-        duckIDs.clear();
-        duckIDs.add(duckID);
+        //Clear birdIDs and insert
+        birdIDs.clear();
+        birdIDs.add(birdID);
 
         showFinalAnswer();
     }
@@ -369,51 +346,5 @@ public class MainActivity extends AppCompatActivity {
         twentyQuestions();
     }
 
-    /**
-     * Get the Bitmap Image of a Picture in the assets folder
-     *
-     * @param file Name of the image inside assets including extension
-     * @return Image from file path in Bitmap form
-     */
-    public Bitmap getBirdImage(String file) {
-        //Update image for ImageView
-        try {
-            return BitmapFactory.decodeStream(this.getAssets().open(file));
-        } catch (IOException unused) {
-            //If duck image does not exist, display noImage file
-            try {
-                return BitmapFactory.decodeStream(this.getAssets().open("noImage.jpg"));
-            } catch (IOException ex){
-                Log.e("MainActivity", "noImage Failed to Load");
-                Log.e("MainActivity", ex.getMessage());
-            }
-            Log.e("MainActivity", "Failed to load image: " + file);
-        }
 
-        return null;
-    }
-
-    /**
-     * On initialisation of the app, copy the database into system files
-     *
-     * @param context Context of the application
-     */
-    private void copyDatabase(Context context) {
-        try {
-            InputStream inputStream = context.getAssets().open(DatabaseHelper.DBNAME);
-            String outFileName = DatabaseHelper.DBLOCATION + DatabaseHelper.DBNAME;
-            OutputStream outputStream = new FileOutputStream(outFileName);
-            byte[] buff = new byte[1024];
-            int length;
-
-            while ((length = inputStream.read(buff)) > 0) {
-                outputStream.write(buff, 0, length);
-            }
-
-            outputStream.flush();
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

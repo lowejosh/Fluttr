@@ -7,5 +7,5 @@
     <string name="are_you_thinking_of">Are you thinking of this bird?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="duck_image_alt">Image of Duck</string>
+    <string name="bird_image_alt">Image of Duck</string>
 </resources>

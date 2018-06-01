@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:id="@+id/tv_result_duck_name"
+        android:id="@+id/tv_result_bird_name"
         android:textColor="#000"
         android:textSize="20sp"
         android:textAlignment="center"/>

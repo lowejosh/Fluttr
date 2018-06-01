@@ -2,7 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/slide_show"
+        android:inAnimation="@anim/slide_in_right"
+        android:outAnimation="@anim/slide_out_left">
+
+    </ViewFlipper>
+
+
+<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"
