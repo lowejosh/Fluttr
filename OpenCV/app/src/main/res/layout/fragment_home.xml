@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_home_title"
-        android:text="Fluttr"
+        android:text="@string/app_title"
         style="@style/Title"/>
 
     <ViewFlipper
@@ -39,7 +39,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/background"
-            android:text="Bird Finder" />
+            android:text="@string/bird_finder_btn"
+            android:onClick="finderOnClick"/>
 
         <Button
             android:id="@+id/btn_Image"
@@ -49,7 +50,8 @@
             android:layout_marginTop="2sp"
             android:layout_weight="1"
             android:background="@color/background"
-            android:text="Bird Identifier" />
+            android:text="@string/bird_identifier_btn"
+            android:onClick="identifierOnClick"/>
 
         <Button
             android:id="@+id/btn_bird_bank"
@@ -59,7 +61,8 @@
             android:layout_marginTop="2sp"
             android:layout_weight="1"
             android:background="@color/background"
-            android:text="Bird Bank" />
+            android:text="@string/bird_bank_btn"
+            android:onClick="bankOnClick"/>
 
     </LinearLayout>
 

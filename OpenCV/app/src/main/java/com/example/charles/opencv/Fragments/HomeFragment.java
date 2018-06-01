@@ -1,4 +1,4 @@
-package com.example.charles.opencv;
+package com.example.charles.opencv.Fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
+
+import com.example.charles.opencv.R;
 
 import java.io.IOException;
 

@@ -6,15 +6,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.content.Intent;
-import android.widget.Button;
 import android.view.View;
 
+import com.example.charles.opencv.Fragments.BirdBankFragment;
+import com.example.charles.opencv.Fragments.HomeFragment;
+import com.example.charles.opencv.Fragments.SearchFragment;
 
-
-
-public class home extends AppCompatActivity
+public class HomeScreen extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     @Override
@@ -30,11 +28,11 @@ public class home extends AppCompatActivity
         button.setOnClickListener( new View.OnClickListener()
         {
             public void onClick (View v){
-                startActivity(new Intent(home.this, MainActivity.class));
+                startActivity(new Intent(HomeScreen.this, MainActivity.class));
             }
         });*/ // currently removed
 
-        // load the home fragment
+        // load the HomeScreen fragment
         loadFragment(new HomeFragment());
     }
 
@@ -71,5 +69,17 @@ public class home extends AppCompatActivity
         }
 
         return loadFragment(fragment);
+    }
+
+    public void finderOnClick(View v) {
+        loadFragment(new HomeFragment());
+    }
+
+    public void identifierOnClick(View v) {
+        loadFragment(new SearchFragment());
+    }
+
+    public void bankOnClick(View v) {
+        loadFragment(new BirdBankFragment());
     }
 }
