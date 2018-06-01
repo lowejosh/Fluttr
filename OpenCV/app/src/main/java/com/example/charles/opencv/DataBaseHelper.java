@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     //The Android's default system path of your application database.
-    private static String DB_PATH = "Context.getFilesDir().getPath()";
+    private static String DB_PATH = "/assets";
 
     private static String DB_NAME = "database";
 
