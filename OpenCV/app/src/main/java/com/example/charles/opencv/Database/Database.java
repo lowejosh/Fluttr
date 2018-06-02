@@ -1,20 +1,24 @@
 package com.example.charles.opencv.Database;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.charles.opencv.Activity.TwentyQuestionActivity;
 import com.example.charles.opencv.TwentyQuestion.Bird;
 import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
 import com.example.charles.opencv.TwentyQuestion.Question;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
     private static final String DBNAME = "database.sqlite";
@@ -120,6 +124,7 @@ public class Database extends SQLiteOpenHelper {
         openDatabase();
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Birds WHERE BirdID = ?", new String[] { String.valueOf(birdID) });
         cursor.moveToFirst();
+
         bird = new Bird(cursor.getInt(0),
                 cursor.getString(1),
                 cursor.getString(2),
@@ -288,9 +293,10 @@ public class Database extends SQLiteOpenHelper {
      * @return Most optimal question to reduce the number of BirdID's
      */
     public Question getBestOption(List<Integer> birdIDs, List<Question> questions) {
-
+        Log.d("TwentyQuestionActivity", "getBestOption");
         //Check if question exists
         if (questions.size() == 0) {
+            Log.d("TwentyQuestionActivity", "Empty list of Questions");
             return null;
         }
 
@@ -305,11 +311,15 @@ public class Database extends SQLiteOpenHelper {
             Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
                     ")) FROM " + question.getTable() + whereStatement, null);
 
+            Log.d("TwentyQuestionActivity", "SELECT Count(DISTINCT(" + question.getTable() +
+                    ")) FROM " + question.getTable() + whereStatement);
+
             cursor.moveToFirst();
             int count = cursor.getInt(0);
 
             //If no birds exist in the table
             if (count == 0) {
+                Log.d("TwentyQuestionActivity", "Bad Question");
                 questionsToRemove.add(question);
             }
 

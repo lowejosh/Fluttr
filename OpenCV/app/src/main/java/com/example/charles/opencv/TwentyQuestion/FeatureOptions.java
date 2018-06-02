@@ -46,7 +46,7 @@ public final class FeatureOptions {
         OPTION.put(33, "Metallic Sheen");
         OPTION.put(34, "White");
         OPTION.put(35, "Yellow");
-        OPTION.put(36, "Bird");
+        OPTION.put(36, "Duck");
         OPTION.put(37, "Fowl");
         OPTION.put(38, "Heavyset");
         OPTION.put(39, "Heron");

@@ -8,14 +8,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.R;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
+import com.example.charles.opencv.TwentyQuestion.Question;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.Question;
-import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
 
 public class TwentyQuestionActivity extends AppCompatActivity {
     private Database dbHandler;
@@ -87,8 +87,16 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         //Increment Question Number
         questionNo++;
 
-        //Get new question and feature list
+        //Get new question
         currentQuestion = dbHandler.getBestOption(birdIDs, questionsLeft);
+
+        //Check if any question is left to identify differences between the birds
+        if (questionsLeft.size() == 0) {
+            nextStage();
+            return;
+        }
+
+        //Get feature list
         featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), birdIDs);
 
         //Check if enough features exist to warrant a question
@@ -346,6 +354,4 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     public void backOnClick(View v) {
         twentyQuestions();
     }
-
-
 }
