@@ -2,28 +2,35 @@ package com.example.charles.opencv;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
+import com.example.charles.opencv.Activity.BirdBankActivity;
+import com.example.charles.opencv.Activity.SearchActivity;
+import com.example.charles.opencv.Activity.TwentyQuestionActivity;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.Database.Database;
 
-import com.example.charles.opencv.Fragments.BirdBankFragment;
-import com.example.charles.opencv.Fragments.HomeFragment;
-import com.example.charles.opencv.Fragments.SearchFragment;
-
-public class HomeScreen extends AppCompatActivity
-        implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class HomeScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.home);
 
-        //BottomNavigationView navigation = findViewById(R.id.navigation);
-        //navigation.setOnNavigationItemSelectedListener(this);
+        ViewFlipper slideShow = findViewById(R.id.slide_show);
+
+        for (int birdID = 1; birdID < 6; birdID++) {
+            Bird bird = new Database(this).getBird(birdID);
+            ImageView ivBird = new ImageView(slideShow.getContext());
+            ivBird.setImageBitmap(bird.getBirdImage(this));
+            slideShow.addView(ivBird);
+        }
+
+        slideShow.setFlipInterval(5000);
+        slideShow.startFlipping();
 
         // Switch to camera activity upon click of button
         /*Button button = (Button) findViewById(R.id.button);
@@ -33,44 +40,6 @@ public class HomeScreen extends AppCompatActivity
                 startActivity(new Intent(HomeScreen.this, MainActivity.class));
             }
         });*/ // currently removed
-
-        // load the HomeScreen fragment
-        loadFragment(new HomeFragment());
-    }
-
-    // Loads the desired fragment into the fragment container
-    private boolean loadFragment(Fragment fragment) {
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Declare the fragment
-        Fragment fragment = null;
-
-        // Find out which button was pressed and load the desired fragment
-        switch(item.getItemId()) {
-            case R.id.navigation_home:
-                fragment = new HomeFragment();
-                break;
-
-            case R.id.navigation_dashboard:
-                fragment = new SearchFragment();
-                break;
-
-            case R.id.navigation_birdBank:
-                fragment = new BirdBankFragment();
-                break;
-        }
-
-        return loadFragment(fragment);
     }
 
     /**
@@ -79,9 +48,6 @@ public class HomeScreen extends AppCompatActivity
      */
     public void finderOnClick(View v) {
         startActivity(new Intent(HomeScreen.this, TwentyQuestionActivity.class));
-
-
-
     }
 
     /**
@@ -89,7 +55,7 @@ public class HomeScreen extends AppCompatActivity
      * @param v Attached View Object (Unused)
      */
     public void identifierOnClick(View v) {
-        loadFragment(new SearchFragment());
+        startActivity(new Intent(HomeScreen.this, SearchActivity.class));
     }
 
     /**
@@ -97,6 +63,6 @@ public class HomeScreen extends AppCompatActivity
      * @param v Attached View Object (Unused)
      */
     public void bankOnClick(View v) {
-        loadFragment(new BirdBankFragment());
+        startActivity(new Intent(HomeScreen.this, BirdBankActivity.class));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.charles.opencv.Database;
+package com.example.charles.opencv.TwentyQuestion;
 
 public class Question {
     private String table;

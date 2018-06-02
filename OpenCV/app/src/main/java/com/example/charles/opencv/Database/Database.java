@@ -11,13 +11,16 @@ import java.util.List;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.charles.opencv.Activity.TwentyQuestionActivity;
+import com.example.charles.opencv.TwentyQuestion.Bird;
 import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
+import com.example.charles.opencv.TwentyQuestion.Question;
 
 public class Database extends SQLiteOpenHelper {
     private static final String DBNAME = "database.sqlite";
     private static String DBLOCATION;
     private Context context;
-    private SQLiteDatabase mDatabase;
+    private static SQLiteDatabase mDatabase;
 
     /**
      * Create database from assets
@@ -385,8 +388,7 @@ public class Database extends SQLiteOpenHelper {
 
             //Add matching birds to list
             for (Integer birdID : similar) {
-                //TODO Remove Magic Number
-                if (birdIDs.size() < 5 && !birdIDs.contains(birdID)) {
+                if (birdIDs.size() < TwentyQuestionActivity.TOP_RESULT_NUM_BIRDS && !birdIDs.contains(birdID)) {
                     birdIDs.add(birdID);
                 } else {
                     break;

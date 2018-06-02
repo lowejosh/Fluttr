@@ -1,4 +1,4 @@
-package com.example.charles.opencv;
+package com.example.charles.opencv.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.Database.Bird;
-import com.example.charles.opencv.Database.Question;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.TwentyQuestion.Question;
+import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
 
 public class TwentyQuestionActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      */
     private void twentyQuestions() {
         //Change view to twenty questions
-        setContentView(R.layout.tq_home);
+        setContentView(R.layout.twenty_question);
 
         //Get full list of birds and questions
         birdIDs = dbHandler.getBirdIDs();
@@ -97,11 +98,11 @@ public class TwentyQuestionActivity extends AppCompatActivity {
             return;
         }
 
-        //Get Views in tq_home
+        //Get Views in twenty_question
         TextView tv_question_no = findViewById(R.id.tv_home_question_no);
         TextView tv_question = findViewById(R.id.tv_home_question);
 
-        //Update Views in tq_home
+        //Update Views in twenty_question
         tv_question_no.setText(String.format("%s.", questionNo));
         tv_question.setText(currentQuestion.getQuestion());
 
@@ -263,7 +264,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the ID of the button from its option number in tq_home
+     * Get the ID of the button from its option number in twenty_question
      *
      * @param optionNo Option number (0-13)
      * @return ID for use in findViewById()
@@ -273,7 +274,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the Option number of the button from its ID in tq_home
+     * Get the Option number of the button from its ID in twenty_question
      *
      * @param id ID of the btn used in findViewById()
      * @return Option Number of the button
