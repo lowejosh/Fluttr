@@ -3,26 +3,32 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
+    android:background="@color/appBackground">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:id="@+id/tv_result_title"
-        android:text="@string/are_you_thinking_of"
-        android:textColor="#000"
-        android:textSize="26sp"
-        android:textAlignment="center"/>
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:paddingBottom="3sp"
+        android:layout_marginBottom="2sp"
+        android:text="@string/are_you_thinking_of"
+        android:textColor="@color/text"
+        android:textSize="26sp"
+        android:textAlignment="center"
+        style="@style/Title"/>
+
+    <TextView
+        android:id="@+id/tv_result_bird_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:id="@+id/tv_result_bird_name"
-        android:textColor="#000"
+        android:layout_marginBottom="2sp"
+        android:textColor="@color/text"
         android:textSize="20sp"
         android:textAlignment="center"/>
 
@@ -30,12 +36,16 @@
         android:id="@+id/iv_result_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:paddingBottom="2sp"
+        android:cropToPadding="false"
         android:adjustViewBounds="true"
-        android:cropToPadding="false" />
+        android:contentDescription="@string/image_of_bird"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/appBackground"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp">
@@ -46,8 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@color/green"
-            android:text="@string/yes" />
+            android:text="@string/yes"
+            android:textColor="@color/text"
+            android:background="@drawable/positive_rounded_button"/>
 
         <Button
             android:id="@+id/btn_result_no"
@@ -55,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:background="@color/red"
-            android:text="@string/no" />
+            android:text="@string/no"
+            android:textColor="@color/text"
+            android:background="@drawable/negative_rounded_button"/>
     </RelativeLayout>
 </LinearLayout>

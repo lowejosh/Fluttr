@@ -10,4 +10,10 @@
     <color name="appBackground">#ffeada</color>
     <color name="background">#fff2e8</color>
     <color name="text">#101010</color>
+    <color name="positive_btn">#00CC00</color>
+    <color name="positive_pressed_btn">#007F00</color>
+    <color name="positive_outline_btn">#009900</color>
+    <color name="negative_btn">#CC0000</color>
+    <color name="negative_pressed_btn">#7F0000</color>
+    <color name="negative_outline_btn">#990000</color>
 </resources>

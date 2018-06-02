@@ -3,24 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/appBackground">
 
     <TextView
+        android:id="@+id/title"
+        style="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="180dp"
-        android:text="Bird Finder has Failed to Idenitify Your Bird."
-        android:textAlignment="center"
-        android:textSize="18sp" />
+        android:background="@color/background"
+        android:text="@string/bird_finder_failure"
+        android:layout_marginBottom="2sp"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Go Back"
         android:id="@+id/failure_back"
-        android:onClick="backOnClick"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:background="@color/background"
+        android:onClick="backOnClick"
+        android:text="@string/try_again"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </RelativeLayout>

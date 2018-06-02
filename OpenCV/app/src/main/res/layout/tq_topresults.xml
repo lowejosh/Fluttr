@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent" >
+    android:layout_width="match_parent"
+    android:background="@color/appBackground">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,11 +14,13 @@
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/top_result_0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:id="@+id/top_result_0"
+            android:layout_marginBottom="2sp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="multiAnswerOnClick">
@@ -26,11 +29,11 @@
                 android:id="@+id/top_result_image_0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:contentDescription="@string/bird_image_alt"
-                android:scaleType="fitXY"
-                android:layout_weight="0.5"/>
+                android:scaleType="fitXY"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -44,17 +47,20 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/text"
+                    android:textSize="18sp"
+                    android:text="@string/testing"/>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/top_result_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:id="@+id/top_result_1"
+            android:layout_marginBottom="2sp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="multiAnswerOnClick">
@@ -63,11 +69,11 @@
                 android:id="@+id/top_result_image_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:contentDescription="@string/bird_image_alt"
-                android:scaleType="fitXY"
-                android:layout_weight="0.5"/>
+                android:scaleType="fitXY"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -81,17 +87,20 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/text"
+                    android:textSize="18sp"
+                    android:text="@string/testing"/>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/top_result_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:id="@+id/top_result_2"
+            android:layout_marginBottom="2sp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="multiAnswerOnClick">
@@ -100,11 +109,11 @@
                 android:id="@+id/top_result_image_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:contentDescription="@string/bird_image_alt"
-                android:scaleType="fitXY"
-                android:layout_weight="0.5"/>
+                android:scaleType="fitXY"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -118,17 +127,20 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/text"
+                    android:textSize="18sp"
+                    android:text="@string/testing"/>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/top_result_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:id="@+id/top_result_3"
+            android:layout_marginBottom="2sp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="multiAnswerOnClick">
@@ -137,11 +149,11 @@
                 android:id="@+id/top_result_image_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:contentDescription="@string/bird_image_alt"
-                android:scaleType="fitXY"
-                android:layout_weight="0.5"/>
+                android:scaleType="fitXY"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -155,17 +167,20 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/text"
+                    android:textSize="18sp"
+                    android:text="@string/testing"/>
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/top_result_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="1"
-            android:id="@+id/top_result_4"
+            android:layout_marginBottom="2sp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="multiAnswerOnClick">
@@ -174,11 +189,11 @@
                 android:id="@+id/top_result_image_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:contentDescription="@string/bird_image_alt"
-                android:scaleType="fitXY"
-                android:layout_weight="0.5"/>
+                android:scaleType="fitXY"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -192,15 +207,18 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
+                    android:textColor="@color/text"
+                    android:textSize="18sp"
+                    android:text="@string/testing"/>
             </RelativeLayout>
         </LinearLayout>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="None of the Above"
-            android:onClick="backOnClick"/>
+            android:text="@string/none_of_the_above"
+            android:onClick="backOnClick"
+            android:background="@color/background"
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 </ScrollView>
