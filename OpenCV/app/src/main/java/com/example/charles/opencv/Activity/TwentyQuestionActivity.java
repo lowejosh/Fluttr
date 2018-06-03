@@ -259,7 +259,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
             showAnswer();
         } else if (questionsLeft.size() == 0) {
             //Check if any questions were asked and if the search has been refined far enough
-            if (questionsAsked.size() > 0 && birdIDs.size() <= TOP_RESULT_NUM_BIRDS) {
+            if (questionsAsked.size() > 0) {
                 //Show Answer List
                 showMultiAnswer();
             } else {

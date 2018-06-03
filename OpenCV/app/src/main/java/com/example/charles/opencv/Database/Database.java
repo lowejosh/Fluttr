@@ -2,7 +2,9 @@ package com.example.charles.opencv.Database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -113,7 +115,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieve the bird attached to the BirdID
+     * Retrieve the bird attached to the BirdID. If bird does not exists, returns null
      *
      * @param birdID BirdID of the selected bird
      * @return Bird matching the BirdID
@@ -125,12 +127,17 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM Birds WHERE BirdID = ?", new String[] { String.valueOf(birdID) });
         cursor.moveToFirst();
 
-        bird = new Bird(cursor.getInt(0),
-                cursor.getString(1),
-                cursor.getString(2),
-                cursor.getShort(3),
-                (byte)cursor.getInt(4),
-                (byte)cursor.getInt(5));
+        try {
+            bird = new Bird(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getShort(3),
+                    (byte) cursor.getInt(4),
+                    (byte) cursor.getInt(5));
+        } catch (CursorIndexOutOfBoundsException ex) {
+            Log.e("Database","Database: Failed to Find Duck with ID: " + birdID);
+            bird = null;
+        }
 
         cursor.close();
         closeDatabase();
@@ -167,7 +174,8 @@ public class Database extends SQLiteOpenHelper {
      * @param birdIDs List of BirdIDs to refine search
      */
     public void updateBirdIDs(int goalFeature, String feature, List<Integer> birdIDs) {
-        if (FeatureOptions.isUnknown(goalFeature)) {
+        //If feature is "Unknown" or size of birdID list is 0
+        if (FeatureOptions.isUnknown(goalFeature) || birdIDs.size() == 0) {
             return;
         }
 
@@ -218,6 +226,11 @@ public class Database extends SQLiteOpenHelper {
     public List<Integer> getListFeatures(String feature, List<Integer> birdIDs) {
         List<Integer> featureList = new ArrayList<>();
 
+        //If birdID list is empty, return empty feature list
+        if (birdIDs.size() == 0) {
+            return featureList;
+        }
+
         //Add Unknown to Feature List
         featureList.add(FeatureOptions.UNKNOWN);
 
@@ -227,17 +240,23 @@ public class Database extends SQLiteOpenHelper {
 
         //Open Database and create cursor
         openDatabase();
-        Cursor cursor = mDatabase.rawQuery(query, null);
-        cursor.moveToFirst();
+        Cursor cursor;
+        try {
+            cursor = mDatabase.rawQuery(query, null);
+            cursor.moveToFirst();
 
-        //Add each feature available
-        while (!cursor.isAfterLast()) {
-            featureList.add(cursor.getInt(0));
-            cursor.moveToNext();
+            //Add each feature available
+            while (!cursor.isAfterLast()) {
+                featureList.add(cursor.getInt(0));
+                cursor.moveToNext();
+            }
+
+            cursor.close();
+        } catch (SQLiteException ex) {
+            //If SQL table does not exist, log error and return empty feature list
+            Log.e("Database", "Invalid Table Selected: " + feature);
+            return new ArrayList<>();
         }
-
-        //Close cursor
-        cursor.close();
 
         //Determine if a bird has none of the listed features
         cursor = mDatabase.rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + feature + ")", null);
@@ -293,10 +312,8 @@ public class Database extends SQLiteOpenHelper {
      * @return Most optimal question to reduce the number of BirdID's
      */
     public Question getBestOption(List<Integer> birdIDs, List<Question> questions) {
-        Log.d("TwentyQuestionActivity", "getBestOption");
         //Check if question exists
-        if (questions.size() == 0) {
-            Log.d("TwentyQuestionActivity", "Empty list of Questions");
+        if (birdIDs.size() == 0 || questions.size() == 0) {
             return null;
         }
 
@@ -306,32 +323,40 @@ public class Database extends SQLiteOpenHelper {
         int maxNumBirds = 0;
         List<Question> questionsToRemove = new ArrayList<>();
 
+
         openDatabase();
         for (Question question : questions) {
-            Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
-                    ")) FROM " + question.getTable() + whereStatement, null);
+            try {
+                Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
+                        ")) FROM " + question.getTable() + whereStatement, null);
 
-            Log.d("TwentyQuestionActivity", "SELECT Count(DISTINCT(" + question.getTable() +
-                    ")) FROM " + question.getTable() + whereStatement);
+                Log.d("TwentyQuestionActivity", "SELECT Count(DISTINCT(" + question.getTable() +
+                        ")) FROM " + question.getTable() + whereStatement);
 
-            cursor.moveToFirst();
-            int count = cursor.getInt(0);
+                cursor.moveToFirst();
+                int count = cursor.getInt(0);
 
-            //If no birds exist in the table
-            if (count == 0) {
-                Log.d("TwentyQuestionActivity", "Bad Question");
-                questionsToRemove.add(question);
+                //If no birds exist in the table
+                if (count == 0) {
+                    Log.d("TwentyQuestionActivity", "Bad Question");
+                    questionsToRemove.add(question);
+                }
+
+                //If table is the new best table
+                else if (count > maxNumBirds) {
+                    bestOption = question;
+                    maxNumBirds = count;
+                }
+
+                cursor.close();
+            } catch (SQLiteException ex) {
+                closeDatabase();
+                Log.e("Database", "getBestOption: Invalid Question: " + questions);
+                questions.remove(question);
             }
-
-            //If table is the new best table
-            else if (count > maxNumBirds) {
-                bestOption = question;
-                maxNumBirds = count;
-            }
-
-            cursor.close();
         }
         closeDatabase();
+
 
         //Update list of questions
         questions.removeAll(questionsToRemove);
@@ -352,7 +377,12 @@ public class Database extends SQLiteOpenHelper {
         List<Integer> birdIDs;
         List<List<Integer>> birdMatches; //Stores all the birds for each question that match the answer
 
-        if (questions.size() == 1) {
+        if (questions.size() <= 1) {
+            return new ArrayList<>();
+        }
+
+        if (answers.size() != questions.size()) {
+            Log.e("Database", "getClosestBirds: Answers and Questions Size Must Match");
             return new ArrayList<>();
         }
 
@@ -428,18 +458,22 @@ public class Database extends SQLiteOpenHelper {
             //Stores all matching birdIDs
             List<Integer> match = new ArrayList<>();
 
-            //EG. SELECT birdID FROM Colour WHERE Colour == 24
-            Cursor cursor = mDatabase.rawQuery("SELECT birdID FROM " + question.getTable() +
-                    " WHERE " + question.getFeature() + " == " + answer, null);
+            try {
+                //EG. SELECT birdID FROM Colour WHERE Colour == 24
+                Cursor cursor = mDatabase.rawQuery("SELECT birdID FROM " + question.getTable() +
+                        " WHERE " + question.getFeature() + " == " + answer, null);
 
-            //Add all matching birdIDs
-            cursor.moveToFirst();
-            while (!cursor.isAfterLast()) {
-                match.add((Integer)cursor.getInt(0));
+                //Add all matching birdIDs
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()) {
+                    match.add((Integer) cursor.getInt(0));
 
-                cursor.moveToNext();
+                    cursor.moveToNext();
+                }
+                cursor.close();
+            } catch (SQLiteException ex) {
+                Log.e("Database", "getMatchingBirdIDs: Invalid Table: " + question.getTable());
             }
-            cursor.close();
 
             //Remove wrong bird and add list to bird matches
             match.remove(wrongBirdID);
