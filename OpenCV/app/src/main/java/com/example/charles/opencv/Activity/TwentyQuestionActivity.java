@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.InstrumentedTest.Bird;
-import com.example.charles.opencv.InstrumentedTest.Feature;
-import com.example.charles.opencv.InstrumentedTest.Question;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.TwentyQuestion.Feature;
+import com.example.charles.opencv.TwentyQuestion.Question;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -10,7 +10,7 @@ import android.widget.ViewFlipper;
 import com.example.charles.opencv.Activity.BirdBankActivity;
 import com.example.charles.opencv.Activity.SearchActivity;
 import com.example.charles.opencv.Activity.TwentyQuestionActivity;
-import com.example.charles.opencv.InstrumentedTest.Bird;
+import com.example.charles.opencv.TwentyQuestion.Bird;
 import com.example.charles.opencv.Database.Database;
 
 public class HomeScreen extends AppCompatActivity {

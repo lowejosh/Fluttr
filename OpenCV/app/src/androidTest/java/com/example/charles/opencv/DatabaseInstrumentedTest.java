@@ -5,8 +5,8 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
 import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.InstrumentedTest.Bird;
-import com.example.charles.opencv.InstrumentedTest.Question;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.TwentyQuestion.Question;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;

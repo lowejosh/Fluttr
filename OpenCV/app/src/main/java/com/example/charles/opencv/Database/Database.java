@@ -9,9 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.charles.opencv.Activity.TwentyQuestionActivity;
-import com.example.charles.opencv.InstrumentedTest.Bird;
-import com.example.charles.opencv.InstrumentedTest.Feature;
-import com.example.charles.opencv.InstrumentedTest.Question;
+import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.TwentyQuestion.Feature;
+import com.example.charles.opencv.TwentyQuestion.Question;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -1,4 +1,4 @@
-package com.example.charles.opencv.InstrumentedTest;
+package com.example.charles.opencv.TwentyQuestion;
 
 public class Question {
     private String table;
@@ -41,7 +41,7 @@ public class Question {
     }
 
     /**
-     * Display Question when toString() is queried
+     * Display Question when toString() is queried, used for debugging purposes
      *
      * @return Question Attached to Feature
      */

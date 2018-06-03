@@ -1,4 +1,4 @@
-package com.example.charles.opencv.InstrumentedTest;
+package com.example.charles.opencv.TwentyQuestion;
 
 import android.content.Context;
 import android.graphics.Bitmap;
