@@ -26,8 +26,8 @@ public class IndividualBirdActivity extends AppCompatActivity {
 
         mBirdName = (TextView) findViewById(R.id.textView6);
         mBirdSeen = (TextView) findViewById(R.id.textView5);
-        mBirdMinSize = (TextView) findViewById(R.id.textView3);
-        mBirdMaxSize = (TextView) findViewById(R.id.textView2);
+        mBirdMinSize = (TextView) findViewById(R.id.textView4);
+        mBirdMaxSize = (TextView) findViewById(R.id.textView3);
         mBirdImage = (ImageView) findViewById(R.id.bird_image);
 
         updateBirdPage ();
@@ -37,7 +37,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         bird = BirdBankActivity.mBirdClicked;
 
         mBirdName.setText(bird.getName());
-        mBirdSeen.setText("Seen on dd/mm/yyyy (placeholder");
+        mBirdSeen.setText("Seen on dd/mm/yyyy (placeholder)\n");
         mBirdMinSize.setText("Min size: " + bird.getMinSize());
         mBirdMaxSize.setText("Max Size: " + bird.getMaxSize());
         mBirdImage.setImageBitmap(bird.getBirdImage(this));

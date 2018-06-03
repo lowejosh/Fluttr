@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
@@ -139,7 +140,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.tq_result);
 
         //Get the final Bird
-        Bird bird = dbHandler.getBird(birdIDs.get(0));
+        final Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
         TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
@@ -157,6 +158,10 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Add birdID to birds seen table
+                AddBird(String.valueOf(bird.getBirdID()));
+
+                //Reload Game
                 twentyQuestions();
             }
         });
@@ -357,4 +362,31 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     protected void backOnClick(View v) {
         twentyQuestions();
     }
+
+
+    /**
+     * Adds birdID to birdSeen table
+     * @param birdID ID of the bird identified
+     */
+    public void AddBird(String birdID) {
+        boolean insertData = dbHandler.addData(birdID);
+
+        if (insertData) {
+            toastMessage("Bird added to Bird Bank");
+        } else {
+            toastMessage("Something went wrong");
+        }
+    }
+
+    /**
+     * Customizable Toast message
+     * @param message Message to send
+     */
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+
+
 }

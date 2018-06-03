@@ -1,5 +1,6 @@
 package com.example.charles.opencv.Database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
@@ -31,6 +32,12 @@ public class Database extends SQLiteOpenHelper {
     private Context context;
     private static SQLiteDatabase mDatabase;
 
+    // Bird seen stuff
+    private static final String BS_TABLE_NAME = "birds_seen";
+    private static final String BS_COL1 = "ID";
+
+
+
     /**
      * Create database from assets
      *
@@ -58,7 +65,8 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY)";
+        db.execSQL(createTable);
     }
 
     /**
@@ -70,7 +78,23 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
+        onCreate(db);
+    }
 
+    public boolean addData(String birdID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BS_COL1, birdID);
+
+        Log.d("Database","addData: Adding " + birdID + " to " + BS_TABLE_NAME);
+        long result = db.insert(BS_TABLE_NAME, null, contentValues);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
