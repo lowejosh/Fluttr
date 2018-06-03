@@ -12,6 +12,6 @@ import org.junit.runner.RunWith;
 public class BirdInstrumentedTest extends ActivityTestCase {
     @Test
     public void birdSuccess() {
-        //Bird bird = new Bird(1, "Bird", "black_kite.jpg", (short) 100, (byte) 10, (byte) 20);
+        Assert.assertNotNull(new Bird(1, "Bird", "black_kite.jpg", (short) 100, (byte) 10, (byte) 20));
     }
 }
