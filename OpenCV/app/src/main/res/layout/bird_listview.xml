@@ -12,7 +12,7 @@
 
         <ImageView
             android:contentDescription="testing"
-            android:id="@+id/imageView"
+            android:id="@+id/bird_image"
             android:layout_width="0dp"
             android:layout_height="10dp"
             android:layout_weight="1"

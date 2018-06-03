@@ -18,7 +18,7 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
-    private Context mContext;
+
 
     /**
      * Bird object which contains all information stored inside the birds table.
@@ -113,10 +113,5 @@ public class Bird {
         return null;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.bird_listview, null);
-        TextView birdName = (TextView)v.findViewById(R.id.bird_name);
-        TextView birdSeen = (TextView)v.findViewById(R.id.bird_name);
-        return null;
-    }
+
 }

@@ -145,6 +145,39 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Retrieve a list of initialised Bird objects from the Birds table
+     * @return List of birds
+     */
+    public List<Bird> getBirdList() {
+        List<Bird> birdList = new ArrayList<>();
+        Bird bird;
+
+        openDatabase();
+        Cursor cursor = mDatabase.rawQuery("SELECT BirdID FROM Birds", null);
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            try {
+                bird = new Bird(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getShort(3),
+                        (byte) cursor.getInt(4),
+                        (byte) cursor.getInt(5));
+            } catch (CursorIndexOutOfBoundsException ex) {
+                Log.e("Database", "Database: Failed to Find Bird with ID: " + cursor.getInt(0));
+                bird = null;
+            }
+            birdList.add(bird);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        closeDatabase();
+        return birdList;
+    }
+
+    /**
      * Returns a list containing all BirdIDs from the Birds table
      *
      * @return List of BirdIDs
