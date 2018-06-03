@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
-import com.example.charles.opencv.TwentyQuestion.Question;
+import com.example.charles.opencv.InstrumentedTest.Bird;
+import com.example.charles.opencv.InstrumentedTest.Feature;
+import com.example.charles.opencv.InstrumentedTest.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
 
                     //Move question from questionsLeft to questionsAsked
                     questionsLeft.remove(currentQuestion);
-                    if (!FeatureOptions.isUnknown(selectedFeature)) {
+                    if (!Feature.isUnknown(selectedFeature)) {
                         questionsAsked.add(currentQuestion);
                     }
 
@@ -120,7 +120,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
 
             //If there is a feature for the button, show the feature and make it visible
             if (btnOption < featureList.size()) {
-                btn.setText(FeatureOptions.valueOf(featureList.get(btnOption)));
+                btn.setText(Feature.valueOf(featureList.get(btnOption)));
                 btn.setVisibility(View.VISIBLE);
             } else {
                 btn.setVisibility(View.INVISIBLE);

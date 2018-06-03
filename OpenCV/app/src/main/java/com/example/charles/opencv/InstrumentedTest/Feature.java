@@ -1,9 +1,9 @@
-package com.example.charles.opencv.TwentyQuestion;
+package com.example.charles.opencv.InstrumentedTest;
 
 import android.util.Log;
 import android.util.SparseArray;
 
-public final class FeatureOptions {
+public final class Feature {
     private static SparseArray<String> OPTION = new SparseArray<>();
     public static final Integer UNKNOWN = -1;
     public static final Integer OTHER = 0;
@@ -72,7 +72,7 @@ public final class FeatureOptions {
     public static String valueOf(Integer option) {
         //If option is too large, return UNKNOWN
         if (option >= OPTION.size()) {
-            Log.d("FeatureOptions", "Value Not Found");
+            Log.d("Feature", "Value Not Found");
             return "Unknown";
         }
 
