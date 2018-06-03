@@ -61,11 +61,7 @@ public class BirdBankActivity extends AppCompatActivity {
                 // ListView Clicked item value
                 String  itemValue    = (String) lvBird.getItemAtPosition(position).toString();
 
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
-
+                
                 mBirdClicked = mList.get(position);
                 Intent intent = new Intent (lvBird.getContext(),IndividualBirdActivity.class);
                 startActivity(intent);
