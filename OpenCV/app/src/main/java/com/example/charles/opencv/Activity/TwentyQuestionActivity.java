@@ -11,12 +11,15 @@ import android.widget.TextView;
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
+import com.example.charles.opencv.TwentyQuestion.Feature;
 import com.example.charles.opencv.TwentyQuestion.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity is the self contained file for the Twenty Questions feature.
+ */
 public class TwentyQuestionActivity extends AppCompatActivity {
     private Database dbHandler;
     private List<Integer> birdIDs, featureList, answers;
@@ -62,7 +65,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
 
                     //Move question from questionsLeft to questionsAsked
                     questionsLeft.remove(currentQuestion);
-                    if (!FeatureOptions.isUnknown(selectedFeature)) {
+                    if (!Feature.isUnknown(selectedFeature)) {
                         questionsAsked.add(currentQuestion);
                     }
 
@@ -120,7 +123,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
 
             //If there is a feature for the button, show the feature and make it visible
             if (btnOption < featureList.size()) {
-                btn.setText(FeatureOptions.valueOf(featureList.get(btnOption)));
+                btn.setText(Feature.valueOf(featureList.get(btnOption)));
                 btn.setVisibility(View.VISIBLE);
             } else {
                 btn.setVisibility(View.INVISIBLE);
@@ -319,7 +322,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * @param id ID of the btn used in findViewById()
      * @return Option Number of the button
      */
-    private int getTopResultOption(int id) {
+    protected int getTopResultOption(int id) {
         //Match id against all result options and return option number
         for (int btnOption = 0; btnOption < TOP_RESULT_NUM_BIRDS; btnOption++) {
             View[] views = getTopResultViews(btnOption);
@@ -336,7 +339,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      *
      * @param v View attached to the onclick
      */
-    public void multiAnswerOnClick(View v) {
+    protected void multiAnswerOnClick(View v) {
         int option = getTopResultOption(v.getId());
         Integer birdID = birdIDs.get(option);
 
@@ -351,7 +354,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * OnClick function for tq_failure button and tq_topresults button
      * @param v View attached to the onclick
      */
-    public void backOnClick(View v) {
+    protected void backOnClick(View v) {
         twentyQuestions();
     }
 }

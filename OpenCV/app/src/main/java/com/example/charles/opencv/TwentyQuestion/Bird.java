@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import com.example.charles.opencv.R;
 
 import java.io.IOException;
 
+/**
+ * This DataType contains all information contained in the Birds Table
+ */
 public class Bird {
     private int birdID;
     private String name;
@@ -18,7 +17,6 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
-
 
     /**
      * Bird object which contains all information stored inside the birds table.
@@ -37,6 +35,14 @@ public class Bird {
         this.atlasNo = atlasNo;
         this.minSize = minSize;
         this.maxSize = maxSize;
+
+        if (birdID < 1) {
+            Log.e("Bird", "Bad ID Given: " + birdID);
+        }
+
+        if (atlasNo < 1) {
+            Log.e("Bird", "Bad Atlas Number Given: " + atlasNo);
+        }
     }
 
     /**
@@ -53,14 +59,6 @@ public class Bird {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns the Image path of this bird inside res/drawable
-     * @return Image Path of this Bird
-     */
-    public String getImage() {
-        return image;
     }
 
     /**
@@ -112,6 +110,4 @@ public class Bird {
 
         return null;
     }
-
-
 }

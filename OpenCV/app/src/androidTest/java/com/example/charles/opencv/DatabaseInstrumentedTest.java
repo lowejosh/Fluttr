@@ -17,6 +17,9 @@ import org.junit.runners.MethodSorters;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Unit tests for the Database Class, requires the physical or emulated machine to run.
+ */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DatabaseInstrumentedTest extends ActivityTestCase {

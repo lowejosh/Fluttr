@@ -1,6 +1,0 @@
--classpath 'D:\\Documents\\GitHub\\team3432-capstone\\Database\\lib\\build\\classes\\java\\main;D:\\Documents\\GitHub\\team3432-capstone\\Database\\lib\\build\\resources\\main'
--d 'D:\\Documents\\GitHub\\team3432-capstone\\Database\\lib\\build\\docs\\javadoc'
--doctitle 'lib API'
--quiet 
--windowtitle 'lib API'
-'D:\\Documents\\GitHub\\team3432-capstone\\Database\\lib\\src\\main\\java\\com\\example\\lib\\MyClass.java'
