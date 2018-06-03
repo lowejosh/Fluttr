@@ -17,6 +17,9 @@ import com.example.charles.opencv.TwentyQuestion.Question;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity is the self contained file for the Twenty Questions feature.
+ */
 public class TwentyQuestionActivity extends AppCompatActivity {
     private Database dbHandler;
     private List<Integer> birdIDs, featureList, answers;

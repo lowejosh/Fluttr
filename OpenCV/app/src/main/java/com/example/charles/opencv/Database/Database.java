@@ -22,6 +22,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * This class is a helper for interfacing with the sql database.
+ */
 public class Database extends SQLiteOpenHelper {
     private static final String DBNAME = "database.sqlite";
     private static String DBLOCATION;

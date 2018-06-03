@@ -1,5 +1,8 @@
 package com.example.charles.opencv.TwentyQuestion;
 
+/**
+ * This DataType contains all information contained in the Question Table
+ */
 public class Question {
     private String table;
     private String question;

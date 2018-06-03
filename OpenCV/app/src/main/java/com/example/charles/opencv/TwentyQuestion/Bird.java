@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import com.example.charles.opencv.R;
 
 import java.io.IOException;
 
+/**
+ * This DataType contains all information contained in the Birds Table
+ */
 public class Bird {
     private int birdID;
     private String name;
@@ -18,7 +17,6 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
-    private Context mContext;
 
     /**
      * Bird object which contains all information stored inside the birds table.
@@ -61,14 +59,6 @@ public class Bird {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns the Image path of this bird inside res/drawable
-     * @return Image Path of this Bird
-     */
-    private String getImage() {
-        return image;
     }
 
     /**
@@ -118,13 +108,6 @@ public class Bird {
             Log.e("MainActivity", "Failed to load image: " + image);
         }
 
-        return null;
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View v = View.inflate(mContext, R.layout.bird_listview, null);
-        TextView birdName = (TextView)v.findViewById(R.id.bird_name);
-        TextView birdSeen = (TextView)v.findViewById(R.id.bird_name);
         return null;
     }
 }

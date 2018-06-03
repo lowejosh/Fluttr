@@ -3,6 +3,9 @@ package com.example.charles.opencv.TwentyQuestion;
 import android.util.Log;
 import android.util.SparseArray;
 
+/**
+ * This class allows the conversion from database ENUM values to their Meaning
+ */
 public final class Feature {
     private static SparseArray<String> OPTION = new SparseArray<>();
     public static final Integer UNKNOWN = -1;
