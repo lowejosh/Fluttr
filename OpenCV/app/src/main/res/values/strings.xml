@@ -21,4 +21,7 @@
     <string name="bird_finder_failure">Unfortunately Bird Finder was unable to determine which bird you were thinking of. Please Try Again.</string>
     <string name="image_of_bird">Image of Bird</string>
     <string name="testing">Testing</string>
+    <string name="references">References</string>
+    <string name="news">News</string>
+    <string name="settings">Settings</string>
 </resources>

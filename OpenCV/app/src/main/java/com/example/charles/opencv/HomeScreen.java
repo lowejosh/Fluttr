@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import com.example.charles.opencv.Activity.BirdBankActivity;
-import com.example.charles.opencv.Activity.SearchActivity;
+import com.example.charles.opencv.Activity.SettingActivity;
 import com.example.charles.opencv.Activity.TwentyQuestionActivity;
-import com.example.charles.opencv.TwentyQuestion.Bird;
 import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.TwentyQuestion.Bird;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -64,5 +64,13 @@ public class HomeScreen extends AppCompatActivity {
      */
     public void bankOnClick(View v) {
         startActivity(new Intent(HomeScreen.this, BirdBankActivity.class));
+    }
+
+    /**
+     * On Button Press, Change Screen to Settings
+     * @param v Attached View Object (Unused)
+     */
+    public void settingOnClick(View v) {
+        startActivity(new Intent(HomeScreen.this, SettingActivity.class));
     }
 }

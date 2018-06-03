@@ -75,8 +75,7 @@
         android:background="@color/appBackground"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_marginTop="2sp"
-        android:layout_marginBottom="2sp">
+        android:layout_marginTop="2sp">
 
         <Button
             android:id="@+id/btn_news"
@@ -85,8 +84,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@color/background"
-            android:layout_marginRight="2sp"
-            android:text="News" />
+            android:layout_marginEnd="2sp"
+            android:text="@string/news" />
 
         <Button
             android:id="@+id/btn_settings"
@@ -95,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@color/background"
-            android:text="Settings" />
+            android:text="@string/settings"
+            android:onClick="settingOnClick"/>
     </LinearLayout>
 </RelativeLayout>
