@@ -172,6 +172,17 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Get the seen_bird table cursor
+     * @return Cursor of bird IDs
+     */
+    public Cursor getSeenBirdIDList() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + BS_TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
      * Retrieve a list of initialised Bird objects from the Birds table
      * @return List of birds
      */

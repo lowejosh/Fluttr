@@ -1,6 +1,7 @@
 package com.example.charles.opencv.Activity;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -374,9 +375,10 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         if (insertData) {
             toastMessage("Bird added to Bird Bank");
         } else {
-            toastMessage("Something went wrong");
+            toastMessage("Bird already in Bird Bank");
         }
     }
+
 
     /**
      * Customizable Toast message

@@ -2,6 +2,7 @@ package com.example.charles.opencv.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import com.example.charles.opencv.TwentyQuestion.Bird;
 import com.example.charles.opencv.Database.Database;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -34,8 +36,14 @@ public class BirdBankActivity extends AppCompatActivity {
 
         // Init database and bird list
         mDBHelper = new Database(this);
-        mList = mDBHelper.getBirdList();
+        //mList = mDBHelper.getBirdList();
         lvBird = (ListView)findViewById(R.id.listview_birdbank);
+
+        Cursor data = mDBHelper.getSeenBirdIDList();
+        mList = new ArrayList<>();
+        while(data.moveToNext()) {
+            mList.add(mDBHelper.getBird(data.getInt(0)));
+        }
 
         // Initiate and set the adapter
         adapter = new ListBirdAdapter(this, mList);
