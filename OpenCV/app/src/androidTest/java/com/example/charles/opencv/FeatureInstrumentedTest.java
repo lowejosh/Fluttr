@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Unit tests for the Feature Class, requires the physical or emulated machine to run.
+ */
 @RunWith(AndroidJUnit4.class)
 public class FeatureInstrumentedTest {
     @Test

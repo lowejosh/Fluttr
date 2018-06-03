@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * Unit tests for the Question DataType, requires the physical or emulated machine to run.
+ */
 @RunWith(AndroidJUnit4.class)
 public class QuestionInstrumentedTest {
     private Question question;

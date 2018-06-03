@@ -14,6 +14,9 @@ import org.junit.runner.RunWith;
 
 import java.io.IOException;
 
+/**
+ * Unit tests for the Duck DataType, requires the physical or emulated machine to run.
+ */
 @RunWith(AndroidJUnit4.class)
 public class DuckInstrumentedTest extends ActivityTestCase {
     private Context context;

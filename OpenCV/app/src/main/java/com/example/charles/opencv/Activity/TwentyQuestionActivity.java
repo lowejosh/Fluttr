@@ -322,7 +322,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * @param id ID of the btn used in findViewById()
      * @return Option Number of the button
      */
-    private int getTopResultOption(int id) {
+    protected int getTopResultOption(int id) {
         //Match id against all result options and return option number
         for (int btnOption = 0; btnOption < TOP_RESULT_NUM_BIRDS; btnOption++) {
             View[] views = getTopResultViews(btnOption);
@@ -339,7 +339,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      *
      * @param v View attached to the onclick
      */
-    public void multiAnswerOnClick(View v) {
+    protected void multiAnswerOnClick(View v) {
         int option = getTopResultOption(v.getId());
         Integer birdID = birdIDs.get(option);
 
@@ -354,7 +354,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * OnClick function for tq_failure button and tq_topresults button
      * @param v View attached to the onclick
      */
-    public void backOnClick(View v) {
+    protected void backOnClick(View v) {
         twentyQuestions();
     }
 }
