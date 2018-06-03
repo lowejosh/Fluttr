@@ -13,11 +13,11 @@ import com.example.charles.opencv.TwentyQuestion.Bird;
 import java.util.List;
 
 
-public class ListProductAdapter extends BaseAdapter {
+public class ListBirdAdapter extends BaseAdapter {
     private Context mContext;
     private List<Bird> mList;
 
-    public ListProductAdapter(Context mContext, List<Bird> mList) {
+    public ListBirdAdapter(Context mContext, List<Bird> mList) {
         this.mContext = mContext;
         this.mList = mList;
     }
@@ -42,10 +42,10 @@ public class ListProductAdapter extends BaseAdapter {
         View v = View.inflate(mContext, R.layout.bird_listview, null);
         TextView birdName = (TextView)v.findViewById(R.id.bird_name);
         TextView birdSeen = (TextView)v.findViewById(R.id.bird_status);
-        ImageView birdImage = (ImageView)v.findViewById(R.id.bird_image);
-        birdName.setText(mList.get(position).getName();
-        birdSeen.setText("dd/mm/yy (placeholder)");
-        birdImage.setImageBitmap(mList.get(position).getBirdImage(mContext));
+        //ImageView birdImage = (ImageView)v.findViewById(R.id.bird_image);
+        birdName.setText(mList.get(position).getName());
+        birdSeen.setText("Seen on dd/mm/yy (placeholder)");
+        //birdImage.setImageBitmap(mList.get(position).getBirdImage(mContext));
         return v;
     }
 }

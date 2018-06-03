@@ -23,8 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
-    private static final String DBNAME = "database.sqlite";
-    private static String DBLOCATION;
+    public static final String DBNAME = "database.sqlite";
+    public static String DBLOCATION;
     private Context context;
     private static SQLiteDatabase mDatabase;
 
@@ -153,7 +153,7 @@ public class Database extends SQLiteOpenHelper {
         Bird bird;
 
         openDatabase();
-        Cursor cursor = mDatabase.rawQuery("SELECT BirdID FROM Birds", null);
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Birds", null);
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -175,6 +175,7 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         closeDatabase();
         return birdList;
+
     }
 
     /**
@@ -537,4 +538,13 @@ public class Database extends SQLiteOpenHelper {
 
         return query.toString();
     }
+
+    /**
+     * Gets the DBNAME
+     * @return the name of the database
+     */
+    public static String getDBNAME() {
+        return DBNAME;
+    }
+
 }
