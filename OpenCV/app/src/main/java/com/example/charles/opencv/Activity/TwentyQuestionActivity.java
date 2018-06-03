@@ -359,7 +359,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * OnClick function for tq_failure button and tq_topresults button
      * @param v View attached to the onclick
      */
-    protected void backOnClick(View v) {
+    public void backOnClick(View v) {
         twentyQuestions();
     }
 
