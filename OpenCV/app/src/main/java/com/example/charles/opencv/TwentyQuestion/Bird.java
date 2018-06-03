@@ -17,7 +17,7 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
-<<
+
 
     /**
      * Bird object which contains all information stored inside the birds table.
