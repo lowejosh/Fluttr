@@ -14,7 +14,7 @@
         android:layout_marginRight="10dp"
         android:dividerHeight="10dp"
         android:divider="@color/background"
-        android:background="#d1d1d1">
+        android:background="@color/background">
 
     </ListView>
 

@@ -16,10 +16,12 @@ import java.util.List;
 public class ListBirdAdapter extends BaseAdapter {
     private Context mContext;
     private List<Bird> mList;
+    private List<String> dateList;
 
-    public ListBirdAdapter(Context mContext, List<Bird> mList) {
+    public ListBirdAdapter(Context mContext, List<Bird> mList, List<String> dateList) {
         this.mContext = mContext;
         this.mList = mList;
+        this.dateList = dateList;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class ListBirdAdapter extends BaseAdapter {
         TextView birdSeen = (TextView)v.findViewById(R.id.bird_status);
         //ImageView birdImage = (ImageView)v.findViewById(R.id.bird_image);
         birdName.setText(mList.get(position).getName());
-        birdSeen.setText("Seen on dd/mm/yy (placeholder)");
+        birdSeen.setText("Identified on " + dateList.get(position));
         //birdImage.setImageBitmap(mList.get(position).getBirdImage(mContext));
         return v;
     }

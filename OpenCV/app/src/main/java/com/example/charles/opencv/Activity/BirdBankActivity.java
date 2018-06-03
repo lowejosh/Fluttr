@@ -25,6 +25,7 @@ public class BirdBankActivity extends AppCompatActivity {
     private ListView lvBird;
     private ListBirdAdapter adapter;
     private List<Bird> mList;
+    private List<String> dateList;
     private Database mDBHelper;
 
     public static Bird mBirdClicked;
@@ -36,17 +37,19 @@ public class BirdBankActivity extends AppCompatActivity {
 
         // Init database and bird list
         mDBHelper = new Database(this);
-        //mList = mDBHelper.getBirdList();
+        mList = new ArrayList<>();
+        dateList = new ArrayList<>();
         lvBird = (ListView)findViewById(R.id.listview_birdbank);
 
         Cursor data = mDBHelper.getSeenBirdIDList();
-        mList = new ArrayList<>();
+
         while(data.moveToNext()) {
             mList.add(mDBHelper.getBird(data.getInt(0)));
+            dateList.add(data.getString(1));
         }
 
         // Initiate and set the adapter
-        adapter = new ListBirdAdapter(this, mList);
+        adapter = new ListBirdAdapter(this, mList, dateList);
         lvBird.setAdapter(adapter);
 
         // ListView Item Click Listener
@@ -61,7 +64,7 @@ public class BirdBankActivity extends AppCompatActivity {
                 // ListView Clicked item value
                 String  itemValue    = (String) lvBird.getItemAtPosition(position).toString();
 
-                
+
                 mBirdClicked = mList.get(position);
                 Intent intent = new Intent (lvBird.getContext(),IndividualBirdActivity.class);
                 startActivity(intent);
@@ -74,5 +77,7 @@ public class BirdBankActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }

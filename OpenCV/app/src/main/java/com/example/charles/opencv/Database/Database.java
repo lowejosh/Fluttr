@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class Database extends SQLiteOpenHelper {
     // Bird seen stuff
     private static final String BS_TABLE_NAME = "birds_seen";
     private static final String BS_COL1 = "ID";
+    private static final String BS_COL2 = "DATE";
 
 
 
@@ -65,7 +68,10 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY)";
+        Log.d("CREATING TABLE","CREATING TABLE");
+        System.out.println("CREATing TABLE");
+        db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
+        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -87,7 +93,12 @@ public class Database extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(BS_COL1, birdID);
 
-        Log.d("Database","addData: Adding " + birdID + " to " + BS_TABLE_NAME);
+        String pattern = "dd-MM-yyyy";
+        String currentDate = new SimpleDateFormat(pattern).format(new Date());
+
+        contentValues.put(BS_COL2, currentDate);
+
+        Log.d("Database","addData: Adding " + birdID + " and " + currentDate + " to " + BS_TABLE_NAME);
         long result = db.insert(BS_TABLE_NAME, null, contentValues);
 
         if (result == -1) {
@@ -583,6 +594,15 @@ public class Database extends SQLiteOpenHelper {
      */
     public static String getDBNAME() {
         return DBNAME;
+    }
+
+    /**
+     * Clears the birds seen table
+     */
+    public void clearBirdsSeen() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String clearDBQuery = "DROP TABLE "+BS_TABLE_NAME;
+        db.execSQL(clearDBQuery);
     }
 
 }
