@@ -55,7 +55,7 @@ public class HomeScreen extends AppCompatActivity {
      * @param v Attached View Object (Unused)
      */
     public void identifierOnClick(View v) {
-        startActivity(new Intent(HomeScreen.this, SearchActivity.class));
+        startActivity(new Intent(HomeScreen.this, MainActivity.class));
     }
 
     /**
