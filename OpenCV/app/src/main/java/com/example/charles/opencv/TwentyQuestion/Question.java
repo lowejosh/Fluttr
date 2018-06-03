@@ -1,5 +1,8 @@
 package com.example.charles.opencv.TwentyQuestion;
 
+/**
+ * This DataType contains all information contained in the Question Table
+ */
 public class Question {
     private String table;
     private String question;
@@ -41,7 +44,7 @@ public class Question {
     }
 
     /**
-     * Display Question when toString() is queried
+     * Display Question when toString() is queried, used for debugging purposes
      *
      * @return Question Attached to Feature
      */

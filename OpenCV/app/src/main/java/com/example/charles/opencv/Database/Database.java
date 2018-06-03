@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.example.charles.opencv.Activity.TwentyQuestionActivity;
 import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.FeatureOptions;
+import com.example.charles.opencv.TwentyQuestion.Feature;
 import com.example.charles.opencv.TwentyQuestion.Question;
 
 import java.io.File;
@@ -22,6 +22,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * This class is a helper for interfacing with the sql database.
+ */
 public class Database extends SQLiteOpenHelper {
     public static final String DBNAME = "database.sqlite";
     public static String DBLOCATION;
@@ -209,7 +212,7 @@ public class Database extends SQLiteOpenHelper {
      */
     public void updateBirdIDs(int goalFeature, String feature, List<Integer> birdIDs) {
         //If feature is "Unknown" or size of birdID list is 0
-        if (FeatureOptions.isUnknown(goalFeature) || birdIDs.size() == 0) {
+        if (Feature.isUnknown(goalFeature) || birdIDs.size() == 0) {
             return;
         }
 
@@ -219,7 +222,7 @@ public class Database extends SQLiteOpenHelper {
         query.append(feature);
         query.append(" WHERE ");
 
-        if (!FeatureOptions.isOther(goalFeature)) {
+        if (!Feature.isOther(goalFeature)) {
             query.append(feature);
             query.append(" = ");
             query.append(goalFeature);
@@ -229,7 +232,7 @@ public class Database extends SQLiteOpenHelper {
         query.append("BirdID IN (VALUES");
         query.append(listIDs(birdIDs));
 
-        if (!FeatureOptions.isOther(goalFeature)) {
+        if (!Feature.isOther(goalFeature)) {
             birdIDs.clear();
         }
 
@@ -238,7 +241,7 @@ public class Database extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
-            if (FeatureOptions.isOther(goalFeature)) {
+            if (Feature.isOther(goalFeature)) {
                 birdIDs.remove((Integer)cursor.getInt(0));
             } else {
                 birdIDs.add(cursor.getInt(0));
@@ -266,7 +269,7 @@ public class Database extends SQLiteOpenHelper {
         }
 
         //Add Unknown to Feature List
-        featureList.add(FeatureOptions.UNKNOWN);
+        featureList.add(Feature.UNKNOWN);
 
         //Create query to find all features that any bird in the list of birdIDs has
         String query = "SELECT DISTINCT(" + feature + ") FROM " + feature +
@@ -300,7 +303,7 @@ public class Database extends SQLiteOpenHelper {
             //If one birdID matches any birdID in the list of birdIDs
             if (birdIDs.contains(cursor.getInt(0))) {
                 //Add other to featureList
-                featureList.add(FeatureOptions.OTHER);
+                featureList.add(Feature.OTHER);
                 break;
             }
             cursor.moveToNext();
