@@ -1,7 +1,6 @@
 package com.example.charles.opencv.Activity;
 
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -36,7 +35,6 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void homeOnClick(View v) {
-        NavUtils.navigateUpFromSameTask(this);
+        super.finish();
     }
-
 }
