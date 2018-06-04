@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;

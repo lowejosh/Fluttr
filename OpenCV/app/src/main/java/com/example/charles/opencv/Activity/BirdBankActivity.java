@@ -1,25 +1,21 @@
 package com.example.charles.opencv.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
+import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.Database.Database;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView;
-import android.view.View;
 
 public class BirdBankActivity extends AppCompatActivity {
     private ListView lvBird;
