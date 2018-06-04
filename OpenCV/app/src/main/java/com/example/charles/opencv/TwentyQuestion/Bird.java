@@ -27,7 +27,7 @@ public class Bird {
      * @param image Bird Image Path inside res/drawable
      * @param atlasNo Bird Atlas Number
      * @param minSize Bird Minimum Size (cm)
-     * @param maxSi ze Bird Maximum Size (cm)
+     * @param maxSize Bird Maximum Size (cm)
      */
     public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize) {
         this.birdID = birdID;
