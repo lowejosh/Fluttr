@@ -191,7 +191,6 @@ public class Database extends SQLiteOpenHelper {
 
     /**
      * Get a list of seen birds
-     * @param data Cursor data
      * @return List of seen birds
      */
     public List<Bird> getSeenBirdList() {
@@ -205,7 +204,6 @@ public class Database extends SQLiteOpenHelper {
 
     /**
      * Get a list of dates for seen birds
-     * @param data Cursor data
      * @return List of dates for seen birds
      */
     public List<String> getSeenBirdDateList() {
@@ -520,6 +518,7 @@ public class Database extends SQLiteOpenHelper {
                 }
 
                 questionMatch[index] = questionNo;
+                index++;
             }
 
             //Compare list of Questions

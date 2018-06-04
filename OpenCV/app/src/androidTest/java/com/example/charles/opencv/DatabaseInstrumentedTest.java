@@ -431,7 +431,7 @@ public class DatabaseInstrumentedTest extends ActivityTestCase {
         List<Integer> birds = db.getClosestBirds(questions, answers, 2);
         Integer success = 3;
 
-        assertEquals(1, birds.size());
+        assertEquals(2, birds.size());
         assertEquals(success, birds.get(0));
     }
 
@@ -506,7 +506,7 @@ public class DatabaseInstrumentedTest extends ActivityTestCase {
         List<Integer> birds = db.getClosestBirds(questions, answers, -1);
         Integer success = 3;
 
-        assertEquals(1, birds.size());
+        assertEquals(3, birds.size());
         assertEquals(success, birds.get(0));
     }
 
@@ -557,7 +557,7 @@ public class DatabaseInstrumentedTest extends ActivityTestCase {
         List<Integer> birds = db.getClosestBirds(questions, answers, null);
         Integer success = 3;
 
-        assertEquals(1, birds.size());
+        assertEquals(3, birds.size());
         assertEquals(success, birds.get(0));
     }
 }
