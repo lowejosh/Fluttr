@@ -514,9 +514,9 @@ public class Database extends SQLiteOpenHelper {
         //Find all values that match between all arrays bar one
         int[] questionMatch = new int[questions.size() - 1];
         for (int skip = 0; skip < questions.size(); skip++) {
-            //Get List of Questions to Compare Against Where the Questions with the largest number of birds attached is added to bird matches first
+            //Get List of Questions to Compare Against Where the Questions with the smallest number of birds are prioritized
             int index = 0;
-            for (int questionNo = questions.size() - 1; questionNo > 0; questionNo--) {
+            for (int questionNo = 0; questionNo < questions.size(); questionNo++) {
                 if (skip == questionNo) {
                     continue;
                 }

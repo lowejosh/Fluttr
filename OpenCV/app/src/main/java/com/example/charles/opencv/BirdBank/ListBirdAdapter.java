@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 import com.example.charles.opencv.Activity.IndividualBirdActivity;
 import com.example.charles.opencv.R;
