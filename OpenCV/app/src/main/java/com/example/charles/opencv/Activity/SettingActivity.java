@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.charles.opencv.R;
+import com.example.charles.opencv.Database.Database;
 
 /**
  * Shows the settings available to the user, this currently only displays the references for information
@@ -18,8 +19,9 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void resetBirdBankOnClick(View v) {
-        //Clear birdIDs and insert
+        Database db = new Database(this);
 
+        db.clearBirdsSeen();
     }
 
     public void referencesOnClick(View v) {
