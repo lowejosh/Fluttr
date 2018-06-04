@@ -1,5 +1,6 @@
 com.example.charles.opencv
 com.example.charles.opencv.Activity
+com.example.charles.opencv.BirdBank
 com.example.charles.opencv.Database
 com.example.charles.opencv.TwentyQuestion
 org.opencv.android

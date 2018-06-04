@@ -21,4 +21,14 @@
     <string name="bird_finder_failure">Unfortunately Bird Finder was unable to determine which bird you were thinking of. Please Try Again.</string>
     <string name="image_of_bird">Image of Bird</string>
     <string name="testing">Testing</string>
+    <string name="references">References</string>
+    <string name="news">News</string>
+    <string name="settings">Settings</string>
+    <string name="reset_bird_bank">Reset Bird Bank</string>
+    <string name="go_back">Go back</string>
+    <string name="show_references">Show references</string>
+    <string name="information_birds_in_backyards">Information: Birds in Backyards</string>
+    <string name="images_image_net_com">Images: Image-net.com</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="confirm">Confirm</string>
 </resources>

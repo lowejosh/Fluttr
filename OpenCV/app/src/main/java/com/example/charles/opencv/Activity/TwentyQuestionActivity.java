@@ -345,7 +345,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      *
      * @param v View attached to the onclick
      */
-    protected void multiAnswerOnClick(View v) {
+    public void multiAnswerOnClick(View v) {
         int option = getTopResultOption(v.getId());
         Integer birdID = birdIDs.get(option);
 
@@ -360,7 +360,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * OnClick function for tq_failure button and tq_topresults button
      * @param v View attached to the onclick
      */
-    protected void backOnClick(View v) {
+    public void backOnClick(View v) {
         twentyQuestions();
     }
 

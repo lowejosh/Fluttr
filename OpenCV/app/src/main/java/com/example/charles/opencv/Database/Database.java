@@ -29,8 +29,8 @@ import java.util.List;
  * This class is a helper for interfacing with the sql database.
  */
 public class Database extends SQLiteOpenHelper {
-    public static final String DBNAME = "database.sqlite";
-    public static String DBLOCATION;
+    private static final String DBNAME = "database.sqlite";
+    private static String DBLOCATION;
     private Context context;
     private static SQLiteDatabase mDatabase;
 
@@ -38,8 +38,6 @@ public class Database extends SQLiteOpenHelper {
     private static final String BS_TABLE_NAME = "birds_seen";
     private static final String BS_COL1 = "ID";
     private static final String BS_COL2 = "DATE";
-
-
 
     /**
      * Create database from assets
@@ -412,9 +410,6 @@ public class Database extends SQLiteOpenHelper {
             try {
                 Cursor cursor = mDatabase.rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
                         ")) FROM " + question.getTable() + whereStatement, null);
-
-                Log.d("TwentyQuestionActivity", "SELECT Count(DISTINCT(" + question.getTable() +
-                        ")) FROM " + question.getTable() + whereStatement);
 
                 cursor.moveToFirst();
                 int count = cursor.getInt(0);
