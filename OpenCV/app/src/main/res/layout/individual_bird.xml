@@ -17,35 +17,57 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/customborder"
+
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="72px"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:background="@color/appBackground"
+            android:textStyle="bold"
             android:text="TextView" />
 
         <ImageView
-            android:layout_width="200dp"
             android:id="@+id/bird_image"
-            android:layout_height="200dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:cropToPadding="false"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_of_bird"
+            android:layout_gravity="center"
+            />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textAlignment="center"
             android:text="TextView" />
 
     </LinearLayout>

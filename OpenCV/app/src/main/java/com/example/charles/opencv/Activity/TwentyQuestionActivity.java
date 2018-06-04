@@ -189,7 +189,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         setContentView(R.layout.tq_result);
 
         //Get the final Bird
-        Bird bird = dbHandler.getBird(birdIDs.get(0));
+        final Bird bird = dbHandler.getBird(birdIDs.get(0));
 
         //Get Views
         TextView tvBirdName = findViewById(R.id.tv_result_bird_name);
@@ -207,6 +207,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AddBird(String.valueOf(bird.getBirdID()));
                 twentyQuestions();
             }
         });
@@ -374,9 +375,10 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         if (insertData) {
             toastMessage("Bird added to Bird Bank");
         } else {
-            toastMessage("Something went wrong");
+            toastMessage("Bird already in Bird Bank");
         }
     }
+
 
     /**
      * Customizable Toast message

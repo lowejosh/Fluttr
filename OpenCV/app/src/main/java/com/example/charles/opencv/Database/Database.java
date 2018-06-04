@@ -18,8 +18,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class Database extends SQLiteOpenHelper {
     // Bird seen stuff
     private static final String BS_TABLE_NAME = "birds_seen";
     private static final String BS_COL1 = "ID";
+    private static final String BS_COL2 = "DATE";
 
     /**
      * Create database from assets
@@ -63,7 +66,10 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY)";
+        Log.d("CREATING TABLE","CREATING TABLE");
+        System.out.println("CREATing TABLE");
+        db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
+        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -85,7 +91,12 @@ public class Database extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(BS_COL1, birdID);
 
-        Log.d("Database","addData: Adding " + birdID + " to " + BS_TABLE_NAME);
+        String pattern = "dd-MM-yyyy";
+        String currentDate = new SimpleDateFormat(pattern).format(new Date());
+
+        contentValues.put(BS_COL2, currentDate);
+
+        Log.d("Database","addData: Adding " + birdID + " and " + currentDate + " to " + BS_TABLE_NAME);
         long result = db.insert(BS_TABLE_NAME, null, contentValues);
 
         if (result == -1) {
@@ -167,6 +178,45 @@ public class Database extends SQLiteOpenHelper {
         cursor.close();
         closeDatabase();
         return bird;
+    }
+
+    /**
+     * Get the seen_bird table cursor
+     * @return Cursor of bird IDs
+     */
+    public Cursor getSeenBirdCursor() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + BS_TABLE_NAME;
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
+     * Get a list of seen birds
+     * @param data Cursor data
+     * @return List of seen birds
+     */
+    public List<Bird> getSeenBirdList() {
+        Cursor data = getSeenBirdCursor();
+        List<Bird> mList = new ArrayList<>();
+        while(data.moveToNext()) {
+            mList.add(this.getBird(data.getInt(0)));
+        }
+        return mList;
+    }
+
+    /**
+     * Get a list of dates for seen birds
+     * @param data Cursor data
+     * @return List of dates for seen birds
+     */
+    public List<String> getSeenBirdDateList() {
+        Cursor data = getSeenBirdCursor();
+        List<String> dateList = new ArrayList<>();
+        while(data.moveToNext()) {
+            dateList.add(data.getString(1));
+        }
+        return dateList;
     }
 
     /**
@@ -464,9 +514,9 @@ public class Database extends SQLiteOpenHelper {
         //Find all values that match between all arrays bar one
         int[] questionMatch = new int[questions.size() - 1];
         for (int skip = 0; skip < questions.size(); skip++) {
-            //Get List of Questions to Compare Against Where the Questions with the largest number of birds attached is added to bird matches first
+            //Get List of Questions to Compare Against Where the Questions with the smallest number of birds are prioritized
             int index = 0;
-            for (int questionNo = questions.size() - 1; questionNo > 0; questionNo--) {
+            for (int questionNo = 0; questionNo < questions.size(); questionNo++) {
                 if (skip == questionNo) {
                     continue;
                 }
@@ -567,6 +617,15 @@ public class Database extends SQLiteOpenHelper {
      */
     public static String getDBNAME() {
         return DBNAME;
+    }
+
+    /**
+     * Clears the birds seen table
+     */
+    public void clearBirdsSeen() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String clearDBQuery = "DROP TABLE "+BS_TABLE_NAME;
+        db.execSQL(clearDBQuery);
     }
 
 }

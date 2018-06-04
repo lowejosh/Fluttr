@@ -37,5 +37,4 @@ public class SettingActivity extends AppCompatActivity {
     public void homeOnClick(View v) {
         super.finish();
     }
-
 }

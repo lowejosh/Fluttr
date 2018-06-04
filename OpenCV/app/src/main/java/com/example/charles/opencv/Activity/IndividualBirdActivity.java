@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;
+
+import java.util.List;
 
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;
@@ -16,6 +19,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdMaxSize;
     ImageView mBirdImage;
     Bird bird;
+    String date;
 
 
     @Override
@@ -30,14 +34,15 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdMaxSize = (TextView) findViewById(R.id.textView3);
         mBirdImage = (ImageView) findViewById(R.id.bird_image);
 
-        updateBirdPage ();
+        updateBirdPage();
     }
 
     private void updateBirdPage() {
-        bird = BirdBankActivity.mBirdClicked;
+        bird = ListBirdAdapter.mBirdClicked;
+        date = ListBirdAdapter.mDateOfBirdClicked;
 
         mBirdName.setText(bird.getName());
-        mBirdSeen.setText("Seen on dd/mm/yyyy (placeholder)\n");
+        mBirdSeen.setText("Identified on " + date + "\n");
         mBirdMinSize.setText("Min size: " + bird.getMinSize());
         mBirdMaxSize.setText("Max Size: " + bird.getMaxSize());
         mBirdImage.setImageBitmap(bird.getBirdImage(this));
