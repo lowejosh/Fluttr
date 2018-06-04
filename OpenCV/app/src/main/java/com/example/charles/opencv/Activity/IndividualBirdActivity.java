@@ -10,6 +10,8 @@ import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;
 
+import java.util.List;
+
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;
     TextView mBirdSeen;
@@ -36,8 +38,8 @@ public class IndividualBirdActivity extends AppCompatActivity {
     }
 
     private void updateBirdPage() {
-        bird = BirdBankActivity.mBirdClicked;
-        date = BirdBankActivity.mDateOfBirdClicked;
+        bird = ListBirdAdapter.mBirdClicked;
+        date = ListBirdAdapter.mDateOfBirdClicked;
 
         mBirdName.setText(bird.getName());
         mBirdSeen.setText("Identified on " + date + "\n");

@@ -23,8 +23,7 @@ public class BirdBankActivity extends AppCompatActivity {
     private List<Bird> mList;
     private List<String> dateList;
     private Database mDBHelper;
-    public static Bird mBirdClicked;
-    public static String mDateOfBirdClicked;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +39,6 @@ public class BirdBankActivity extends AppCompatActivity {
         // Initiate and set the adapter
         adapter = new ListBirdAdapter(this, mList, dateList);
         lvBird.setAdapter(adapter);
-
-
-        // ListView Item Click Listener
-        lvBird.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                mBirdClicked = mList.get(position);
-                mDateOfBirdClicked = dateList.get(position);
-                Intent intent = new Intent (lvBird.getContext(),IndividualBirdActivity.class);
-                startActivity(intent);
-
-
-            }
-
-        });
-
-
     }
 
 
