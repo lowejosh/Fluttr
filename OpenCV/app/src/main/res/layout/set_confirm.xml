@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBackground"
-    android:onClick="">
+    android:background="@color/appBackground">
 
 
     <TextView
@@ -13,26 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="2sp"
-        android:text="Confirm" />
+        android:text="@string/confirm" />
 
     <Button
         android:id="@+id/referenceButton"
-        android:layout_width="wrap_content"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="233dp"
         android:layout_marginStart="26dp"
+        android:background="@color/background"
+        android:onClick="resetBirdBankOnClick"
         android:text="@string/reset_bird_bank" />
 
     <Button
         android:id="@+id/backButton"
-        android:layout_width="139dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/referenceButton"
         android:layout_marginEnd="26dp"
-        android:onClick="bankOnClick"
+        android:background="@color/background"
+        android:onClick="backOnClick"
         android:text="@string/go_back" />
 
     <TextView
@@ -42,7 +46,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="168dp"
-        android:text="Are you sure?"
+        android:text="@string/are_you_sure"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 

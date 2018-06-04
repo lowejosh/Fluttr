@@ -29,4 +29,8 @@
     <string name="settings">Settings</string>
     <string name="reset_bird_bank">Reset Bird Bank</string>
     <string name="show_references">Show references</string>
+    <string name="information_birds_in_backyards">Information: Birds in Backyards</string>
+    <string name="images_image_net_com">Images: Image-net.com</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="confirm">Confirm</string>
 </resources>

@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBackground"
-    android:onClick="">
+    android:background="@color/appBackground">
 
 
     <TextView
@@ -22,7 +21,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/backyards"
         android:background="@color/background"
-        android:text="Images: Image-net.com"
+        android:text="@string/images_image_net_com"
         android:textColor="@color/text" />
 
     <TextView
@@ -33,7 +32,7 @@
         android:layout_below="@+id/title"
         android:layout_marginTop="-2sp"
         android:background="@color/background"
-        android:text="Information: Birds in Backyards"
+        android:text="@string/information_birds_in_backyards"
         android:textColor="@color/text" />
 
     <Button
@@ -42,8 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:onClick="bankOnClick"
-        android:text="Go back" />
+        android:onClick="backOnClick"
+        android:text="@string/go_back"
+        android:background="@color/background"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </RelativeLayout>

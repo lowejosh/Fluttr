@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBackground"
-    android:onClick="backOnClick">
+    android:background="@color/appBackground">
 
 
     <TextView
@@ -22,7 +21,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="167dp"
-        android:text="@string/reset_bird_bank" />
+        android:text="@string/reset_bird_bank"
+        android:onClick="confirmOnClick"
+        android:background="@color/background"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/referenceButton"
@@ -31,7 +33,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="163dp"
-        android:text="@string/show_references" />
+        android:text="@string/show_references"
+        android:onClick="referencesOnClick"
+        android:background="@color/background"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:id="@+id/backButton"
@@ -39,8 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:onClick="bankOnClick"
-        android:text="@string/go_back" />
+        android:onClick="homeOnClick"
+        android:text="@string/go_back"
+        android:background="@color/background"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
 </RelativeLayout>
