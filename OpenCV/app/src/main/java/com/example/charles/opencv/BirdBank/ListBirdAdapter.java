@@ -1,12 +1,17 @@
 package com.example.charles.opencv.BirdBank;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ImageView;
 
+import com.example.charles.opencv.Activity.IndividualBirdActivity;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.TwentyQuestion.Bird;
 
@@ -44,10 +49,8 @@ public class ListBirdAdapter extends BaseAdapter {
         View v = View.inflate(mContext, R.layout.bird_listview, null);
         TextView birdName = (TextView)v.findViewById(R.id.bird_name);
         TextView birdSeen = (TextView)v.findViewById(R.id.bird_status);
-        //ImageView birdImage = (ImageView)v.findViewById(R.id.bird_image);
         birdName.setText(mList.get(position).getName());
         birdSeen.setText("Identified on " + dateList.get(position));
-        //birdImage.setImageBitmap(mList.get(position).getBirdImage(mContext));
         return v;
     }
 }

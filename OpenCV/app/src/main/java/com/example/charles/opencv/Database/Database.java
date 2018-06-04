@@ -184,11 +184,39 @@ public class Database extends SQLiteOpenHelper {
      * Get the seen_bird table cursor
      * @return Cursor of bird IDs
      */
-    public Cursor getSeenBirdIDList() {
+    public Cursor getSeenBirdCursor() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + BS_TABLE_NAME;
         Cursor data = db.rawQuery(query, null);
         return data;
+    }
+
+    /**
+     * Get a list of seen birds
+     * @param data Cursor data
+     * @return List of seen birds
+     */
+    public List<Bird> getSeenBirdList() {
+        Cursor data = getSeenBirdCursor();
+        List<Bird> mList = new ArrayList<>();
+        while(data.moveToNext()) {
+            mList.add(this.getBird(data.getInt(0)));
+        }
+        return mList;
+    }
+
+    /**
+     * Get a list of dates for seen birds
+     * @param data Cursor data
+     * @return List of dates for seen birds
+     */
+    public List<String> getSeenBirdDateList() {
+        Cursor data = getSeenBirdCursor();
+        List<String> dateList = new ArrayList<>();
+        while(data.moveToNext()) {
+            dateList.add(data.getString(1));
+        }
+        return dateList;
     }
 
     /**
