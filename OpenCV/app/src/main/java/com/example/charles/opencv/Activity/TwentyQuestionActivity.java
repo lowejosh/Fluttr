@@ -1,5 +1,6 @@
 package com.example.charles.opencv.Activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,6 +30,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     private int questionNo;
     private final int MAX_NUM_FEATURES = 14;
     public static final int TOP_RESULT_NUM_BIRDS = 5;
+    private Context mContext = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +161,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Add birdID to birds seen table
-                AddBird(String.valueOf(bird.getBirdID()));
+                AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
 
                 //Reload Game
                 twentyQuestions();
@@ -207,7 +209,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddBird(String.valueOf(bird.getBirdID()));
+                AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
                 twentyQuestions();
             }
         });
@@ -369,13 +371,16 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * Adds birdID to birdSeen table
      * @param birdID ID of the bird identified
      */
-    public void AddBird(String birdID) {
-        boolean insertData = dbHandler.addData(birdID);
+    public static void AddBird(String birdID, Database dbHandler, Context c) {
+        Bird bird = dbHandler.getBird(Integer.parseInt(birdID));
+        if (bird != null) {
+            boolean insertData = dbHandler.addData(birdID);
 
-        if (insertData) {
-            toastMessage("Bird added to Bird Bank");
-        } else {
-            toastMessage("Bird already in Bird Bank");
+            if (insertData) {
+                toastMessage("Bird added to Bird Bank", c);
+            } else {
+                toastMessage("Bird already in Bird Bank", c);
+            }
         }
     }
 
@@ -384,8 +389,8 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      * Customizable Toast message
      * @param message Message to send
      */
-    private void toastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private static void toastMessage(String message, Context c) {
+        Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
     }
 
 

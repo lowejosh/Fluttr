@@ -66,7 +66,6 @@ public class ListBirdAdapter extends BaseAdapter implements ListAdapter {
         constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CLICK","CLICKED");
                 mBirdClicked = mList.get(position);
                 mDateOfBirdClicked = dateList.get(position);
                 Intent intent = new Intent(mContext, IndividualBirdActivity.class);

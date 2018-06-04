@@ -66,8 +66,6 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("CREATING TABLE","CREATING TABLE");
-        System.out.println("CREATing TABLE");
         db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
         String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
@@ -624,8 +622,7 @@ public class Database extends SQLiteOpenHelper {
      */
     public void clearBirdsSeen() {
         SQLiteDatabase db = this.getWritableDatabase();
-        String clearDBQuery = "DROP TABLE "+BS_TABLE_NAME;
-        db.execSQL(clearDBQuery);
+        onCreate(db);
     }
 
 }
