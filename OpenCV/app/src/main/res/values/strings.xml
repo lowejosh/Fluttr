@@ -25,4 +25,9 @@
     <string name="images_image_net_com">Images: Image-net.com</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="confirm">Confirm</string>
+    <string name="image_net_com">Image-net.com</string>
+    <string name="images">Images:</string>
+    <string name="shutterstock_com">Shutterstock.com</string>
+    <string name="birds_in_backyards">Birds in Backyards</string>
+    <string name="information">Information:</string>
 </resources>
