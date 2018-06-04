@@ -1,7 +1,9 @@
 package com.example.charles.opencv.Activity;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.example.charles.opencv.R;
 
@@ -15,4 +17,26 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
     }
+
+    public void resetBirdBankOnClick(View v) {
+        //Clear birdIDs and insert
+
+    }
+
+    public void referencesOnClick(View v) {
+        setContentView(R.layout.set_references);
+    }
+
+    public void confirmOnClick(View v) {
+        setContentView(R.layout.set_confirm);
+    }
+
+    public void backOnClick(View v) {
+        setContentView(R.layout.settings);
+    }
+
+    public void homeOnClick(View v) {
+        NavUtils.navigateUpFromSameTask(this);
+    }
+
 }

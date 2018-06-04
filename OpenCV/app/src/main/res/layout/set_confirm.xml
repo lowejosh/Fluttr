@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground">
+
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2sp"
+        android:text="@string/confirm" />
+
+    <Button
+        android:id="@+id/referenceButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="145dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="233dp"
+        android:layout_marginStart="26dp"
+        android:background="@color/background"
+        android:onClick="resetBirdBankOnClick"
+        android:text="@string/reset_bird_bank" />
+
+    <Button
+        android:id="@+id/backButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/referenceButton"
+        android:layout_marginEnd="26dp"
+        android:background="@color/background"
+        android:onClick="backOnClick"
+        android:text="@string/go_back" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="168dp"
+        android:text="@string/are_you_sure"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
+</RelativeLayout>
