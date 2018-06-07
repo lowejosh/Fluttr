@@ -9,10 +9,10 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.charles.opencv.Activity.TwentyQuestionActivity;
-import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.Feature;
-import com.example.charles.opencv.TwentyQuestion.Question;
+import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
+import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.BirdFinder.Feature;
+import com.example.charles.opencv.BirdFinder.Question;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -440,7 +440,7 @@ public class Database extends SQLiteOpenHelper {
 
                 //If no birds exist in the table
                 if (count == 0) {
-                    Log.d("TwentyQuestionActivity", "Bad Question");
+                    Log.d("BirdFinderActivity", "Bad Question");
                     questionsToRemove.add(question);
                 }
 
@@ -531,7 +531,7 @@ public class Database extends SQLiteOpenHelper {
 
             //Add matching birds to list
             for (Integer birdID : similar) {
-                if (birdIDs.size() < TwentyQuestionActivity.TOP_RESULT_NUM_BIRDS && !birdIDs.contains(birdID)) {
+                if (birdIDs.size() < BirdFinderActivity.TOP_RESULT_NUM_BIRDS && !birdIDs.contains(birdID)) {
                     birdIDs.add(birdID);
                 } else {
                     break;

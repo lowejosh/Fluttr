@@ -47,24 +47,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                android:weightSum="1"
+                android:id="@+id/layout_1">
 
                 <Button
                     android:id="@+id/btn_option_0"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
-                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
                     android:layout_marginEnd="2sp"
+                    android:layout_weight="0.5"
                     android:background="@color/background"
-                    android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:visibility="invisible" />
 
                 <Button
                     android:id="@+id/btn_option_1"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -72,14 +73,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_2"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -89,7 +90,7 @@
                 <Button
                     android:id="@+id/btn_option_3"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -97,14 +98,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_4"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -114,7 +115,7 @@
                 <Button
                     android:id="@+id/btn_option_5"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -122,14 +123,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_6"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -139,7 +140,7 @@
                 <Button
                     android:id="@+id/btn_option_7"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -147,14 +148,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_8"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -164,7 +165,7 @@
                 <Button
                     android:id="@+id/btn_option_9"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -172,14 +173,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_10"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -189,7 +190,7 @@
                 <Button
                     android:id="@+id/btn_option_11"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -197,14 +198,14 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginBottom="2sp"
                 android:weightSum="1">
 
                 <Button
                     android:id="@+id/btn_option_12"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginEnd="2sp"
                     android:background="@color/background"
@@ -214,7 +215,7 @@
                 <Button
                     android:id="@+id/btn_option_13"
                     android:layout_width="0dp"
-                    android:layout_height="65dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:background="@color/background"
                     android:visibility="invisible"
@@ -225,6 +226,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/background"
                 android:text="@string/go_home"
+                android:onClick="goHomeOnClick"
                 style="?android:attr/borderlessButtonStyle"/>
         </LinearLayout>
     </ScrollView>

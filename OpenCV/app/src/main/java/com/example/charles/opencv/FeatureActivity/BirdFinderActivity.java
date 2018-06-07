@@ -1,4 +1,4 @@
-package com.example.charles.opencv.Activity;
+package com.example.charles.opencv.FeatureActivity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.Bird;
-import com.example.charles.opencv.TwentyQuestion.Feature;
-import com.example.charles.opencv.TwentyQuestion.Question;
+import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.BirdFinder.Feature;
+import com.example.charles.opencv.BirdFinder.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * This activity is the self contained file for the Twenty Questions feature.
  */
-public class TwentyQuestionActivity extends AppCompatActivity {
+public class BirdFinderActivity extends AppCompatActivity {
     private Database dbHandler;
     private List<Integer> birdIDs, featureList, answers;
     private List<Question> questionsAsked, questionsLeft;
@@ -48,7 +48,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
      */
     private void twentyQuestions() {
         //Change view to twenty questions
-        setContentView(R.layout.twenty_question);
+        setContentView(R.layout.birdfinder);
 
         //Get full list of birds and questions
         birdIDs = dbHandler.getBirdIDs();
@@ -112,11 +112,11 @@ public class TwentyQuestionActivity extends AppCompatActivity {
             return;
         }
 
-        //Get Views in twenty_question
+        //Get Views in birdfinder
         TextView tv_question_no = findViewById(R.id.tv_home_question_no);
         TextView tv_question = findViewById(R.id.tv_home_question);
 
-        //Update Views in twenty_question
+        //Update Views in birdfinder
         tv_question_no.setText(String.format("%s.", questionNo));
         tv_question.setText(currentQuestion.getQuestion());
 
@@ -135,11 +135,11 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * If one bird is left, this will display the bird in tq_result
+     * If one bird is left, this will display the bird in bf_result
      */
     private void showAnswer() {
-        //Change the View to tq_result
-        setContentView(R.layout.tq_result);
+        //Change the View to bf_result
+        setContentView(R.layout.bf_result);
 
         //Get the final Bird
         final Bird bird = dbHandler.getBird(birdIDs.get(0));
@@ -184,11 +184,11 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Display result page against, deny button displays tq_failure instead of tq_topresults
+     * Display result page against, deny button displays bf_failure instead of bf_topresults
      */
     private void showFinalAnswer() {
-        //Change the View to tq_result
-        setContentView(R.layout.tq_result);
+        //Change the View to bf_result
+        setContentView(R.layout.bf_result);
 
         //Get the final Bird
         final Bird bird = dbHandler.getBird(birdIDs.get(0));
@@ -230,9 +230,13 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         final int IMAGE = 1;
         final int TEXT = 2;
 
-        setContentView(R.layout.tq_topresults);
+        setContentView(R.layout.bf_topresults);
 
-        //For each result in tq_topresults
+        //Disable user input while screen is loading
+        View screen = findViewById(R.id.visible);
+        screen.setVisibility(View.INVISIBLE);
+
+        //For each result in bf_topresults
         for (int birdOption = 0; birdOption < TOP_RESULT_NUM_BIRDS; birdOption++) {
             //Get image and text view
             View[] result = getTopResultViews(birdOption);
@@ -252,13 +256,15 @@ public class TwentyQuestionActivity extends AppCompatActivity {
                 result[TEXT].setVisibility(View.GONE);
             }
         }
+
+        screen.setVisibility(View.VISIBLE);
     }
 
     /**
-     * Display tq_failure
+     * Display bf_failure
      */
     private void showFailure() {
-        setContentView(R.layout.tq_failure);
+        setContentView(R.layout.bf_failure);
     }
 
     /**
@@ -283,7 +289,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the ID of the button from its option number in twenty_question
+     * Get the ID of the button from its option number in birdfinder
      *
      * @param optionNo Option number (0-13)
      * @return ID for use in findViewById()
@@ -293,7 +299,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the Option number of the button from its ID in twenty_question
+     * Get the Option number of the button from its ID in birdfinder
      *
      * @param id ID of the btn used in findViewById()
      * @return Option Number of the button
@@ -311,7 +317,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the image and text view for the option number from tq_topresults, array output is View[linearLayout, imageView, textView]
+     * Get the image and text view for the option number from bf_topresults, array output is View[linearLayout, imageView, textView]
      *
      * @param optionNo Option number (0-4)
      * @return Array containing linear layout, image and text view
@@ -325,7 +331,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * Get the Option number of the view from its ID in tq_topresults
+     * Get the Option number of the view from its ID in bf_topresults
      *
      * @param id ID of the btn used in findViewById()
      * @return Option Number of the button
@@ -343,7 +349,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * OnClick function for image and text views in tq_topresults
+     * OnClick function for image and text views in bf_topresults
      *
      * @param v View attached to the onclick
      */
@@ -359,11 +365,19 @@ public class TwentyQuestionActivity extends AppCompatActivity {
     }
 
     /**
-     * OnClick function for tq_failure button and tq_topresults button
+     * OnClick function for bf_failure button and bf_topresults button
      * @param v View attached to the onclick
      */
     public void backOnClick(View v) {
         twentyQuestions();
+    }
+
+    /**
+     * Onclick function for bf_topresults button
+     * @param v View attached to the onclick
+     */
+    public void failureOnClick(View v) {
+        showFailure();
     }
 
 
@@ -393,7 +407,7 @@ public class TwentyQuestionActivity extends AppCompatActivity {
         Toast.makeText(c, message, Toast.LENGTH_SHORT).show();
     }
 
-
-
-
+    public void goHomeOnClick(View v) {
+        super.finish();
+    }
 }

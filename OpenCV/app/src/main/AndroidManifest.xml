@@ -18,12 +18,12 @@
         </activity>
 
         <activity
-            android:name=".Activity.TwentyQuestionActivity"
+            android:name=".FeatureActivity.BirdFinderActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".Activity.IndividualBirdActivity"
+            android:name=".BirdBank.IndividualBirdActivity"
             android:screenOrientation="portrait">
         </activity>
 
@@ -35,9 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SearchActivity" />
-        <activity android:name=".Activity.BirdBankActivity" />
-        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".FeatureActivity.SearchActivity" />
+        <activity android:name=".FeatureActivity.BirdBankActivity" />
+        <activity android:name=".FeatureActivity.SettingActivity" />
 
     </application>
 

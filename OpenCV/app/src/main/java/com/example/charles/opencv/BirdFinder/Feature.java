@@ -1,4 +1,4 @@
-package com.example.charles.opencv.TwentyQuestion;
+package com.example.charles.opencv.BirdFinder;
 
 import android.util.Log;
 import android.util.SparseArray;

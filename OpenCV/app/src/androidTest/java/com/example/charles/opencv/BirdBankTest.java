@@ -1,23 +1,16 @@
 package com.example.charles.opencv;
 
-import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Looper;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
-import com.example.charles.opencv.Activity.TwentyQuestionActivity;
-import com.example.charles.opencv.BirdBank.ListBirdAdapter;
-import com.example.charles.opencv.Activity.BirdBankActivity;
+import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.TwentyQuestion.Bird;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.io.IOException;
 
 
 /**
@@ -43,7 +36,7 @@ BirdBankTest extends ActivityTestCase {
         Looper.prepare();
 
         int expectedSeenBirdListSize = db.getSeenBirdList().size();
-        TwentyQuestionActivity.AddBird("-1", db, InstrumentationRegistry.getTargetContext());
+        BirdFinderActivity.AddBird("-1", db, InstrumentationRegistry.getTargetContext());
         int actualSeenBirdListSize = db.getSeenBirdList().size();
         assertEquals(expectedSeenBirdListSize, actualSeenBirdListSize);
     }
@@ -51,7 +44,7 @@ BirdBankTest extends ActivityTestCase {
     @Test
     public void addSeenBird() {
         int expectedSeenBirdListSize = db.getSeenBirdList().size() + 1;
-        TwentyQuestionActivity.AddBird("1", db, InstrumentationRegistry.getTargetContext());
+        BirdFinderActivity.AddBird("1", db, InstrumentationRegistry.getTargetContext());
         int actualSeenBirdListSize = db.getSeenBirdList().size();
         assertEquals(expectedSeenBirdListSize, actualSeenBirdListSize);
     }
@@ -89,7 +82,7 @@ public class BirdBankTest extends ActivityTestCase {
 
     @Test
     public void addInvalidSeenBird {
-        TwentyQuestionActivity test = new TwentyQuestionActivity();
+        BirdFinderActivity test = new BirdFinderActivity();
         int expectedSeenBirdSize = db.getSeenBirdList().size();
         test.AddBird("0");
         int actualSeenBirdSize = db.getSeenBirdList().size();

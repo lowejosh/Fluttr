@@ -1,4 +1,4 @@
-package com.example.charles.opencv.Activity;
+package com.example.charles.opencv.FeatureActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
-import com.example.charles.opencv.Activity.BirdBankActivity;
-import com.example.charles.opencv.Activity.SettingActivity;
-import com.example.charles.opencv.Activity.TwentyQuestionActivity;
+import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
+import com.example.charles.opencv.FeatureActivity.SettingActivity;
+import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.BirdFinder.Bird;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class HomeScreen extends AppCompatActivity {
      * @param v Attached View Object (Unused)
      */
     public void finderOnClick(View v) {
-        startActivity(new Intent(HomeScreen.this, TwentyQuestionActivity.class));
+        startActivity(new Intent(HomeScreen.this, BirdFinderActivity.class));
     }
 
     /**

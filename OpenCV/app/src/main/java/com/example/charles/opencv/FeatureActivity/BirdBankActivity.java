@@ -1,4 +1,4 @@
-package com.example.charles.opencv.Activity;
+package com.example.charles.opencv.FeatureActivity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.BirdFinder.Bird;
 
 import java.util.List;
 

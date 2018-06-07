@@ -1,4 +1,4 @@
-package com.example.charles.opencv.TwentyQuestion;
+package com.example.charles.opencv.BirdFinder;
 
 /**
  * This DataType contains all information contained in the Question Table

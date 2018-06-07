@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:isScrollContainer="true">
+        android:isScrollContainer="true"
+        android:id="@+id/visible">
 
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -217,7 +218,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/none_of_the_above"
-            android:onClick="backOnClick"
+            android:onClick="failureOnClick"
             android:background="@color/background"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>

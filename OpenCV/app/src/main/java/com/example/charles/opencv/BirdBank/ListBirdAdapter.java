@@ -3,19 +3,15 @@ package com.example.charles.opencv.BirdBank;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.charles.opencv.Activity.IndividualBirdActivity;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.Bird;
+import com.example.charles.opencv.BirdFinder.Bird;
 
 import java.util.List;
 

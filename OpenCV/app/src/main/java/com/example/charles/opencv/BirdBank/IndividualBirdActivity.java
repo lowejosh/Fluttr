@@ -1,4 +1,4 @@
-package com.example.charles.opencv.Activity;
+package com.example.charles.opencv.BirdBank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,9 +8,7 @@ import android.widget.TextView;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.TwentyQuestion.Bird;
-
-import java.util.List;
+import com.example.charles.opencv.BirdFinder.Bird;
 
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;

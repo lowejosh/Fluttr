@@ -2,7 +2,7 @@ package com.example.charles.opencv;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.charles.opencv.TwentyQuestion.Feature;
+import com.example.charles.opencv.BirdFinder.Feature;
 
 import org.junit.Assert;
 import org.junit.Test;
