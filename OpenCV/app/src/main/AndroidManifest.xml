@@ -23,6 +23,16 @@
         </activity>
 
         <activity
+            android:name=".Settings.ReferenceActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".Settings.ResetActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name=".BirdBank.IndividualBirdActivity"
             android:screenOrientation="portrait">
         </activity>
