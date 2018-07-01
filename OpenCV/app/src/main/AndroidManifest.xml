@@ -35,7 +35,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FeatureActivity.SearchActivity" />
+        <activity
+            android:name=".FeatureActivity.SearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".FeatureActivity.BirdBankActivity" />
         <activity android:name=".FeatureActivity.SettingActivity" />
 
