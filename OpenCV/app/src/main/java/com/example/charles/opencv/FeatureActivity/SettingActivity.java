@@ -1,12 +1,16 @@
 package com.example.charles.opencv.FeatureActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.HomeScreen;
 import com.example.charles.opencv.R;
+import com.example.charles.opencv.Settings.ReferenceActivity;
+import com.example.charles.opencv.Settings.ResetActivity;
 
 /**
  * Shows the settings available to the user, this currently only displays the references for information
@@ -19,26 +23,13 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.settings);
     }
 
-    public void resetBirdBankOnClick(View v) {
-        Database db = new Database(this);
-
-        db.clearBirdsSeen();
-        Toast.makeText(getApplicationContext(), "Bird Bank Reset", Toast.LENGTH_SHORT).show();
-        setContentView(R.layout.settings);
-    }
-
     public void referencesOnClick(View v) {
-        setContentView(R.layout.set_references);
+        startActivity(new Intent(SettingActivity.this, ReferenceActivity.class));
     }
 
     public void confirmOnClick(View v) {
-        setContentView(R.layout.set_confirm);
+        startActivity(new Intent(SettingActivity.this, ResetActivity.class));
     }
-
-    public void backOnClick(View v) {
-        setContentView(R.layout.settings);
-    }
-
     public void homeOnClick(View v) {
         super.finish();
     }
