@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.example.charles.opencv.BirdFinder.Bird;
 import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
-import com.example.charles.opencv.FeatureActivity.SettingActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
-import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.FeatureActivity.SettingActivity;
 
 public class HomeScreen extends AppCompatActivity {
 

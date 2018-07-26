@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
 
@@ -16,7 +17,7 @@ public class ResetActivity extends AppCompatActivity {
     }
 
     public void resetBirdBankOnClick(View v) {
-        Database db = new Database(this);
+        BirdBankDatabase db = new BirdBankDatabase(this);
 
         db.clearBirdsSeen();
         Toast.makeText(getApplicationContext(), "Bird Bank Reset", Toast.LENGTH_SHORT).show();

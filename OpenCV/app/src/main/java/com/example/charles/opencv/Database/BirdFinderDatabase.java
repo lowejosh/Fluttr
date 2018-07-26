@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.charles.opencv.BirdFinder.Feature;
 import com.example.charles.opencv.BirdFinder.Question;
-import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 
 import java.util.ArrayList;

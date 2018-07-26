@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.R;
 
 import java.util.List;
 

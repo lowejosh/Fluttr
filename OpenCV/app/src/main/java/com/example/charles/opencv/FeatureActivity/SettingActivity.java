@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.HomeScreen;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Settings.ReferenceActivity;
 import com.example.charles.opencv.Settings.ResetActivity;

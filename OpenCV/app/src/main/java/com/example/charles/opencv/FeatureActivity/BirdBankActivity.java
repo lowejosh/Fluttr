@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
-import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.Database.BirdBankDatabase;
+import com.example.charles.opencv.R;
 
 import java.util.List;
 

@@ -15,9 +15,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * This class is a helper for interfacing with the sql database.
@@ -29,9 +27,9 @@ public class Database extends SQLiteOpenHelper {
     private static SQLiteDatabase mDatabase;
 
     // Bird seen stuff
-    protected static final String BS_TABLE_NAME = "birds_seen";
-    protected static final String BS_COL1 = "ID";
-    protected static final String BS_COL2 = "DATE";
+    static final String BS_TABLE_NAME = "birds_seen";
+    static final String BS_COL1 = "ID";
+    static final String BS_COL2 = "DATE";
 
     /**
      * Create database from assets
@@ -92,7 +90,7 @@ public class Database extends SQLiteOpenHelper {
     /**
      * Open the sqlite database
      */
-    protected void openDatabase() {
+    void openDatabase() {
         String dbPath = context.getDatabasePath(DBNAME).getPath();
 
         if (mDatabase != null && mDatabase.isOpen()) {
@@ -105,7 +103,7 @@ public class Database extends SQLiteOpenHelper {
     /**
      * Close the sqlite database if open
      */
-    protected void closeDatabase() {
+    void closeDatabase() {
         if (mDatabase != null) {
             mDatabase.close();
         }
@@ -133,7 +131,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    protected Cursor rawQuery(String sql, String[] args) {
+    Cursor rawQuery(String sql, String[] args) {
         return mDatabase.rawQuery(sql, args);
     }
 
@@ -169,8 +167,8 @@ public class Database extends SQLiteOpenHelper {
 
     /**
      * Add bird ID to the birds_seen table
-     * @param birdID
-     * @return
+     * @param birdID ID of the Bird
+     * @return True if data is added
      */
     public boolean addData(String birdID) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -186,13 +184,5 @@ public class Database extends SQLiteOpenHelper {
         long result = db.insert(BS_TABLE_NAME, null, contentValues);
 
         return (result != -1);
-    }
-
-    /**
-     * Gets the DBNAME
-     * @return the name of the database
-     */
-    public static String getDBNAME() {
-        return DBNAME;
     }
 }

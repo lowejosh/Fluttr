@@ -5,29 +5,54 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
-import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
+import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.BirdFinder.Question;
+import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Unit tests for the
+ * Unit tests for the Database Class, requires the physical or emulated machine to run.
  */
 @RunWith(AndroidJUnit4.class)
-public class
-BirdBankTest extends ActivityTestCase {
-    private Database db;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class BirdBankDatabaseInstrumentedTest extends ActivityTestCase {
+    private BirdBankDatabase db;
 
     @Before
     public void setup() {
-        // setup database
-        db = new Database(InstrumentationRegistry.getTargetContext());
+        db = new BirdBankDatabase(InstrumentationRegistry.getTargetContext());
 
         // clear bird-bank
         db.clearBirdsSeen();
+    }
+
+    //aaa So that this test occurs first
+    @Test
+    public void aaaDatabaseCreation() {
+        //Checks if database was made in startup
+        assertTrue(true);
+    }
+
+    @Test
+    public void getBirdSuccess() {
+        Bird bird = db.getBird(1);
+        assertEquals(1, bird.getBirdID());
+    }
+
+    @Test
+    public void getBirdInvalid() {
+        Bird bird = db.getBird(0);
+        assertNull(bird);
     }
 
     @Test
@@ -48,46 +73,4 @@ BirdBankTest extends ActivityTestCase {
         int actualSeenBirdListSize = db.getSeenBirdList().size();
         assertEquals(expectedSeenBirdListSize, actualSeenBirdListSize);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-@RunWith(AndroidJUnit4.class)
-public class BirdBankTest extends ActivityTestCase {
-    private Database db;
-
-    @Before
-    public void setup() {
-        // setup database
-        db = new Database(InstrumentationRegistry.getTargetContext());
-
-        // clear bird-bank
-        db.clearBirdsSeen();
-    }
-
-    @Test
-    public void addInvalidSeenBird {
-        BirdFinderActivity test = new BirdFinderActivity();
-        int expectedSeenBirdSize = db.getSeenBirdList().size();
-        test.AddBird("0");
-        int actualSeenBirdSize = db.getSeenBirdList().size();
-        assertEquals(expectedSeenBirdSize, actualSeenBirdSize);
-    }
-}
-
-*/

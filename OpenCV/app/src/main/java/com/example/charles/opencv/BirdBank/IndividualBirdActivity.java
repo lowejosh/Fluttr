@@ -6,9 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.charles.opencv.BirdBank.ListBirdAdapter;
-import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.R;
 
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;

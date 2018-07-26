@@ -10,12 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.charles.opencv.Database.BirdFinderDatabase;
-import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
 import com.example.charles.opencv.BirdFinder.Feature;
 import com.example.charles.opencv.BirdFinder.Question;
+import com.example.charles.opencv.Database.BirdFinderDatabase;
+import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.R;
 
 import java.util.ArrayList;
 import java.util.List;

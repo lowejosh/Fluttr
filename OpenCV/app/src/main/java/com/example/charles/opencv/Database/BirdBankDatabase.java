@@ -1,17 +1,12 @@
 package com.example.charles.opencv.Database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.charles.opencv.BirdFinder.Bird;
-import com.example.charles.opencv.Database.Database;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class BirdBankDatabase extends Database {
@@ -62,11 +57,10 @@ public class BirdBankDatabase extends Database {
      * Get the seen_bird table cursor
      * @return Cursor of bird IDs
      */
-    public Cursor getSeenBirdCursor() {
+    private Cursor getSeenBirdCursor() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + BS_TABLE_NAME;
-        Cursor data = db.rawQuery(query, null);
-        return data;
+        return db.rawQuery(query, null);
     }
 
     /**
