@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
-import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
 
@@ -20,7 +20,7 @@ public class BirdBankActivity extends AppCompatActivity {
         setContentView(R.layout.birdbank);
 
         // Init vars
-        Database db = new Database(this);
+        BirdBankDatabase db = new BirdBankDatabase(this);
         List<Bird> mList = db.getSeenBirdList();
         List<String> dateList = db.getSeenBirdDateList();
 

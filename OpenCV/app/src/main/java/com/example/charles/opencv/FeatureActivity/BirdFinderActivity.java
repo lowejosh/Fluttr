@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.BirdFinder.Bird;
@@ -23,7 +24,7 @@ import java.util.List;
  * This activity is the self contained file for the Twenty Questions feature.
  */
 public class BirdFinderActivity extends AppCompatActivity {
-    private Database dbHandler;
+    private BirdFinderDatabase dbHandler;
     private List<Integer> birdIDs, featureList, answers;
     private List<Question> questionsAsked, questionsLeft;
     private Question currentQuestion;
@@ -37,7 +38,7 @@ public class BirdFinderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        dbHandler = new Database(this);
+        dbHandler = new BirdFinderDatabase(this);
 
         //Begin Twenty Question Game
         twentyQuestions();
