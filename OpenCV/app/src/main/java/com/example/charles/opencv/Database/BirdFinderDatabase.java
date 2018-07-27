@@ -5,9 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.example.charles.opencv.BirdFinder.Feature;
-import com.example.charles.opencv.BirdFinder.Question;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
+import com.example.charles.opencv.Tables.Feature;
+import com.example.charles.opencv.Tables.Question;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,7 +32,7 @@ public class BirdFinderDatabase extends Database {
         List<Integer> birdIDs = new ArrayList<>();
 
         openDatabase();
-        Cursor cursor = rawQuery("SELECT BirdID FROM Birds", null);
+        Cursor cursor = rawQuery("SELECT BirdID FROM Birds");
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -79,7 +79,7 @@ public class BirdFinderDatabase extends Database {
         }
 
         openDatabase();
-        Cursor cursor = rawQuery(query.toString(), null);
+        Cursor cursor = rawQuery(query.toString());
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -105,7 +105,7 @@ public class BirdFinderDatabase extends Database {
         Question question;
 
         openDatabase();
-        Cursor cursor = rawQuery("SELECT * FROM Question", null);
+        Cursor cursor = rawQuery("SELECT * FROM Question");
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -146,7 +146,7 @@ public class BirdFinderDatabase extends Database {
         openDatabase();
         Cursor cursor;
         try {
-            cursor = rawQuery(query, null);
+            cursor = rawQuery(query);
             cursor.moveToFirst();
 
             //Add each feature available
@@ -163,7 +163,7 @@ public class BirdFinderDatabase extends Database {
         }
 
         //Determine if a bird has none of the listed features
-        cursor = rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + feature + ")", null);
+        cursor = rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + feature + ")");
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -207,7 +207,7 @@ public class BirdFinderDatabase extends Database {
         for (Question question : questions) {
             try {
                 Cursor cursor = rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
-                        ")) FROM " + question.getTable() + whereStatement, null);
+                        ")) FROM " + question.getTable() + whereStatement);
 
                 cursor.moveToFirst();
                 int count = cursor.getInt(0);
@@ -338,7 +338,7 @@ public class BirdFinderDatabase extends Database {
             try {
                 //EG. SELECT birdID FROM Colour WHERE Colour == 24
                 Cursor cursor = rawQuery("SELECT birdID FROM " + question.getTable() +
-                        " WHERE " + question.getFeature() + " == " + answer, null);
+                        " WHERE " + question.getFeature() + " == " + answer);
 
                 //Add all matching birdIDs
                 cursor.moveToFirst();

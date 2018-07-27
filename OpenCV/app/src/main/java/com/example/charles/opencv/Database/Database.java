@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.Tables.Bird;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -52,6 +52,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * <b>Not Implemented</b>
      * Called when the database is created for the first time. This is where the
      * creation of tables and the initial population of the tables should happen.
      *
@@ -63,6 +64,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * <b>Not Implemented</b>
      * Called when the database needs to be upgraded. The implementation
      * should use this method to drop tables, add tables, or do anything else it
      * needs to upgrade to the new schema version.
@@ -131,8 +133,29 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    Cursor rawQuery(String sql, String[] args) {
-        return mDatabase.rawQuery(sql, args);
+    /**
+     * Runs the provided SQL and returns a {@link Cursor} over the result set.
+     *
+     * @param sql the SQL query. The SQL string must not be ; terminated
+     * @return A {@link Cursor} object, which is positioned before the first entry. Note that
+     * {@link Cursor}s are not synchronized, see the documentation for more details.
+     */
+    Cursor rawQuery(String sql) {
+        return mDatabase.rawQuery(sql, null);
+    }
+
+    /**
+     * Runs the provided SQL and returns a {@link Cursor} over the result set.
+     *
+     * @param sql the SQL query. The SQL string must not be ; terminated
+     * @param selectionArgs You may include ?s in where clause in the query,
+     *     which will be replaced by the values from selectionArgs. The
+     *     values will be bound as Strings.
+     * @return A {@link Cursor} object, which is positioned before the first entry. Note that
+     * {@link Cursor}s are not synchronized, see the documentation for more details.
+     */
+    Cursor rawQuery(String sql, String[] selectionArgs) {
+        return mDatabase.rawQuery(sql, selectionArgs);
     }
 
     /**

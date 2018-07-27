@@ -4,8 +4,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
-import com.example.charles.opencv.BirdFinder.Bird;
-import com.example.charles.opencv.BirdFinder.Question;
+import com.example.charles.opencv.Tables.Bird;
+import com.example.charles.opencv.Tables.Question;
 import com.example.charles.opencv.Database.BirdFinderDatabase;
 
 import org.junit.Before;

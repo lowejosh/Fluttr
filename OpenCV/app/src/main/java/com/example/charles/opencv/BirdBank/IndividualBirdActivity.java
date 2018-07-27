@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.charles.opencv.BirdFinder.Bird;
 import com.example.charles.opencv.R;
+import com.example.charles.opencv.Tables.Bird;
 
+/**
+ * Displays detailed information about the bird on the app screen.
+ */
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;
     TextView mBirdSeen;
@@ -17,7 +20,6 @@ public class IndividualBirdActivity extends AppCompatActivity {
     ImageView mBirdImage;
     Bird bird;
     String date;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class IndividualBirdActivity extends AppCompatActivity {
         updateBirdPage();
     }
 
+    /**
+     * Updates the bird page with stored information about the bird
+     */
     private void updateBirdPage() {
         bird = ListBirdAdapter.mBirdClicked;
         date = ListBirdAdapter.mDateOfBirdClicked;

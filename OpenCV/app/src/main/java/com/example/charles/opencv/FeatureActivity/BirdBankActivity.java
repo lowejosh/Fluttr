@@ -7,12 +7,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
-import com.example.charles.opencv.BirdFinder.Bird;
 import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
+import com.example.charles.opencv.Tables.Bird;
 
 import java.util.List;
 
+/**
+ * This activity is the self contained file for the Bird Bank Feature.
+ */
 public class BirdBankActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

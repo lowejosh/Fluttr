@@ -1,8 +1,9 @@
 com.example.charles.opencv
-com.example.charles.opencv.Activity
 com.example.charles.opencv.BirdBank
 com.example.charles.opencv.Database
-com.example.charles.opencv.TwentyQuestion
+com.example.charles.opencv.FeatureActivity
+com.example.charles.opencv.Settings
+com.example.charles.opencv.Tables
 org.opencv.android
 org.opencv.calib3d
 org.opencv.core

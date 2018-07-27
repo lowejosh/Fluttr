@@ -20,13 +20,27 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.settings);
     }
 
+    /**
+     * Sends the user to ReferenceActivity.Class
+     * @param v View
+     */
     public void referencesOnClick(View v) {
         startActivity(new Intent(SettingActivity.this, ReferenceActivity.class));
     }
 
-    public void confirmOnClick(View v) {
+    /**
+     * Sends the user to ResetActivity.Class
+     * @param v View
+     */
+    public void resetBirdBankOnClick(View v) {
         startActivity(new Intent(SettingActivity.this, ResetActivity.class));
     }
+
+    /**
+     * Back on click function for the "GO BACK" button
+     *
+     * @param v View of the button
+     */
     public void homeOnClick(View v) {
         super.finish();
     }

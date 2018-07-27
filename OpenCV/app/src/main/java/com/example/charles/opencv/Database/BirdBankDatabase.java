@@ -4,11 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.charles.opencv.BirdFinder.Bird;
+import com.example.charles.opencv.Tables.Bird;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controls Bird Bank specific database functionality
+ */
 public class BirdBankDatabase extends Database {
     public BirdBankDatabase(Context context) {
         super(context);

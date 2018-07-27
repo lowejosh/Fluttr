@@ -5,10 +5,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
-import com.example.charles.opencv.BirdFinder.Bird;
-import com.example.charles.opencv.BirdFinder.Question;
+import com.example.charles.opencv.Tables.Bird;
 import com.example.charles.opencv.Database.BirdBankDatabase;
-import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 
 import org.junit.Before;
@@ -16,9 +14,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Unit tests for the Database Class, requires the physical or emulated machine to run.

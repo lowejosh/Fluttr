@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:layout_marginBottom="2sp"
             android:background="@color/background"
-            android:onClick="confirmOnClick"
+            android:onClick="resetBirdBankOnClick"
             android:text="@string/reset_bird_bank"/>
 
         <Button
