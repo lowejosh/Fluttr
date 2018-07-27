@@ -10,20 +10,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.BirdFinder.Bird;
-import com.example.charles.opencv.BirdFinder.Feature;
-import com.example.charles.opencv.BirdFinder.Question;
+import com.example.charles.opencv.Tables.Bird;
+import com.example.charles.opencv.Tables.Feature;
+import com.example.charles.opencv.Tables.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This activity is the self contained file for the Twenty Questions feature.
+ * This activity is the self contained file for the Bird Finder feature.
  */
 public class BirdFinderActivity extends AppCompatActivity {
-    private Database dbHandler;
+    private BirdFinderDatabase dbHandler;
     private List<Integer> birdIDs, featureList, answers;
     private List<Question> questionsAsked, questionsLeft;
     private Question currentQuestion;
@@ -37,7 +38,7 @@ public class BirdFinderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        dbHandler = new Database(this);
+        dbHandler = new BirdFinderDatabase(this);
 
         //Begin Twenty Question Game
         twentyQuestions();
@@ -63,21 +64,21 @@ public class BirdFinderActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Get Selected Feature
-                    Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
+                //Get Selected Feature
+                Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
 
-                    //Move question from questionsLeft to questionsAsked
-                    questionsLeft.remove(currentQuestion);
-                    if (!Feature.isUnknown(selectedFeature)) {
-                        questionsAsked.add(currentQuestion);
-                    }
+                //Move question from questionsLeft to questionsAsked
+                questionsLeft.remove(currentQuestion);
+                if (!Feature.isUnknown(selectedFeature)) {
+                    questionsAsked.add(currentQuestion);
+                }
 
-                    //Update BirdIDs and answers List
-                    dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getFeature(), birdIDs);
-                    answers.add(selectedFeature);
+                //Update BirdIDs and answers List
+                dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getFeature(), birdIDs);
+                answers.add(selectedFeature);
 
-                    //Move to Next Stage
-                    nextStage();
+                //Move to Next Stage
+                nextStage();
                 }
             });
         }
@@ -160,11 +161,11 @@ public class BirdFinderActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Add birdID to birds seen table
-                AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
+            //Add birdID to birds seen table
+            AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
 
-                //Reload Game
-                twentyQuestions();
+            //Reload Game
+            twentyQuestions();
             }
         });
 
@@ -172,13 +173,13 @@ public class BirdFinderActivity extends AppCompatActivity {
         btnDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                birdIDs = dbHandler.getClosestBirds(questionsAsked, answers, birdIDs.get(0));
+            birdIDs = dbHandler.getClosestBirds(questionsAsked, answers, birdIDs.get(0));
 
-                if (birdIDs.size() == 0) {
-                    showFailure();
-                } else {
-                    showMultiAnswer();
-                }
+            if (birdIDs.size() == 0) {
+                showFailure();
+            } else {
+                showMultiAnswer();
+            }
             }
         });
     }
@@ -209,8 +210,8 @@ public class BirdFinderActivity extends AppCompatActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
-                twentyQuestions();
+            AddBird(String.valueOf(bird.getBirdID()), dbHandler, mContext);
+            twentyQuestions();
             }
         });
 

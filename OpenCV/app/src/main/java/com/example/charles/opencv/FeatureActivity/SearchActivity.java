@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.charles.opencv.R;
 
+/**
+ * This activity is the self contained file for the Search feature.
+ */
 public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

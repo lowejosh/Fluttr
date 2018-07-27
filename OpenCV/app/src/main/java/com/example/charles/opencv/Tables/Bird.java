@@ -1,4 +1,4 @@
-package com.example.charles.opencv.BirdFinder;
+package com.example.charles.opencv.Tables;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.charles.opencv.Database.Database;
+import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
 
+/**
+ * Controls the resetting of the bird bank feature inside the settings feature.
+ */
 public class ResetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,14 +18,23 @@ public class ResetActivity extends AppCompatActivity {
         setContentView(R.layout.set_confirm);
     }
 
+    /**
+     * Resets the bird bank table on button click
+     * @param v View
+     */
     public void resetBirdBankOnClick(View v) {
-        Database db = new Database(this);
+        BirdBankDatabase db = new BirdBankDatabase(this);
 
         db.clearBirdsSeen();
         Toast.makeText(getApplicationContext(), "Bird Bank Reset", Toast.LENGTH_SHORT).show();
         super.finish();
     }
 
+    /**
+     * Back on click function for the "GO BACK" button
+     *
+     * @param v View of the button
+     */
     public void backOnClick(View v) {
         super.finish();
     }
