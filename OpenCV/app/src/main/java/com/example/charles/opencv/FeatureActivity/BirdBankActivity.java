@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.Database.BirdBankDatabase;
@@ -54,5 +55,10 @@ public class BirdBankActivity extends AppCompatActivity {
         // Initiate and set the adapter
         ListBirdAdapter adapter = new ListBirdAdapter(this, mList, dateList);
         lvBird.setAdapter(adapter);
+    }
+
+    public void onClickShare(View v)
+    {
+        Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
     }
 }

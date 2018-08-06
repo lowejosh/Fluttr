@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Tables.Bird;
@@ -106,7 +107,6 @@ public class ListBirdAdapter extends BaseAdapter implements ListAdapter {
                 mContext.startActivity(intent);
             }
         });
-
 
         return view;
     }
