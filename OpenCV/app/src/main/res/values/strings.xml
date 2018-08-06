@@ -31,4 +31,5 @@
     <string name="birds_in_backyards">Birds in Backyards</string>
     <string name="information">Information:</string>
     <string name="no_birds">You Haven\'t Found Any Birds Yet! Go Looking!</string>
+    <string name="share">Share Progress</string>
 </resources>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Button;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
 import com.example.charles.opencv.Database.BirdBankDatabase;
@@ -38,10 +39,13 @@ public class BirdBankActivity extends AppCompatActivity {
 
         //If no Birds have been found, display message
         TextView tv_no_birds = findViewById(R.id.no_birds);
+        Button btn_share = findViewById(R.id.btn_share);
         if (mList.size() == 0) {
             tv_no_birds.setVisibility(View.VISIBLE);
+            btn_share.setVisibility(View.GONE);
         } else {
             tv_no_birds.setVisibility(View.GONE);
+            btn_share.setVisibility(View.VISIBLE);
         }
 
         //Get list view

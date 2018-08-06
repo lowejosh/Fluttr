@@ -13,6 +13,14 @@
         style="@style/Title"
         android:visibility="gone"/>
 
+    <Button
+        android:id="@+id/btn_share"
+        style="@style/Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/share"
+        android:visibility="visible"/>
+
     <ListView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -26,5 +34,6 @@
         android:background="@color/appBackground">
 
     </ListView>
+
 
 </LinearLayout>
