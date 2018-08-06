@@ -1,5 +1,6 @@
 package com.example.charles.opencv.FeatureActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +21,11 @@ import java.util.List;
  * This activity is the self contained file for the Bird Bank Feature.
  */
 public class BirdBankActivity extends AppCompatActivity {
+
+    // temp global
+    List<Bird> mList = new ArrayList<>();
+    List<String> dateList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +33,7 @@ public class BirdBankActivity extends AppCompatActivity {
 
         // Init vars
         BirdBankDatabase db = new BirdBankDatabase(this);
-        List<Bird> mList = new ArrayList<>();
-        List<String> dateList = new ArrayList<>();
+
         try {
             mList = db.getSeenBirdList();
             dateList = db.getSeenBirdDateList();
@@ -59,6 +64,11 @@ public class BirdBankActivity extends AppCompatActivity {
 
     public void onClickShare(View v)
     {
-        Toast.makeText(this, "Test", Toast.LENGTH_LONG).show();
+        int birdsFound = mList.size();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I have identified " + birdsFound + " birds with Fluttr! {PLACEHOLDER}");
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
 }
