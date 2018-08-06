@@ -11,6 +11,7 @@ import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Tables.Bird;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +25,16 @@ public class BirdBankActivity extends AppCompatActivity {
 
         // Init vars
         BirdBankDatabase db = new BirdBankDatabase(this);
-        List<Bird> mList = db.getSeenBirdList();
-        List<String> dateList = db.getSeenBirdDateList();
+        List<Bird> mList = new ArrayList<>();
+        List<String> dateList = new ArrayList<>();
+        try {
+            mList = db.getSeenBirdList();
+            dateList = db.getSeenBirdDateList();
+        } catch(RuntimeException e) {
+            // If the table doesn't exist - create one
+            db.onCreate(db.getWritableDatabase());
+        }
+
 
         //If no Birds have been found, display message
         TextView tv_no_birds = findViewById(R.id.no_birds);
