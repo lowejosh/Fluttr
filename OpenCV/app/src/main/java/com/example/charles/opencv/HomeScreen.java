@@ -20,15 +20,13 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 public class HomeScreen extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
         FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         ViewFlipper slideShow = findViewById(R.id.slide_show);
 
