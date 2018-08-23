@@ -19,9 +19,7 @@ public class FeatureInstrumentedTest {
     }
 
     @Test
-    public void valueOfUnknown() {
-        Assert.assertEquals("Unknown", Feature.valueOf(Feature.UNKNOWN));
-    }
+    public void valueOfUnknown() { Assert.assertEquals("Unknown", Feature.valueOf(Feature.UNKNOWN)); }
 
     @Test
     public void valueOfOther() {
@@ -29,9 +27,7 @@ public class FeatureInstrumentedTest {
     }
 
     @Test
-    public void valueOfNegative() {
-        Assert.assertEquals("Unknown", Feature.valueOf(-1));
-    }
+    public void valueOfNegative() { Assert.assertEquals("Unknown", Feature.valueOf(Feature.UNKNOWN)); }
 
     @Test
     public void valueOfOutOfBounds() {
@@ -45,7 +41,7 @@ public class FeatureInstrumentedTest {
 
     @Test
     public void isUnknownFailure() {
-        Assert.assertFalse(Feature.isUnknown(1));
+        Assert.assertFalse(Feature.isUnknown(Feature.UNKNOWN));
     }
 
     @Test
@@ -55,6 +51,6 @@ public class FeatureInstrumentedTest {
 
     @Test
     public void isOtherFailure() {
-        Assert.assertFalse(Feature.isOther(1));
+        Assert.assertFalse(Feature.isOther(Feature.OTHER));
     }
 }
