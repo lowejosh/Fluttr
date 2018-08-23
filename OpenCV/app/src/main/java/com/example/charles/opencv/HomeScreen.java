@@ -12,16 +12,21 @@ import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 import com.example.charles.opencv.Tables.Bird;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Main Menu Controls
  */
 public class HomeScreen extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        mAuth = FirebaseAuth.getInstance();
 
         ViewFlipper slideShow = findViewById(R.id.slide_show);
 
