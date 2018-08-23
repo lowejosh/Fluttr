@@ -94,7 +94,7 @@ public class Bird {
      * @param context App Context
      * @return Image from file path in Bitmap form
      */
-    public Bitmap getBirdImage(Context context) {
+    public Bitmap getImage(Context context) {
         //Update image for ImageView
         try {
             return BitmapFactory.decodeStream(context.getAssets().open(image));

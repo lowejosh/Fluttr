@@ -155,7 +155,7 @@ public class BirdFinderActivity extends AppCompatActivity {
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
+        ivBirdImage.setImageBitmap(bird.getImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +204,7 @@ public class BirdFinderActivity extends AppCompatActivity {
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
+        ivBirdImage.setImageBitmap(bird.getImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -245,7 +245,7 @@ public class BirdFinderActivity extends AppCompatActivity {
                 Bird bird = dbHandler.getBird(birdIDs.get(birdOption));
 
                 //Update Views
-                ((ImageView) result[IMAGE]).setImageBitmap(bird.getBirdImage(getApplicationContext()));
+                ((ImageView) result[IMAGE]).setImageBitmap(bird.getImage(getApplicationContext()));
                 ((TextView) result[TEXT]).setText(bird.getName());
 
                 //Set Visibility

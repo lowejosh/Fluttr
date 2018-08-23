@@ -28,7 +28,7 @@ public class HomeScreen extends AppCompatActivity {
         for (int birdID = 1; birdID < 6; birdID++) {
             Bird bird = new BirdFinderDatabase(this).getBird(birdID);
             ImageView ivBird = new ImageView(slideShow.getContext());
-            ivBird.setImageBitmap(bird.getBirdImage(this));
+            ivBird.setImageBitmap(bird.getImage(this));
             slideShow.addView(ivBird);
         }
 

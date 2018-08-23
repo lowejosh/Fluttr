@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.Tables.Feature;
@@ -21,6 +22,33 @@ public class BirdFinderDatabase extends Database {
 
     public BirdFinderDatabase(Context context) {
         super(context);
+        loadFeatures();
+    }
+
+    private void loadFeatures() {
+        if (Feature.isLoaded())
+            return;
+
+        SparseArray<String> featureNames = new SparseArray<>();
+        SparseArray<String> featureImages = new SparseArray<>();
+
+        openDatabase();
+        Cursor cursor = rawQuery("SELECT * From Feature");
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            Log.i("BirdFinderDatabase", cursor.getString(1));
+
+            featureNames.put(cursor.getInt(0), cursor.getString(1));
+            featureImages.put(cursor.getInt(0), cursor.getString(2));
+
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        closeDatabase();
+
+        Feature.loadFeatures(featureNames, featureImages);
     }
 
     /**

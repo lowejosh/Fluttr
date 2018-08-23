@@ -38,6 +38,15 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
     }
 
     @Test
+    public void multiDatabaseCreation() {
+        //Checks if database was made in startup
+        BirdFinderDatabase db = new BirdFinderDatabase(InstrumentationRegistry.getTargetContext());
+        BirdFinderDatabase db2 = new BirdFinderDatabase(InstrumentationRegistry.getTargetContext());
+
+        assertTrue(true);
+    }
+
+    @Test
     public void getBirdSuccess() {
         Bird bird = db.getBird(1);
         assertEquals(1, bird.getBirdID());
