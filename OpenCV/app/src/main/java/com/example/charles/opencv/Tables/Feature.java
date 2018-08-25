@@ -32,16 +32,24 @@ public final class Feature {
         if (features.size() != images.size())
             throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Arrays are not the same size.");
 
-        try {
-            UNKNOWN = features.keyAt(features.indexOfValue("Unknown"));
-            OTHER   = features.keyAt(features.indexOfValue("Other"));
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Feature array does not contain and Unknown and Other option.");
+        for (int i = 0; i < features.size(); i++) {
+            if (features.valueAt(i).equals("Unknown"))
+                UNKNOWN = features.keyAt(i);
+            if (features.valueAt(i).equals("Other"))
+                OTHER = features.keyAt(i);
         }
+
+        if (UNKNOWN == null || OTHER == null)
+            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Feature array does not contain an Unknown or Other option.");
+
+        Log.i("Unknown", String.valueOf(UNKNOWN));
+        Log.i("Other", String.valueOf(OTHER));
 
         featureName  = features;
         featureImage = images;
         loaded       = true;
+
+        Log.i("Features", featureName.toString());
     }
 
     /**

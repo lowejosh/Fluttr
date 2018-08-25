@@ -74,7 +74,7 @@ public class BirdFinderActivity extends AppCompatActivity {
                 }
 
                 //Update BirdIDs and answers List
-                dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getFeature(), birdIDs);
+                dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getTable(), birdIDs);
                 answers.add(selectedFeature);
 
                 //Move to Next Stage
@@ -104,7 +104,7 @@ public class BirdFinderActivity extends AppCompatActivity {
         }
 
         //Get feature list
-        featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), birdIDs);
+        featureList = dbHandler.getListFeatures(currentQuestion.getTable(), birdIDs);
 
         //Check if enough features exist to warrant a question
         if (featureList.size() == 1) {

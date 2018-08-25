@@ -28,13 +28,6 @@ public class Question {
     }
 
     /**
-     * Get Feature Name of the Question inside the SQL Table
-     *
-     * @return Feature Name inside SQL Table
-     */
-    public String getFeature() {return getTable(); }
-
-    /**
      * Get the Question to be Asked
      *
      * @return Question Attached to Feature
