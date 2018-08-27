@@ -18,6 +18,7 @@ public final class Feature {
     private static SparseArray<String> featureName;
     private static SparseArray<String> featureImage;
     private static boolean loaded = false;
+    private static Bitmap noImage;
 
     public static void loadFeatures(SparseArray<String> features, SparseArray<String> images) {
         //Check if options array has been already loaded
@@ -88,15 +89,17 @@ public final class Feature {
         //Update image for ImageView
         try {
             return BitmapFactory.decodeStream(context.getAssets().open(featureImage.get(option)));
-        } catch (IOException unused) {
+        } catch (IOException | IllegalArgumentException unused) {
             //If bird image does not exist, display noImage file
+            Log.e("MainActivity", "Failed to load image: " + featureName.get(option));
+
             try {
-                return BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg"));
-            } catch (IOException ex){
+                Bitmap temp = BitmapFactory.decodeStream(context.getAssets().open("features/noImage.png"));
+                return temp;
+            } catch (IOException ex) {
                 Log.e("MainActivity", "noImage Failed to Load");
                 Log.e("MainActivity", ex.getMessage());
             }
-            Log.e("MainActivity", "Failed to load image: " + featureImage.get(option));
         }
 
         return null;

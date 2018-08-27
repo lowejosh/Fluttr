@@ -99,14 +99,15 @@ public class Bird {
         try {
             return BitmapFactory.decodeStream(context.getAssets().open(image));
         } catch (IOException unused) {
+            Log.e("MainActivity", "Failed to load image: " + image);
+
             //If bird image does not exist, display noImage file
             try {
                 return BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg"));
-            } catch (IOException ex){
+            } catch (IOException | IllegalArgumentException ex){
                 Log.e("MainActivity", "noImage Failed to Load");
                 Log.e("MainActivity", ex.getMessage());
             }
-            Log.e("MainActivity", "Failed to load image: " + image);
         }
 
         return null;
