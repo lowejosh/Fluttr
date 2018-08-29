@@ -88,7 +88,7 @@ public final class Feature {
 
         //Update image for ImageView
         try {
-            return BitmapFactory.decodeStream(context.getAssets().open(featureImage.get(option)));
+            return BitmapFactory.decodeStream(context.getAssets().open("features/" + featureImage.get(option)));
         } catch (IOException | IllegalArgumentException unused) {
             //If bird image does not exist, display noImage file
             Log.e("MainActivity", "Failed to load image: " + featureName.get(option) + " " + featureImage.get(option));
