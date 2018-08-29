@@ -98,7 +98,7 @@ public class Bird {
         //Update image for ImageView
         try {
             return BitmapFactory.decodeStream(context.getAssets().open(image));
-        } catch (IOException unused) {
+        } catch (IOException | IllegalArgumentException unused) {
             Log.e("MainActivity", "Failed to load image: " + image);
 
             //If bird image does not exist, display noImage file
