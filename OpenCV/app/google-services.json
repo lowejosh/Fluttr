@@ -103,11 +103,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "45765890518-7cccjgluo0fu1t09flbmtrclap9k75hh.apps.googleusercontent.com",
+          "client_id": "45765890518-6i8vi4fv92f8eklv9h76a870jq6d26tj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.charles.opencv",
-            "certificate_hash": "d744ae1cb4ccab0528473a35721c4dc6f73c4791"
+            "certificate_hash": "c440948b28173a56d85c46d7596e0515d8bd3511"
           }
         },
         {
