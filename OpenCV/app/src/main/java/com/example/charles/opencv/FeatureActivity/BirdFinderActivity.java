@@ -49,7 +49,7 @@ public class BirdFinderActivity extends AppCompatActivity {
      */
     private void twentyQuestions() {
         //Change view to twenty questions
-        setContentView(R.layout.birdfinder_v2);
+        setContentView(R.layout.birdfinder);
 
         //Get full list of birds and questions
         birdIDs = dbHandler.getBirdIDs();

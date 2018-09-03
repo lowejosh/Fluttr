@@ -47,179 +47,468 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
-                android:weightSum="1"
-                android:id="@+id/layout_1">
+                android:weightSum="4"
+                android:baselineAligned="false">
 
-                <Button
+                <LinearLayout
                     android:id="@+id/btn_option_0"
-                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="2sp"
-                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:orientation="vertical"
                     android:background="@color/background"
-                    android:visibility="invisible" />
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Prominent Bill With More"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_2"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_3"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                android:weightSum="4"
+                android:baselineAligned="false">
 
-                <Button
+                <LinearLayout
                     android:id="@+id/btn_option_4"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_5"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_6"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_7"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                android:weightSum="4"
+                android:baselineAligned="false">
 
-                <Button
+                <LinearLayout
                     android:id="@+id/btn_option_8"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_9"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_10"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_11"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2sp"
-                android:weightSum="1">
+                android:weightSum="4"
+                android:baselineAligned="false">
 
-                <Button
+                <LinearLayout
                     android:id="@+id/btn_option_12"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:layout_marginEnd="2sp"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
 
-                <Button
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:id="@+id/btn_option_13"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:background="@color/background"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:visibility="invisible"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btn_option_14"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btn_option_15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:onClick="selectOptionOnClick">
+
+                    <ImageView
+                        android:tag="Image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/image_of_feature_option"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:tag="Text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"/>
+
+                </LinearLayout>
             </LinearLayout>
             <Button
                 android:layout_width="match_parent"
