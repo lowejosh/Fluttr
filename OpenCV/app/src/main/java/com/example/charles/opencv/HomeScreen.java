@@ -34,15 +34,6 @@ public class HomeScreen extends AppCompatActivity {
 
         slideShow.setFlipInterval(5000);
         slideShow.startFlipping();
-
-        // Switch to camera activity upon click of button
-        /*Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener( new View.OnClickListener()
-        {
-            public void onClick (View v){
-                startActivity(new Intent(HomeScreen.this, MainActivity.class));
-            }
-        });*/ // currently removed
     }
 
     /**
