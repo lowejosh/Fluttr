@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.Tables.Feature;
@@ -21,6 +22,32 @@ public class BirdFinderDatabase extends Database {
 
     public BirdFinderDatabase(Context context) {
         super(context);
+        loadFeatures();
+    }
+
+    private void loadFeatures() {
+        if (Feature.isLoaded())
+            return;
+
+        SparseArray<String> featureNames = new SparseArray<>();
+        SparseArray<String> featureImages = new SparseArray<>();
+
+        openDatabase();
+        Log.d("loadFeatures", "SELECT * From Feature");
+        Cursor cursor = rawQuery("SELECT * From Feature");
+        cursor.moveToFirst();
+
+        while (!cursor.isAfterLast()) {
+            featureNames.put(cursor.getInt(0), cursor.getString(1));
+            featureImages.put(cursor.getInt(0), cursor.getString(2));
+
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        closeDatabase();
+
+        Feature.loadFeatures(featureNames, featureImages);
     }
 
     /**
@@ -32,6 +59,7 @@ public class BirdFinderDatabase extends Database {
         List<Integer> birdIDs = new ArrayList<>();
 
         openDatabase();
+        Log.d("getBirdIDs", "SELECT BirdID FROM Birds");
         Cursor cursor = rawQuery("SELECT BirdID FROM Birds");
         cursor.moveToFirst();
 
@@ -65,8 +93,7 @@ public class BirdFinderDatabase extends Database {
         query.append(" WHERE ");
 
         if (!Feature.isOther(goalFeature)) {
-            query.append(feature);
-            query.append(" = ");
+            query.append("FeatureID = ");
             query.append(goalFeature);
             query.append(" AND ");
         }
@@ -79,6 +106,7 @@ public class BirdFinderDatabase extends Database {
         }
 
         openDatabase();
+        Log.d("updateBirdIDs", query.toString());
         Cursor cursor = rawQuery(query.toString());
         cursor.moveToFirst();
 
@@ -105,6 +133,7 @@ public class BirdFinderDatabase extends Database {
         Question question;
 
         openDatabase();
+        Log.d("getListQuestions", "SELECT * FROM Question");
         Cursor cursor = rawQuery("SELECT * FROM Question");
         cursor.moveToFirst();
 
@@ -123,11 +152,11 @@ public class BirdFinderDatabase extends Database {
     /**
      * Get the list of possible features from a table with the list of BirdIDs
      *
-     * @param feature Table
+     * @param table Table
      * @param birdIDs List of BirdIDs
      * @return List of Features
      */
-    public List<Integer> getListFeatures(String feature, List<Integer> birdIDs) {
+    public List<Integer> getListFeatures(String table, List<Integer> birdIDs) {
         List<Integer> featureList = new ArrayList<>();
 
         //If birdID list is empty, return empty feature list
@@ -139,13 +168,14 @@ public class BirdFinderDatabase extends Database {
         featureList.add(Feature.UNKNOWN);
 
         //Create query to find all features that any bird in the list of birdIDs has
-        String query = "SELECT DISTINCT(" + feature + ") FROM " + feature +
-                " WHERE BirdID IN (VALUES" + listIDs(birdIDs) + " ORDER BY " + feature;
+        String query = "SELECT DISTINCT(FeatureID) FROM " + table +
+                " WHERE BirdID IN (VALUES" + listIDs(birdIDs) + " ORDER BY FeatureID";
 
         //Open Database and create cursor
         openDatabase();
         Cursor cursor;
         try {
+            Log.d("getListFeatures", query);
             cursor = rawQuery(query);
             cursor.moveToFirst();
 
@@ -158,12 +188,13 @@ public class BirdFinderDatabase extends Database {
             cursor.close();
         } catch (SQLiteException ex) {
             //If SQL table does not exist, log error and return empty feature list
-            Log.e("Database", "Invalid Table Selected: " + feature);
+            Log.e("Database", "Invalid Table Selected: " + table);
             return new ArrayList<>();
         }
 
         //Determine if a bird has none of the listed features
-        cursor = rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + feature + ")");
+        Log.d("getListFeatures", "SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + table + ")");
+        cursor = rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + table + ")");
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()) {
@@ -202,12 +233,13 @@ public class BirdFinderDatabase extends Database {
         int maxNumBirds = 0;
         List<Question> questionsToRemove = new ArrayList<>();
 
+        Log.i("getBestOption", questions.toString());
 
         openDatabase();
         for (Question question : questions) {
             try {
-                Cursor cursor = rawQuery("SELECT Count(DISTINCT(" + question.getTable() +
-                        ")) FROM " + question.getTable() + whereStatement);
+                Log.d("getBestOption", "SELECT Count(DISTINCT(FeatureID)) FROM " + question.getTable() + whereStatement);
+                Cursor cursor = rawQuery("SELECT Count(DISTINCT(FeatureID)) FROM " + question.getTable() + whereStatement);
 
                 cursor.moveToFirst();
                 int count = cursor.getInt(0);
@@ -337,13 +369,13 @@ public class BirdFinderDatabase extends Database {
 
             try {
                 //EG. SELECT birdID FROM Colour WHERE Colour == 24
-                Cursor cursor = rawQuery("SELECT birdID FROM " + question.getTable() +
-                        " WHERE " + question.getFeature() + " == " + answer);
+                Log.d("getMatchingBirdIDs", "SELECT birdID FROM " + question.getTable() + " WHERE FeatureID == " + answer);
+                Cursor cursor = rawQuery("SELECT birdID FROM " + question.getTable() + " WHERE FeatureID == " + answer);
 
                 //Add all matching birdIDs
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
-                    match.add((Integer) cursor.getInt(0));
+                    match.add(cursor.getInt(0));
 
                     cursor.moveToNext();
                 }

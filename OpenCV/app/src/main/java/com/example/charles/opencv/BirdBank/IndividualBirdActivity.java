@@ -47,6 +47,6 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdSeen.setText("Identified on " + date + "\n");
         mBirdMinSize.setText("Min size: " + bird.getMinSize());
         mBirdMaxSize.setText("Max Size: " + bird.getMaxSize());
-        mBirdImage.setImageBitmap(bird.getBirdImage(this));
+        mBirdImage.setImageBitmap(bird.getImage(this));
     }
 }

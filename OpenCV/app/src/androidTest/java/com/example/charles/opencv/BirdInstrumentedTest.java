@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @RunWith(AndroidJUnit4.class)
 public class
-DuckInstrumentedTest extends ActivityTestCase {
+BirdInstrumentedTest extends ActivityTestCase {
     private Context context;
     private Bird bird;
     private int ID = 1;
@@ -63,12 +63,12 @@ DuckInstrumentedTest extends ActivityTestCase {
     }
 
     public void birdGetImageBitmap() throws IOException {
-        assertEquals(BitmapFactory.decodeStream(context.getAssets().open("image/" + image)), bird.getBirdImage(context));
+        assertEquals(BitmapFactory.decodeStream(context.getAssets().open("image/" + image)), bird.getImage(context));
     }
 
     public void birdGetImageBitmapBadImage() throws IOException {
         bird = new Bird(ID, name, "", atlasNo, minSize, maxSize);
-        assertEquals(BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg")), bird.getBirdImage(context));
+        assertEquals(BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg")), bird.getImage(context));
     }
 
     @Test

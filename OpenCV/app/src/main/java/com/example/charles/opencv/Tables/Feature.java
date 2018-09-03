@@ -1,69 +1,64 @@
 package com.example.charles.opencv.Tables;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.util.SparseArray;
 
+import java.io.IOException;
+
 /**
- * This class allows the conversion from database ENUM values to their Meaning
+ * This class allows the conversion from database ENUM values to their meaning. To use this class, run loadFeatures() when the database is loaded.
  */
 public final class Feature {
-    private static SparseArray<String> OPTION = new SparseArray<>();
-    public static final Integer UNKNOWN = -1;
-    public static final Integer OTHER = 0;
+    public static Integer UNKNOWN;
+    public static Integer OTHER;
 
-    static {
-        OPTION.put(-1, "Unknown");
-        OPTION.put(0, "Other");
-        OPTION.put(1, "Prominent");
-        OPTION.put(2, "Curved");
-        OPTION.put(3, "Long");
-        OPTION.put(4, "Obvious Coloured Eye Ring");
-        OPTION.put(5, "Obvious White Patch");
-        OPTION.put(6, "Obvious Coloured Patch");
-        OPTION.put(7, "Brightly Coloured");
-        OPTION.put(8, "Shield");
-        OPTION.put(9, "Distinctively Masked");
-        OPTION.put(10, "Crest");
-        OPTION.put(11, "Topknot");
-        OPTION.put(12, "Knob");
-        OPTION.put(13, "Lobe");
-        OPTION.put(14, "Obvious Streaks");
-        OPTION.put(15, "Spots");
-        OPTION.put(16, "Showy");
-        OPTION.put(17, "Bare Skin");
-        OPTION.put(18, "Wattles");
-        OPTION.put(19, "Tufts");
-        OPTION.put(20, "Plumes");
-        OPTION.put(21, "Forked");
-        OPTION.put(22, "Fanned");
-        OPTION.put(23, "Black");
-        OPTION.put(24, "Blue");
-        OPTION.put(25, "Brown");
-        OPTION.put(26, "Green");
-        OPTION.put(27, "Grey");
-        OPTION.put(28, "Orange");
-        OPTION.put(29, "Pink");
-        OPTION.put(30, "Purple");
-        OPTION.put(31, "Red");
-        OPTION.put(32, "Glossy Sheen");
-        OPTION.put(33, "Metallic Sheen");
-        OPTION.put(34, "White");
-        OPTION.put(35, "Yellow");
-        OPTION.put(36, "Duck");
-        OPTION.put(37, "Fowl");
-        OPTION.put(38, "Heavyset");
-        OPTION.put(39, "Heron");
-        OPTION.put(40, "Honey Eater");
-        OPTION.put(41, "Kingfisher");
-        OPTION.put(42, "Medium Shorebird");
-        OPTION.put(43, "Large Shorebird");
-        OPTION.put(44, "Owl");
-        OPTION.put(45, "Parrot");
-        OPTION.put(46, "Pigeon");
-        OPTION.put(47, "Raptor");
-        OPTION.put(48, "Seagull");
-        OPTION.put(49, "Small Bird with Tail Down");
-        OPTION.put(50, "Small Bird with Tail Up");
+    private static SparseArray<String> featureName;
+    private static SparseArray<String> featureImage;
+    private static boolean loaded = false;
+    private static Bitmap noImage;
+
+    public static void loadFeatures(SparseArray<String> features, SparseArray<String> images) {
+        //Check if options array has been already loaded
+        if (loaded)
+            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Do not load feature array multiple times.");
+
+        //Check if there is at minimum an unknown, other, and another feature
+        if (features.size() < 3)
+            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Feature array does not contain any features.");
+
+        //Check both arrays are the same size
+        if (features.size() != images.size())
+            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Arrays are not the same size.");
+
+        for (int i = 0; i < features.size(); i++) {
+            if (features.valueAt(i).equals("Unknown"))
+                UNKNOWN = features.keyAt(i);
+            if (features.valueAt(i).equals("Other"))
+                OTHER = features.keyAt(i);
+        }
+
+        if (UNKNOWN == null || OTHER == null)
+            throw new RuntimeException("Feature [Feature(SparseArray<String> features)]: Feature array does not contain an Unknown or Other option.");
+
+        Log.i("Unknown", String.valueOf(UNKNOWN));
+        Log.i("Other", String.valueOf(OTHER));
+
+        featureName  = features;
+        featureImage = images;
+        loaded       = true;
+
+        Log.i("Features", featureName.toString());
+    }
+
+    /**
+     * Returns true if the feature list has been loaded.
+     * @return True if the feature list has been loaded
+     */
+    public static boolean isLoaded() {
+        return loaded;
     }
 
     /**
@@ -73,14 +68,45 @@ public final class Feature {
      * @return Value of the Feature
      */
     public static String valueOf(Integer option) {
-        //If option is too large, return UNKNOWN
-        if (option >= OPTION.size()) {
-            Log.d("Feature", "Value Not Found");
-            return "Unknown";
-        }
+        if (!loaded)
+            throw new RuntimeException("Feature [valueOf(Integer option)]: Feature set not loaded yet.");
 
         //Return Value of the Feature, if None Exists Return UNKNOWN
-        return OPTION.get(option, "Unknown");
+        return featureName.get(option, "Unknown");
+    }
+
+    /**
+     * Get an image of the feature.
+     *
+     * @param context Program context
+     * @param option Feature Option
+     * @return Image of the Feature
+     */
+    public static Bitmap getImage(Context context, Integer option) {
+        if (!loaded)
+            throw new RuntimeException("Feature [valueOf(Integer option)]: Feature set not loaded yet.");
+
+        //Update image for ImageView
+        try {
+            return BitmapFactory.decodeStream(context.getAssets().open("features/" + featureImage.get(option)));
+        } catch (IOException | IllegalArgumentException unused) {
+            //If bird image does not exist, display noImage file
+            Log.e("MainActivity", "Failed to load image: " + featureName.get(option) + " " + featureImage.get(option));
+
+            try {
+                //Bitmap temp = BitmapFactory.decodeStream(context.getAssets().open("features/noImage.png"));
+                //return temp;
+                if (noImage == null)
+                    noImage = BitmapFactory.decodeStream(context.getAssets().open("features/noImage.png"));
+
+                return noImage;
+            } catch (IOException ex) {
+                Log.e("MainActivity", "noImage Failed to Load");
+                Log.e("MainActivity", ex.getMessage());
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -90,6 +116,9 @@ public final class Feature {
      * @return True if the feature is an "unknown" feature
      */
     public static boolean isUnknown(Integer feature) {
+        if (!loaded)
+            throw new RuntimeException("Feature [isUnknown(Integer feature)]: Feature set not loaded yet.");
+
         return feature.equals(UNKNOWN);
     }
 
@@ -100,6 +129,22 @@ public final class Feature {
      * @return True if the feature is an "other" feature
      */
     public static boolean isOther(Integer feature) {
+        if (!loaded)
+            throw new RuntimeException("Feature [isOther(Integer feature)]: Feature set not loaded yet.");
+
         return feature.equals(OTHER);
+    }
+
+    /**
+     * DO NOT USE THIS FUNCTION. DESIGNED FOR JUNIT TESTING ONLY.
+     * Resets class to unset state so it can be loaded again.
+     */
+    public static void reset() {
+        if (loaded) {
+            featureName.clear();
+            UNKNOWN = null;
+            OTHER   = null;
+            loaded  = false;
+        }
     }
 }

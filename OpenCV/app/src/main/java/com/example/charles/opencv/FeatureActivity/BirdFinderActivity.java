@@ -29,7 +29,7 @@ public class BirdFinderActivity extends AppCompatActivity {
     private List<Question> questionsAsked, questionsLeft;
     private Question currentQuestion;
     private int questionNo;
-    private final int MAX_NUM_FEATURES = 14;
+    private final int MAX_NUM_FEATURES = 16;
     public static final int TOP_RESULT_NUM_BIRDS = 5;
     private Context mContext = this;
 
@@ -49,7 +49,7 @@ public class BirdFinderActivity extends AppCompatActivity {
      */
     private void twentyQuestions() {
         //Change view to twenty questions
-        setContentView(R.layout.birdfinder);
+        setContentView(R.layout.birdfinder_v2);
 
         //Get full list of birds and questions
         birdIDs = dbHandler.getBirdIDs();
@@ -57,31 +57,6 @@ public class BirdFinderActivity extends AppCompatActivity {
         questionsAsked = new ArrayList<>();
         answers = new ArrayList<>();
         questionNo = 0;
-
-        //Set Onclick Events for Option Buttons
-        for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
-            Button btn = findViewById(getHomeButtonID(btnOption));
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                //Get Selected Feature
-                Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
-
-                //Move question from questionsLeft to questionsAsked
-                questionsLeft.remove(currentQuestion);
-                if (!Feature.isUnknown(selectedFeature)) {
-                    questionsAsked.add(currentQuestion);
-                }
-
-                //Update BirdIDs and answers List
-                dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getFeature(), birdIDs);
-                answers.add(selectedFeature);
-
-                //Move to Next Stage
-                nextStage();
-                }
-            });
-        }
 
         //Ask question
         nextQuestion();
@@ -104,7 +79,7 @@ public class BirdFinderActivity extends AppCompatActivity {
         }
 
         //Get feature list
-        featureList = dbHandler.getListFeatures(currentQuestion.getFeature(), birdIDs);
+        featureList = dbHandler.getListFeatures(currentQuestion.getTable(), birdIDs);
 
         //Check if enough features exist to warrant a question
         if (featureList.size() == 1) {
@@ -123,7 +98,24 @@ public class BirdFinderActivity extends AppCompatActivity {
 
         //Make relevant buttons visible
         for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
-            Button btn = findViewById(getHomeButtonID(btnOption));
+            LinearLayout option = findViewById(getLayoutOptionID(btnOption));
+            ImageView image = option.findViewWithTag("Image");
+            TextView title = option.findViewWithTag("Text");
+
+            //If there is a feature for the button, show the feature and make it visible
+            if (btnOption < featureList.size()) {
+                image.setImageBitmap(Feature.getImage(mContext, featureList.get(btnOption)));
+                title.setText(Feature.valueOf(featureList.get(btnOption)));
+                option.setVisibility(View.VISIBLE);
+            } else {
+                option.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        /*
+        //Make relevant buttons visible
+        for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
+            Button btn = findViewById(getLayoutOptionID(btnOption));
 
             //If there is a feature for the button, show the feature and make it visible
             if (btnOption < featureList.size()) {
@@ -132,7 +124,7 @@ public class BirdFinderActivity extends AppCompatActivity {
             } else {
                 btn.setVisibility(View.INVISIBLE);
             }
-        }
+        }*/
     }
 
     /**
@@ -155,7 +147,7 @@ public class BirdFinderActivity extends AppCompatActivity {
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
+        ivBirdImage.setImageBitmap(bird.getImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +196,7 @@ public class BirdFinderActivity extends AppCompatActivity {
 
         //Update Views
         tvBirdName.setText(bird.getName());
-        ivBirdImage.setImageBitmap(bird.getBirdImage(getApplicationContext()));
+        ivBirdImage.setImageBitmap(bird.getImage(getApplicationContext()));
 
         //Restart Game
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -245,7 +237,7 @@ public class BirdFinderActivity extends AppCompatActivity {
                 Bird bird = dbHandler.getBird(birdIDs.get(birdOption));
 
                 //Update Views
-                ((ImageView) result[IMAGE]).setImageBitmap(bird.getBirdImage(getApplicationContext()));
+                ((ImageView) result[IMAGE]).setImageBitmap(bird.getImage(getApplicationContext()));
                 ((TextView) result[TEXT]).setText(bird.getName());
 
                 //Set Visibility
@@ -295,7 +287,7 @@ public class BirdFinderActivity extends AppCompatActivity {
      * @param optionNo Option number (0-13)
      * @return ID for use in findViewById()
      */
-    private int getHomeButtonID(int optionNo) {
+    private int getLayoutOptionID(int optionNo) {
         return getResources().getIdentifier("btn_option_" + optionNo, "id", getPackageName());
     }
 
@@ -308,7 +300,7 @@ public class BirdFinderActivity extends AppCompatActivity {
     private int getHomeButtonOption(int id) {
         //Match id against all option buttons and return option number
         for (int btnOption = 0; btnOption < MAX_NUM_FEATURES; btnOption++) {
-            if (id == getHomeButtonID(btnOption)) {
+            if (id == getLayoutOptionID(btnOption)) {
                 return btnOption;
             }
         }
@@ -349,6 +341,24 @@ public class BirdFinderActivity extends AppCompatActivity {
         return -1;
     }
 
+    public void selectOptionOnClick(View v) {
+        //Get Selected Feature
+        Integer selectedFeature = featureList.get(getHomeButtonOption(v.getId()));
+
+        //Move question from questionsLeft to questionsAsked
+        questionsLeft.remove(currentQuestion);
+        if (!Feature.isUnknown(selectedFeature)) {
+            questionsAsked.add(currentQuestion);
+        }
+
+        //Update BirdIDs and answers List
+        dbHandler.updateBirdIDs(selectedFeature, currentQuestion.getTable(), birdIDs);
+        answers.add(selectedFeature);
+
+        //Move to Next Stage
+        nextStage();
+    }
+
     /**
      * OnClick function for image and text views in bf_topresults
      *
@@ -381,7 +391,6 @@ public class BirdFinderActivity extends AppCompatActivity {
         showFailure();
     }
 
-
     /**
      * Adds birdID to birdSeen table
      * @param birdID ID of the bird identified
@@ -398,7 +407,6 @@ public class BirdFinderActivity extends AppCompatActivity {
             }
         }
     }
-
 
     /**
      * Customizable Toast message
