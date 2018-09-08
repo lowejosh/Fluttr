@@ -22,7 +22,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newtheme);
+        setContentView(R.layout.home);
 
         updateImage((ImageView)findViewById(R.id.bird_ID_image), "Brain.png");
         updateImage((ImageView)findViewById(R.id.bird_finder_image), "Bird Finder.png");
