@@ -1,17 +1,18 @@
 package com.example.charles.opencv;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ViewFlipper;
 
-import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
-import com.example.charles.opencv.Tables.Bird;
+
+import java.io.IOException;
 
 /**
  * Main Menu Controls
@@ -21,9 +22,17 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.newtheme);
 
-        ViewFlipper slideShow = findViewById(R.id.slide_show);
+        updateImage((ImageView)findViewById(R.id.bird_ID_image), "Brain.png");
+        updateImage((ImageView)findViewById(R.id.bird_finder_image), "Bird Finder.png");
+        updateImage((ImageView)findViewById(R.id.bird_bank_image), "Bank 2.png");
+        updateImage((ImageView)findViewById(R.id.bird_news_image), "News.png");
+        updateImage((ImageView)findViewById(R.id.settings_image), "Settings 1.png");
+        updateImage((ImageView)findViewById(R.id.achievement_image), "Achievements.png");
+        updateImage((ImageView)findViewById(R.id.profile_image), "Profile.png");
+
+        /*ViewFlipper slideShow = findViewById(R.id.slide_show);
 
         for (int birdID = 1; birdID < 6; birdID++) {
             Bird bird = new BirdFinderDatabase(this).getBird(birdID);
@@ -33,7 +42,16 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         slideShow.setFlipInterval(5000);
-        slideShow.startFlipping();
+        slideShow.startFlipping();*/
+    }
+
+    private void updateImage(ImageView v, String filename) {
+        //Update image for ImageView
+        try {
+            v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
+        } catch (IOException | IllegalArgumentException unused) {
+            Log.e("MainActivity", "Failed to load image: " + "icons/" + filename);
+        }
     }
 
     /**
