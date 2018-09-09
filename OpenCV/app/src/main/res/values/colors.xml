@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#000</color>
+    <color name="white">#FFF</color>
     <color name="appBackground">#ffeada</color>
     <color name="background">#fff2e8</color>
     <color name="text">#101010</color>
@@ -10,4 +11,5 @@
     <color name="negative_btn">#CC0000</color>
     <color name="negative_pressed_btn">#7F0000</color>
     <color name="negative_outline_btn">#990000</color>
+    <color name="title_color">#908981</color>
 </resources>

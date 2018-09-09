@@ -5,6 +5,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
 import com.example.charles.opencv.Tables.Bird;
+import com.example.charles.opencv.Tables.Feature;
 import com.example.charles.opencv.Tables.Question;
 import com.example.charles.opencv.Database.BirdFinderDatabase;
 
@@ -34,6 +35,15 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
     @Test
     public void aaaDatabaseCreation() {
         //Checks if database was made in startup
+        assertTrue(true);
+    }
+
+    @Test
+    public void multiDatabaseCreation() {
+        //Checks if database was made in startup
+        BirdFinderDatabase db = new BirdFinderDatabase(InstrumentationRegistry.getTargetContext());
+        BirdFinderDatabase db2 = new BirdFinderDatabase(InstrumentationRegistry.getTargetContext());
+
         assertTrue(true);
     }
 
@@ -71,7 +81,9 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Prominent Bill
         String feature = "Bill";
-        int goalFeature = 1;
+        int goalFeature = 20;
+
+        //List of successful birds
         Integer success = 2; //Australasian Shoveler
 
         //Update bird list
@@ -90,9 +102,11 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         birdIDs.add(2); //Australasian Shoveler
         birdIDs.add(3); //Australian Shelduck
 
-        //Prominent Bill
+        //Black Colour
         String feature = "Colour";
-        int goalFeature = 23;
+        int goalFeature = 44;
+
+        //List of successful birds
         List<Integer> success = new ArrayList<>();
         success.add(1);
         success.add(2);
@@ -135,7 +149,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Prominent Bill
         String feature = "Bill";
-        int goalFeature = 1;
+        int goalFeature = 20;
 
         //Invalid Bird
         db.updateBirdIDs(goalFeature, feature, birdIDs);
@@ -179,7 +193,9 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Prominent Bill
         String feature = "Bill";
-        int goalFeature = -1; //Unknown
+        int goalFeature = Feature.UNKNOWN; //Unknown
+
+        //List of successful birds
         Integer success = 1; //Australasian Shoveler
 
         //Update bird list
@@ -203,17 +219,28 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Success Features
         List<Integer> success = new ArrayList<>();
-        success.add(-1); //Other
-        success.add(1);  //Prominent
-        success.add(2);  //Curved
-        success.add(3);  //Long
+        success.add(Feature.OTHER); //Other
+        success.add(Feature.UNKNOWN); //Unknown
+        success.add(20);  //Prominent
+        success.add(21);  //Curved
+        success.add(22);  //Long
 
         //Get list of features
         List<Integer> features = db.getListFeatures(feature, birdIDs);
 
+        assertEquals(success.size(), features.size());
+
         //Match features in order
         for (int featureID = 0; featureID < success.size(); featureID++) {
-            assertEquals(success.get(featureID), features.get(featureID));
+            boolean found = false;
+
+            for (int listID = 0; listID < features.size(); listID++) {
+                if (success.get(featureID).equals(features.get(listID))) {
+                    found = true;
+                }
+            }
+
+            assertTrue(found);
         }
     }
 
@@ -230,17 +257,28 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Success Features
         List<Integer> success = new ArrayList<>();
-        success.add(-1); //Other
-        success.add(1);  //Prominent
-        success.add(2);  //Curved
-        success.add(3);  //Long
+        success.add(Feature.OTHER); //Other
+        success.add(Feature.UNKNOWN); //Unknown
+        success.add(20);  //Prominent
+        success.add(21);  //Curved
+        success.add(22);  //Long
 
         //Get list of features
         List<Integer> features = db.getListFeatures(feature, birdIDs);
 
+        assertEquals(success.size(), features.size());
+
         //Match features in order
         for (int featureID = 0; featureID < success.size(); featureID++) {
-            assertEquals(success.get(featureID), features.get(featureID));
+            boolean found = false;
+
+            for (int listID = 0; listID < features.size(); listID++) {
+                if (success.get(featureID).equals(features.get(listID))) {
+                    found = true;
+                }
+            }
+
+            assertTrue(found);
         }
     }
 
@@ -270,17 +308,27 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
 
         //Success Features
         List<Integer> success = new ArrayList<>();
-        success.add(-1); //Other
-        success.add(1);  //Prominent
-        success.add(2);  //Curved
-        success.add(3);  //Long
+        success.add(Feature.UNKNOWN); //Unknown
+        success.add(20);  //Prominent
+        success.add(21);  //Curved
+        success.add(22);  //Long
 
         //Get list of features
         List<Integer> features = db.getListFeatures(feature, birdIDs);
 
+        assertEquals(success.size(), features.size());
+
         //Match features in order
         for (int featureID = 0; featureID < success.size(); featureID++) {
-            assertEquals(success.get(featureID), features.get(featureID));
+            boolean found = false;
+
+            for (int listID = 0; listID < features.size(); listID++) {
+                if (success.get(featureID).equals(features.get(listID))) {
+                    found = true;
+                }
+            }
+
+            assertTrue(found);
         }
     }
 
@@ -425,8 +473,8 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         questions.add(new Question("Eye", ""));
 
         List<Integer> answers = new ArrayList<>();
-        answers.add(23);
-        answers.add(4);
+        answers.add(44);
+        answers.add(25);
 
         List<Integer> birds = db.getClosestBirds(questions, answers, 2);
         Integer success = 3;
@@ -455,8 +503,8 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         questions.add(new Question("Bill", ""));
 
         List<Integer> answers = new ArrayList<>();
-        answers.add(34); //White
-        answers.add(2);  //Curved
+        answers.add(55); //White
+        answers.add(21);  //Curved
 
         List<Integer> birds = db.getClosestBirds(questions, answers, 2);
 
@@ -500,8 +548,8 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         questions.add(new Question("Eye", ""));
 
         List<Integer> answers = new ArrayList<>();
-        answers.add(23);
-        answers.add(4);
+        answers.add(44);
+        answers.add(25);
 
         List<Integer> birds = db.getClosestBirds(questions, answers, -1);
         Integer success = 3;
@@ -551,8 +599,8 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         questions.add(new Question("Eye", ""));
 
         List<Integer> answers = new ArrayList<>();
-        answers.add(23);
-        answers.add(4);
+        answers.add(44);
+        answers.add(25);
 
         List<Integer> birds = db.getClosestBirds(questions, answers, null);
         Integer success = 3;

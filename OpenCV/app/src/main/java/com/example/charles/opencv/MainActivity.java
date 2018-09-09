@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.charles.opencv.Gallery.BaseFragment;
 import com.example.charles.opencv.Gallery.GalleryFragment;
 
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements BaseFragment.OnFr
     Button clickimage;
     Button uploadphoto;
     Button viewgallery;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

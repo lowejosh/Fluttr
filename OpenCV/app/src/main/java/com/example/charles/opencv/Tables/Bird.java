@@ -94,19 +94,20 @@ public class Bird {
      * @param context App Context
      * @return Image from file path in Bitmap form
      */
-    public Bitmap getBirdImage(Context context) {
+    public Bitmap getImage(Context context) {
         //Update image for ImageView
         try {
             return BitmapFactory.decodeStream(context.getAssets().open(image));
-        } catch (IOException unused) {
+        } catch (IOException | IllegalArgumentException unused) {
+            Log.e("MainActivity", "Failed to load image: " + image);
+
             //If bird image does not exist, display noImage file
             try {
                 return BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg"));
-            } catch (IOException ex){
+            } catch (IOException | IllegalArgumentException ex){
                 Log.e("MainActivity", "noImage Failed to Load");
                 Log.e("MainActivity", ex.getMessage());
             }
-            Log.e("MainActivity", "Failed to load image: " + image);
         }
 
         return null;

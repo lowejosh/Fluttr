@@ -33,4 +33,19 @@
     <string name="no_birds">You Haven\'t Found Any Birds Yet! Go Looking!</string>
     <string name="share">Share Progress</string>
     <string name="send_to">Sending to</string>
+    <string name="image_of_feature_option">Image of Feature Option</string>
+    <string name="birdAIDescription">Using machine learning to determine the species of bird from an image.</string>
+    <string name="visual_ai_title">Visual AI</string>
+    <string name="visual_ai_description">Determine your bird through AI</string>
+    <string name="bird_finder_title">Bird Finder</string>
+    <string name="bird_bank_title">Bird Bank</string>
+    <string name="bird_finder_description">Find the bird you are thinking of based off a series of questions.</string>
+    <string name="bird_bank_description">List of all birds you have found.</string>
+    <string name="birds_news_title">Top Bird News</string>
+    <string name="birds_news_description">Birds News</string>
+    <string name="settings_title">Settings</string>
+    <string name="achievements_title">Achievements</string>
+    <string name="profile_title">Profile</string>
+    <string name="settings_description">User Settings</string>
+    <string name="achievements_description">User Achievements</string>
 </resources>

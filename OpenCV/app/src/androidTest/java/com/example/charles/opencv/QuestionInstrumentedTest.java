@@ -29,11 +29,6 @@ public class QuestionInstrumentedTest {
     }
 
     @Test
-    public void getFeatureSuccess() {
-        Assert.assertEquals(table, question.getFeature());
-    }
-
-    @Test
     public void getQuestionSuccess() {
         Assert.assertEquals(questionToAsk, question.getQuestion());
     }

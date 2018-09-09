@@ -1,100 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/appBackground">
+    android:layout_height="wrap_content">
 
-    <TextView
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_home_title"
-        android:text="@string/app_title"
-        style="@style/Title"/>
-
-    <ViewFlipper
-        android:id="@+id/slide_show"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/fragment_home_title"
         android:background="@color/appBackground"
-        android:inAnimation="@anim/slide_in_right"
-        android:outAnimation="@anim/slide_out_left" />
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_below="@+id/slide_show"
-        android:layout_above="@+id/main_settings_list"
-        android:orientation="vertical"
-        android:background="@color/appBackground"
-        android:id="@+id/main_feature_list"
-        android:weightSum="3">
-
-        <Button
-            android:id="@+id/btn_question"
-            style="?android:attr/borderlessButtonStyle"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/bird_finder_btn"
-            android:onClick="finderOnClick"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="20sp"
+            android:text="@string/app_title"
+            android:textColor="@color/title_color"
+            android:textSize="42sp" />
 
-        <Button
-            android:id="@+id/btn_Image"
-            style="?android:attr/borderlessButtonStyle"
+        <RelativeLayout
+            android:id="@+id/birdID"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="2sp"
-            android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/bird_identifier_btn"
-            android:onClick="identifierOnClick"/>
+            android:layout_height="200sp"
+            android:background="@color/appBackground"
+            android:gravity="center"
+            android:onClick="identifierOnClick">
 
-        <Button
-            android:id="@+id/btn_bird_bank"
-            style="?android:attr/borderlessButtonStyle"
+            <ImageView
+                android:id="@+id/bird_ID_image"
+                android:layout_width="175sp"
+                android:layout_height="175sp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/birdAIDescription"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/bird_ID_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_alignBottom="@+id/bird_ID_image"
+                android:text="@string/visual_ai_title"
+                android:textColor="@color/title_color"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/bird_ID_image"
+                android:layout_marginStart="5sp"
+                android:layout_marginEnd="10sp"
+                android:text="@string/visual_ai_description"
+                android:textColor="@color/title_color"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="2sp"
-            android:layout_weight="1"
-            android:background="@color/background"
-            android:text="@string/bird_bank_btn"
-            android:onClick="bankOnClick"/>
+            android:layout_height="2sp"
+            android:background="@color/white"
+            tools:ignore="SmallSp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2sp"
+                android:layout_marginEnd="1sp"
+                android:layout_weight="0.5"
+                android:background="@color/appBackground"
+                android:gravity="center"
+                android:paddingTop="5sp"
+                android:onClick="finderOnClick">
+
+                <ImageView
+                    android:id="@+id/bird_finder_image"
+                    android:layout_width="124sp"
+                    android:layout_height="100sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/bird_finder_description"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/bird_finder_title"
+                    android:layout_width="198dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bird_finder_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginStart="5sp"
+                    android:text="@string/bird_finder_title"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2sp"
+                android:layout_marginStart="1sp"
+                android:layout_weight="0.5"
+                android:background="@color/appBackground"
+                android:gravity="center"
+                android:paddingTop="5sp"
+                android:onClick="bankOnClick">
+
+                <ImageView
+                    android:id="@+id/bird_bank_image"
+                    android:layout_width="100sp"
+                    android:layout_height="100sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/bird_bank_description"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/bird_bank_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/bird_bank_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="5sp"
+                    android:layout_marginEnd="10sp"
+                    android:text="@string/bird_bank_title"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="5sp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:text="@string/birds_news_title"
+                android:textColor="@color/title_color"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/bird_news_image"
+                android:layout_width="150sp"
+                android:layout_height="150sp"
+                android:contentDescription="@string/birds_news_description"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2sp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginEnd="1sp"
+                android:paddingTop="5sp"
+                android:background="@color/appBackground"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:onClick="settingOnClick">
+
+                    <ImageView
+                        android:id="@+id/settings_image"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:contentDescription="@string/settings_description"
+                        app:srcCompat="@drawable/ic_launcher_background" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5sp"
+                        android:layout_marginEnd="10sp"
+                        android:scaleType="fitXY"
+                        android:text="@string/settings_title"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2sp"
+                    android:layout_marginBottom="5sp"
+                    android:background="@color/white"
+                    tools:ignore="SmallSp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/achievement_image"
+                        android:layout_width="100sp"
+                        android:layout_height="100sp"
+                        android:scaleType="fitXY"
+                        android:contentDescription="@string/achievements_description"
+                        app:srcCompat="@drawable/ic_launcher_background" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5sp"
+                        android:layout_marginEnd="10sp"
+                        android:text="@string/achievements_title"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@color/appBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5sp"
+                    android:text="@string/profile_title"
+                    android:textColor="@color/title_color"
+                    android:textSize="24sp" />
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10sp"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/birds_news_description"
+                    app:srcCompat="@drawable/ic_launcher_background" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/main_settings_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/appBackground"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginTop="2sp">
-
-        <Button
-            android:id="@+id/btn_news"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/background"
-            android:layout_marginEnd="2sp"
-            android:text="@string/news" />
-
-        <Button
-            android:id="@+id/btn_settings"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:background="@color/background"
-            android:text="@string/settings"
-            android:onClick="settingOnClick"/>
-    </LinearLayout>
-</RelativeLayout>
+</ScrollView>
