@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleSignUp"
         style="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

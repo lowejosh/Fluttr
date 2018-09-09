@@ -48,4 +48,10 @@
     <string name="profile_title">Profile</string>
     <string name="settings_description">User Settings</string>
     <string name="achievements_description">User Achievements</string>
+    <string name="profile">Profile</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

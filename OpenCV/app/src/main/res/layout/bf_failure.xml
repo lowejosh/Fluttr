@@ -7,7 +7,7 @@
     android:background="@color/appBackground">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleSignUp"
         style="@style/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:id="@+id/failure_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/titleSignUp"
         android:layout_centerHorizontal="true"
         android:background="@color/background"
         android:onClick="backOnClick"
