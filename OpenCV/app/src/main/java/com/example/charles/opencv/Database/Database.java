@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This class is a helper for interfacing with the sql database.
@@ -207,5 +208,19 @@ public class Database extends SQLiteOpenHelper {
         long result = db.insert(BS_TABLE_NAME, null, contentValues);
 
         return (result != -1);
+    }
+
+    /**
+     * Add bird IDs to the birds_seen table
+     * @param birdIDs List of Bird IDs
+     * @return True if data is added
+     */
+    public boolean addData(List<String> birdIDs) {
+        for (String ID : birdIDs) {
+            if (!addData(ID)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
