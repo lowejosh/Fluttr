@@ -63,6 +63,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void goBack(View v) {
+        super.finish();
+    }
+
     /**
      * Register Account
      * @param v

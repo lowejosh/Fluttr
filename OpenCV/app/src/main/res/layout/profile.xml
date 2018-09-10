@@ -13,7 +13,8 @@
         android:layout_height="72dp"
         android:contentDescription="@string/back_button"
         android:background="@color/background"
-        app:srcCompat="?android:attr/actionModeCloseDrawable" />
+        app:srcCompat="?android:attr/actionModeCloseDrawable"
+        android:onClick="goBack"/>
 
     <RelativeLayout
         android:id="@+id/logged_in"
