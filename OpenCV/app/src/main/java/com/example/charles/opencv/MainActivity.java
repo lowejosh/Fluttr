@@ -3,12 +3,14 @@ package com.example.charles.opencv;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     Button uploadPhoto;
     Button viewGallery;
 
+    public static int screenHeight;
+    public static int screenWidth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +39,27 @@ public class MainActivity extends AppCompatActivity {
         takePhoto = findViewById(R.id.clickimage);
         uploadPhoto = findViewById(R.id.uploadphoto);
         viewGallery = findViewById(R.id.viewgallery);
+
+        // for getting screen dimensions
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
+        screenHeight = size.y;
+
         // start camera
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkIfCameraAvailable()) {
-                    takePhoto();
+                    String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
+                    int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
+
+                    if (checkVal==PackageManager.PERMISSION_GRANTED) {
+                        takePhoto();
+                    } else {
+                        Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(MainActivity.this,"Camera Not Available",Toast.LENGTH_SHORT).show();
                 }
@@ -56,7 +77,14 @@ public class MainActivity extends AppCompatActivity {
         viewGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, GalleryActivity.class));
+                String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
+                int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
+
+                if (checkVal==PackageManager.PERMISSION_GRANTED) {
+                    startActivity(new Intent(MainActivity.this, GalleryActivity.class));
+                } else {
+                    Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -64,29 +92,22 @@ public class MainActivity extends AppCompatActivity {
     //method to click image
     private void takePhoto()
     {
-        String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
-        int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
+        // camera
+        Intent imgIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        String timeStamp = new SimpleDateFormat("yyyyddMM_HHmmss").format(new Date());
 
-        if (checkVal==PackageManager.PERMISSION_GRANTED) {
-            // camera
-            Intent imgIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            String timeStamp = new SimpleDateFormat("yyyyddMM_HHmmss").format(new Date());
+        // folder
+        File fluttrFolder = new File(Environment.getExternalStorageDirectory(), "Fluttr");
+        fluttrFolder.mkdirs();
 
-            // folder
-            File fluttrFolder = new File(Environment.getExternalStorageDirectory(), "Fluttr");
-            fluttrFolder.mkdirs();
-
-            // image
-            File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
-            Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
-                    MainActivity.this,
-                    "com.example.charles.opencv.provider",
-                    img);
-            imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
-            startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
-        } else {
-            Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
-        }
+        // image
+        File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
+        Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
+                MainActivity.this,
+                "com.example.charles.opencv.provider",
+                img);
+        imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
+        startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
 
     }
 

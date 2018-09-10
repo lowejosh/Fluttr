@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.charles.opencv.MainActivity;
 import com.example.charles.opencv.R;
 
 import java.io.File;
+
 
 public class GalleryActivity extends Activity
 {
@@ -74,9 +76,8 @@ public class GalleryActivity extends Activity
             public void onItemClick (AdapterView<?> parent, View view,
                                      int position, long id)
             {
-                // target width and height
-                int width = 700;
-                int height = 500;
+                int width = MainActivity.screenWidth;
+                int height = MainActivity.screenHeight;
 
                 BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
                 bmpOptions.inJustDecodeBounds = true;
