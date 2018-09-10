@@ -250,7 +250,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
                 android:background="@color/appBackground"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="profileOnClick">
 
                 <TextView
                     android:layout_width="match_parent"
