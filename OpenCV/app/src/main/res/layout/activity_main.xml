@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/appBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_below="@+id/slide_show"
+    android:layout_above="@+id/main_settings_list"
+    android:orientation="vertical"
+    android:id="@+id/container"
+    android:weightSum="3">
+    <!-- todo create strings -->
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/clickimage"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:text="Take Photo"/>
+
+    <Button
+        android:id="@+id/uploadphoto"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="2sp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:text="Upload Photo"/>
+
+    <Button
+        android:id="@+id/viewgallery"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="2sp"
+        android:layout_weight="1"
+        android:background="@color/background"
+        android:text="View Gallery"/>
+</LinearLayout>

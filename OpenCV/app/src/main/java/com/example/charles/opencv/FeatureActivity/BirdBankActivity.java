@@ -67,7 +67,7 @@ public class BirdBankActivity extends AppCompatActivity {
         int birdsFound = mList.size();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I have identified " + birdsFound + " birds with Fluttr! {PLACEHOLDER}");
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I have identified " + birdsFound + " birds with Fluttr!\nCheck it out here: (placeholder for link)");
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
