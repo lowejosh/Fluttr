@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
+import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 
 import java.io.IOException;
@@ -31,20 +32,13 @@ public class HomeScreen extends AppCompatActivity {
         updateImage((ImageView)findViewById(R.id.settings_image), "Settings 1.png");
         updateImage((ImageView)findViewById(R.id.achievement_image), "Achievements.png");
         updateImage((ImageView)findViewById(R.id.profile_image), "Profile.png");
-
-        /*ViewFlipper slideShow = findViewById(R.id.slide_show);
-
-        for (int birdID = 1; birdID < 6; birdID++) {
-            Bird bird = new BirdFinderDatabase(this).getBird(birdID);
-            ImageView ivBird = new ImageView(slideShow.getContext());
-            ivBird.setImageBitmap(bird.getImage(this));
-            slideShow.addView(ivBird);
-        }
-
-        slideShow.setFlipInterval(5000);
-        slideShow.startFlipping();*/
     }
 
+    /**
+     * Updates the image view with a file stored in assets/icons
+     * @param v ImageView
+     * @param filename Filename and extension of the icon
+     */
     private void updateImage(ImageView v, String filename) {
         //Update image for ImageView
         try {
@@ -55,7 +49,15 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     /**
-     * On Button Press, Change Screen to Twenty Questions
+     * On Button Press, Change Screen to Profile
+     * @param v Attached View Object (Unused)
+     */
+    public void profileOnClick(View v) {
+        startActivity(new Intent(HomeScreen.this, ProfileActivity.class));
+    }
+
+    /**
+     * On Button Press, Change Screen to Bird Finder
      * @param v Attached View Object (Unused)
      */
     public void finderOnClick(View v) {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.charles.opencv">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -27,36 +29,48 @@
         </provider>
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" />
-        <activity
-            android:name=".FeatureActivity.BirdFinderActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Settings.ReferenceActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Settings.ResetActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".BirdBank.IndividualBirdActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".HomeScreen"
             android:label="@string/title_activity_home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name=".FeatureActivity.BirdFinderActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Settings.ReferenceActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Settings.ResetActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".BirdBank.IndividualBirdActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".FeatureActivity.SearchActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".FeatureActivity.BirdBankActivity" />
-        <activity android:name=".FeatureActivity.SettingActivity" />
-        <activity android:name=".Gallery.GalleryActivity" />
-        <activity android:name=".Gallery.GallerySelectedActivity"></activity>
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".FeatureActivity.BirdBankActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FeatureActivity.SettingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FeatureActivity.ProfileActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
