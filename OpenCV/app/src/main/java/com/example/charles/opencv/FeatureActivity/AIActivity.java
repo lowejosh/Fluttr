@@ -3,6 +3,8 @@ package com.example.charles.opencv.FeatureActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,17 +12,21 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.charles.opencv.AI.GoogleAI;
 import com.example.charles.opencv.Gallery.GalleryActivity;
 import com.example.charles.opencv.R;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class AIActivity extends AppCompatActivity {
 
@@ -28,6 +34,7 @@ public class AIActivity extends AppCompatActivity {
     Button takePhoto;
     Button uploadPhoto;
     Button viewGallery;
+    File img;
 
     public static int screenHeight;
     public static int screenWidth;
@@ -91,6 +98,7 @@ public class AIActivity extends AppCompatActivity {
                 int checkVal = getApplicationContext().checkCallingOrSelfPermission(storagePerm);
                 int checkVal2 = getApplicationContext().checkCallingOrSelfPermission(cameraPerm);
                 if (checkVal == PackageManager.PERMISSION_GRANTED && checkVal2 == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(AIActivity.this, "Loading ...", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(AIActivity.this, GalleryActivity.class));
                 } else {
                     Toast.makeText(AIActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
@@ -111,13 +119,15 @@ public class AIActivity extends AppCompatActivity {
         fluttrFolder.mkdirs();
 
         // image
-        File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
+        img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
         Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
                 AIActivity.this,
                 "com.example.charles.opencv.provider",
                 img);
         imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
         startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
+
+
 
     }
 
@@ -133,7 +143,28 @@ public class AIActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
             // success
             if (resultCode == RESULT_OK) {
-                Toast.makeText(AIActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AIActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
+
+                // AI STUFF
+                if (img.getAbsolutePath() == null) {
+                    Toast.makeText(AIActivity.this, "Error Processing Image! Please Retry", Toast.LENGTH_LONG).show();
+                } else {
+                    String imgPath = img.getAbsolutePath();
+                    Bitmap image = null;
+
+                    try {
+                        image = BitmapFactory.decodeFile(imgPath);
+                    } catch(Exception e) {
+                        Log.i("OnCreate", "Image didn't load.");
+                    }
+
+                    GoogleAI ai = new GoogleAI();
+                    List<Integer> list = ai.identify(image);
+                    System.out.println("AI_LIST = " + list.toString());
+                    Toast.makeText(AIActivity.this, "[debug] Identified " + list.toString(), Toast.LENGTH_LONG).show();
+
+                }
+
             // failure
             } else {
                 Toast.makeText(AIActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
