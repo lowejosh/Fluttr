@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.charles.opencv.AI.GoogleAI;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
@@ -32,6 +33,9 @@ public class HomeScreen extends AppCompatActivity {
         updateImage((ImageView)findViewById(R.id.settings_image), "Settings 1.png");
         updateImage((ImageView)findViewById(R.id.achievement_image), "Achievements.png");
         updateImage((ImageView)findViewById(R.id.profile_image), "Profile.png");
+
+        GoogleAI ai = new GoogleAI();
+        ai.searchBirds(this);
     }
 
     /**
