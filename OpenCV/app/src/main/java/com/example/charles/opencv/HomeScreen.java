@@ -1,6 +1,7 @@
 package com.example.charles.opencv;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Main Menu Controls
@@ -34,8 +36,21 @@ public class HomeScreen extends AppCompatActivity {
         updateImage((ImageView)findViewById(R.id.achievement_image), "Achievements.png");
         updateImage((ImageView)findViewById(R.id.profile_image), "Profile.png");
 
+        /*Bitmap image = null;
+
+        try {
+            image = BitmapFactory.decodeStream(this.getAssets().open("images/black_swan.jpg"));
+        } catch (IOException ex) {
+            Log.i("OnCreate", "Image didnt load.");
+        }
+
         GoogleAI ai = new GoogleAI();
-        ai.searchBirds(this);
+        List<Integer> list = ai.identify(image);
+
+        for (Integer ID : list) {
+            Log.i("Birds", String.valueOf(ID));
+        }
+        ai.searchBirds(this);*/
     }
 
     /**
