@@ -1,7 +1,6 @@
 package com.example.charles.opencv;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.charles.opencv.AI.GoogleAI;
+import com.example.charles.opencv.FeatureActivity.AIActivity;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Main Menu Controls
@@ -63,7 +61,7 @@ public class HomeScreen extends AppCompatActivity {
         try {
             v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
         } catch (IOException | IllegalArgumentException unused) {
-            Log.e("MainActivity", "Failed to load image: " + "icons/" + filename);
+            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
         }
     }
 
@@ -88,7 +86,7 @@ public class HomeScreen extends AppCompatActivity {
      * @param v Attached View Object (Unused)
      */
     public void identifierOnClick(View v) {
-        startActivity(new Intent(HomeScreen.this, MainActivity.class));
+        startActivity(new Intent(HomeScreen.this, AIActivity.class));
     }
 
     /**

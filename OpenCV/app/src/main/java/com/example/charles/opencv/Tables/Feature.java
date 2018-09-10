@@ -91,7 +91,7 @@ public final class Feature {
             return BitmapFactory.decodeStream(context.getAssets().open("features/" + featureImage.get(option)));
         } catch (IOException | IllegalArgumentException unused) {
             //If bird image does not exist, display noImage file
-            Log.e("MainActivity", "Failed to load image: " + featureName.get(option) + " " + featureImage.get(option));
+            Log.e("AIActivity", "Failed to load image: " + featureName.get(option) + " " + featureImage.get(option));
 
             try {
                 //Bitmap temp = BitmapFactory.decodeStream(context.getAssets().open("features/noImage.png"));
@@ -101,8 +101,8 @@ public final class Feature {
 
                 return noImage;
             } catch (IOException ex) {
-                Log.e("MainActivity", "noImage Failed to Load");
-                Log.e("MainActivity", ex.getMessage());
+                Log.e("AIActivity", "noImage Failed to Load");
+                Log.e("AIActivity", ex.getMessage());
             }
         }
 

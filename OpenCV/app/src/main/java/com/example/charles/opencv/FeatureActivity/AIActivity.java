@@ -1,4 +1,4 @@
-package com.example.charles.opencv;
+package com.example.charles.opencv.FeatureActivity;
 
 
 import android.content.Intent;
@@ -16,12 +16,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.charles.opencv.Gallery.GalleryActivity;
+import com.example.charles.opencv.R;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class AIActivity extends AppCompatActivity {
 
     private static final int CAPTURE_IMAGE_REQUEST_CODE=1000;
     Button takePhoto;
@@ -65,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
                     if (checkVal == PackageManager.PERMISSION_GRANTED && checkVal2 == PackageManager.PERMISSION_GRANTED) {
                         takePhoto();
                     } else {
-                        Toast.makeText(MainActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AIActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(MainActivity.this,"Camera Not Available",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AIActivity.this,"Camera Not Available",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -90,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
                 int checkVal = getApplicationContext().checkCallingOrSelfPermission(storagePerm);
                 int checkVal2 = getApplicationContext().checkCallingOrSelfPermission(cameraPerm);
                 if (checkVal == PackageManager.PERMISSION_GRANTED && checkVal2 == PackageManager.PERMISSION_GRANTED) {
-                    startActivity(new Intent(MainActivity.this, GalleryActivity.class));
+                    startActivity(new Intent(AIActivity.this, GalleryActivity.class));
                 } else {
-                    Toast.makeText(MainActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AIActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         // image
         File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
         Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
-                MainActivity.this,
+                AIActivity.this,
                 "com.example.charles.opencv.provider",
                 img);
         imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
     // checks if camera is available
     public boolean checkIfCameraAvailable() {
-        return MainActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
+        return AIActivity.this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
     // gets the result
@@ -132,10 +133,10 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
             // success
             if (resultCode == RESULT_OK) {
-                Toast.makeText(MainActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AIActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
             // failure
             } else {
-                Toast.makeText(MainActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AIActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

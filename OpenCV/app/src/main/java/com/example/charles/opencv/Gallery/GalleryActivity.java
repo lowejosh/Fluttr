@@ -4,14 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.example.charles.opencv.MainActivity;
+import com.example.charles.opencv.FeatureActivity.AIActivity;
 import com.example.charles.opencv.R;
 
 import java.io.File;
@@ -76,8 +76,8 @@ public class GalleryActivity extends Activity
             public void onItemClick (AdapterView<?> parent, View view,
                                      int position, long id)
             {
-                int width = MainActivity.screenWidth;
-                int height = MainActivity.screenHeight;
+                int width = AIActivity.screenWidth;
+                int height = AIActivity.screenHeight;
 
                 BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
                 bmpOptions.inJustDecodeBounds = true;

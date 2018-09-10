@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         try {
             v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
         } catch (IOException | IllegalArgumentException unused) {
-            Log.e("MainActivity", "Failed to load image: " + "icons/" + filename);
+            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
         }
     }
 
