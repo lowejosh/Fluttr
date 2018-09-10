@@ -64,22 +64,30 @@ public class MainActivity extends AppCompatActivity {
     //method to click image
     private void takePhoto()
     {
-        // camera
-        Intent imgIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        String timeStamp = new SimpleDateFormat("yyyyddMM_HHmmss").format(new Date());
+        String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
+        int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
 
-        // folder
-        File fluttrFolder = new File(Environment.getExternalStorageDirectory(), "Fluttr");
-        fluttrFolder.mkdirs();
+        if (checkVal==PackageManager.PERMISSION_GRANTED) {
+            // camera
+            Intent imgIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            String timeStamp = new SimpleDateFormat("yyyyddMM_HHmmss").format(new Date());
 
-        // image
-        File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
-        Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
-                MainActivity.this,
-                "com.example.charles.opencv.provider",
-                img);
-        imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
-        startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
+            // folder
+            File fluttrFolder = new File(Environment.getExternalStorageDirectory(), "Fluttr");
+            fluttrFolder.mkdirs();
+
+            // image
+            File img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
+            Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
+                    MainActivity.this,
+                    "com.example.charles.opencv.provider",
+                    img);
+            imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
+            startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
+        } else {
+            Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     // checks if camera is available
