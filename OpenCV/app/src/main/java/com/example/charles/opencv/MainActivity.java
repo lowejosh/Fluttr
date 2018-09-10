@@ -47,18 +47,25 @@ public class MainActivity extends AppCompatActivity {
         screenWidth = size.x;
         screenHeight = size.y;
 
+
+
+
         // start camera
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkIfCameraAvailable()) {
-                    String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
-                    int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
 
-                    if (checkVal==PackageManager.PERMISSION_GRANTED) {
+
+                    // permissions
+                    String storagePerm = "android.permission.WRITE_EXTERNAL_STORAGE";
+                    String cameraPerm = "android.permission.CAMERA";
+                    int checkVal = getApplicationContext().checkCallingOrSelfPermission(storagePerm);
+                    int checkVal2 = getApplicationContext().checkCallingOrSelfPermission(cameraPerm);
+                    if (checkVal == PackageManager.PERMISSION_GRANTED && checkVal2 == PackageManager.PERMISSION_GRANTED) {
                         takePhoto();
                     } else {
-                        Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(MainActivity.this,"Camera Not Available",Toast.LENGTH_SHORT).show();
@@ -77,13 +84,15 @@ public class MainActivity extends AppCompatActivity {
         viewGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String requiredPermission = "android.permission.WRITE_EXTERNAL_STORAGE";
-                int checkVal = getApplicationContext().checkCallingOrSelfPermission(requiredPermission);
-
-                if (checkVal==PackageManager.PERMISSION_GRANTED) {
+                // permissions
+                String storagePerm = "android.permission.WRITE_EXTERNAL_STORAGE";
+                String cameraPerm = "android.permission.CAMERA";
+                int checkVal = getApplicationContext().checkCallingOrSelfPermission(storagePerm);
+                int checkVal2 = getApplicationContext().checkCallingOrSelfPermission(cameraPerm);
+                if (checkVal == PackageManager.PERMISSION_GRANTED && checkVal2 == PackageManager.PERMISSION_GRANTED) {
                     startActivity(new Intent(MainActivity.this, GalleryActivity.class));
                 } else {
-                    Toast.makeText(MainActivity.this,"Storage Permission Required",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Storage and Camera Permission Required",Toast.LENGTH_SHORT).show();
                 }
             }
         });
