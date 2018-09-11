@@ -19,11 +19,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.charles.opencv.AI.GoogleAI;
+
 import com.example.charles.opencv.Gallery.GalleryActivity;
 import com.example.charles.opencv.R;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -54,9 +54,6 @@ public class AIActivity extends AppCompatActivity {
         display.getSize(size);
         screenWidth = size.x;
         screenHeight = size.y;
-
-
-
 
         // start camera
         takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -126,9 +123,6 @@ public class AIActivity extends AppCompatActivity {
                 img);
         imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
         startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
-
-
-
     }
 
     // checks if camera is available
@@ -146,7 +140,7 @@ public class AIActivity extends AppCompatActivity {
                 //Toast.makeText(AIActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
 
                 // AI STUFF
-                if (img.getAbsolutePath() == null) {
+                if (img == null) {
                     Toast.makeText(AIActivity.this, "Error Processing Image! Please Retry", Toast.LENGTH_LONG).show();
                 } else {
                     String imgPath = img.getAbsolutePath();
