@@ -1,0 +1,35 @@
+package com.example.charles.opencv.Achievements;
+
+public class MultiStepAchievement extends Achievement {
+    private int maxValue;
+    private int currentValue;
+
+    /**
+     * Achievements with multiple completion conditions.
+     * @param name Name of the achievement
+     * @param description Description of the achievement
+     * @param maxValue Max value for achievement to hit
+     * @param currentValue Current progress through the achievement
+     */
+    public MultiStepAchievement(String name, String description, int maxValue, int currentValue) {
+        super(name, description, maxValue == currentValue);
+        this.maxValue = maxValue;
+        this.currentValue = currentValue;
+    }
+
+    /**
+     * Max value to hit for the achievement to activate
+     * @return Int value of the max value to hit for the achievement to activate
+     */
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    /**
+     * Current progress through the achievement
+     * @return Int value of the current progress through the achievement
+     */
+    public int getCurrentValue() {
+        return currentValue;
+    }
+}

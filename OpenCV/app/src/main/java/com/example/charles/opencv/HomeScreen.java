@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.charles.opencv.FeatureActivity.AIActivity;
+import com.example.charles.opencv.FeatureActivity.AchievementActivity;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
@@ -103,5 +104,13 @@ public class HomeScreen extends AppCompatActivity {
      */
     public void settingOnClick(View v) {
         startActivity(new Intent(HomeScreen.this, SettingActivity.class));
+    }
+
+    /**
+     * On Button Press, Change Screen to Achievements
+     * @param v Attached View Object (Unused)
+     */
+    public void achievementOnClick(View v) {
+        startActivity(new Intent(HomeScreen.this, AchievementActivity.class));
     }
 }
