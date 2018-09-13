@@ -40,4 +40,12 @@ public class Achievement {
     public boolean isComplete() {
         return complete;
     }
+
+    /**
+     * Returns true if the achievement is a singular step
+     * @return True if the achievement is a singular step
+     */
+    public boolean isSingular() {
+        return true;
+    }
 }

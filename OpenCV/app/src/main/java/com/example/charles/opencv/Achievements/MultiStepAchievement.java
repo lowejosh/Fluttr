@@ -32,4 +32,13 @@ public class MultiStepAchievement extends Achievement {
     public int getCurrentValue() {
         return currentValue;
     }
+
+    /**
+     * Returns true if the achievement is a singular step
+     * @return True if the achievement is a singular step
+     */
+    @Override
+    public boolean isSingular() {
+        return false;
+    }
 }

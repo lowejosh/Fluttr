@@ -5,13 +5,16 @@ import android.content.Context;
 import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.Database.BirdFinderDatabase;
 
-import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AchievementManager {
     private List<Achievement> achievements = new ArrayList<>();
 
+    /**
+     * Generates a list of achievements and the users progress through them
+     * @param context Application context
+     */
     public AchievementManager(Context context) {
         BirdBankDatabase bankDB = new BirdBankDatabase(context);
         BirdFinderDatabase findDB = new BirdFinderDatabase(context);
