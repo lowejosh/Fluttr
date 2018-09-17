@@ -58,7 +58,7 @@
                 android:textColor="@color/title_color"
                 android:textAlignment="center"
                 android:layout_marginBottom="0sp"
-                android:paddingBottom="0sp"/>
+                android:paddingBottom="5sp"/>
 
             <TextView
                 android:id="@+id/bird_description"
@@ -77,64 +77,69 @@
                 android:background="@color/background"/>
 
             <LinearLayout
-                android:id="@+id/sound_layout"
+                android:id="@+id/sidebar"
                 android:layout_width="84sp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/identification_date"
                 android:layout_marginEnd="10sp"
-                android:orientation="vertical"
-                android:background="@color/background"
-                android:padding="10sp">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/bird_call"
-                    android:layout_width="64sp"
-                    android:layout_height="64sp"
-                    android:layout_marginEnd="10sp"
-                    android:adjustViewBounds="true"
+                <LinearLayout
+                    android:id="@+id/sound_layout"
                     android:background="@color/background"
-                    android:contentDescription="@string/image_of_bird"
-                    android:cropToPadding="false"
-                    android:paddingBottom="2sp"
-                    app:srcCompat="@drawable/ic_launcher_background"
-                    android:onClick="playSound"/>
-
-                <TextView
-                    android:id="@+id/tv_cry"
-                    android:layout_width="64sp"
+                    android:layout_width="84sp"
                     android:layout_height="wrap_content"
-                    android:text="Bird Cry"
-                    android:textAlignment="center"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/size_layout"
-                android:layout_width="84sp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/sound_layout"
-                android:layout_marginEnd="10sp"
-                android:layout_marginTop="10sp"
-                android:orientation="vertical"
-                android:background="@color/background"
-                android:padding="10sp">
+                    android:orientation="vertical"
+                    android:padding="10sp">
 
-                <TextView
-                    android:id="@+id/min_size"
-                    android:layout_width="64sp"
+                    <ImageView
+                        android:id="@+id/bird_call"
+                        android:layout_width="64sp"
+                        android:layout_height="64sp"
+                        android:layout_marginEnd="10sp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/background"
+                        android:contentDescription="@string/image_of_bird"
+                        android:cropToPadding="false"
+                        android:paddingBottom="2sp"
+                        app:srcCompat="@drawable/ic_launcher_background"
+                        android:onClick="playSound"/>
+
+                    <TextView
+                        android:id="@+id/tv_cry"
+                        android:layout_width="64sp"
+                        android:layout_height="wrap_content"
+                        android:text="Bird Cry"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/size_layout"
+                    android:layout_width="84sp"
                     android:layout_height="wrap_content"
-                    android:text="..."
-                    android:textAlignment="center"
-                    android:textColor="@color/title_color"/>
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginTop="10sp"
+                    android:orientation="vertical"
+                    android:background="@color/background"
+                    android:padding="10sp">
 
-                <TextView
-                    android:id="@+id/max_size"
-                    android:layout_width="64sp"
-                    android:layout_height="wrap_content"
-                    android:text="..."
-                    android:textAlignment="center"
-                    android:textColor="@color/title_color"/>
+                    <TextView
+                        android:id="@+id/min_size"
+                        android:layout_width="64sp"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:textAlignment="center"
+                        android:textColor="@color/title_color"/>
 
+                    <TextView
+                        android:id="@+id/max_size"
+                        android:layout_width="64sp"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:textAlignment="center"
+                        android:textColor="@color/title_color"/>
+
+                </LinearLayout>
             </LinearLayout>
 
         </RelativeLayout>
