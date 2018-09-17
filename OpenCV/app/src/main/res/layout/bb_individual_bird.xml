@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/bird_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="72px"
@@ -47,14 +47,14 @@
             />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/identification_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:text="@string/testing" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/min_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -62,7 +62,7 @@
             android:text="@string/testing" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/max_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"

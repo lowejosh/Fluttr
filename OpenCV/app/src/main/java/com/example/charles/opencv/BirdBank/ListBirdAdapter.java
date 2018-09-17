@@ -88,7 +88,7 @@ public class ListBirdAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.bird_listview, null);
+            view = inflater.inflate(R.layout.bb_listview, null);
         }
 
         ConstraintLayout constraintLayout = (ConstraintLayout)view.findViewById(R.id.list_item_constraint);

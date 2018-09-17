@@ -25,12 +25,12 @@ public class IndividualBirdActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.individual_bird);
+        setContentView(R.layout.bb_individual_bird);
 
-        mBirdName = (TextView) findViewById(R.id.textView6);
-        mBirdSeen = (TextView) findViewById(R.id.textView5);
-        mBirdMinSize = (TextView) findViewById(R.id.textView4);
-        mBirdMaxSize = (TextView) findViewById(R.id.textView3);
+        mBirdName = (TextView) findViewById(R.id.bird_name);
+        mBirdSeen = (TextView) findViewById(R.id.identification_date);
+        mBirdMinSize = (TextView) findViewById(R.id.min_size);
+        mBirdMaxSize = (TextView) findViewById(R.id.max_size);
         mBirdImage = (ImageView) findViewById(R.id.bird_image);
 
         updateBirdPage();
