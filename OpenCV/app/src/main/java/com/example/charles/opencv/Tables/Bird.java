@@ -1,6 +1,7 @@
 package com.example.charles.opencv.Tables;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -18,6 +19,7 @@ public class Bird {
     private byte minSize;
     private byte maxSize;
     private String description;
+    private String sound;
 
 
     /**
@@ -25,13 +27,14 @@ public class Bird {
      *
      * @param birdID BirdID
      * @param name Bird Name
-     * @param image Bird Image Path inside res/drawable
+     * @param image Bird Image Path inside assets/images
      * @param atlasNo Bird Atlas Number
      * @param minSize Bird Minimum Size (cm)
      * @param maxSize Bird Maximum Size (cm)
      * @param description Bird Description
+     * @param sound Bird sound file inside assets/sound
      */
-    public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize, String description) {
+    public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize, String description, String sound) {
         this.birdID = birdID;
         this.name = name;
         this.image = "images/" + image;
@@ -39,6 +42,7 @@ public class Bird {
         this.minSize = minSize;
         this.maxSize = maxSize;
         this.description = description;
+        this.sound = sound;
 
         if (birdID < 1) {
             Log.e("Bird", "Bad ID Given: " + birdID);
@@ -97,6 +101,22 @@ public class Bird {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns AssetFileDescriptor sound file of the bird
+     * @param context
+     * @return
+     */
+    public AssetFileDescriptor getSound(Context context) {
+        AssetFileDescriptor descriptor = null;
+        try {
+            descriptor = context.getAssets().openFd("sound/" + sound);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return descriptor;
     }
 
     /**

@@ -183,7 +183,8 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getShort(3),
                     (byte) cursor.getInt(4),
                     (byte) cursor.getInt(5),
-                    cursor.getString(6));
+                    cursor.getString(6),
+                    cursor.getString(7));
         } catch (CursorIndexOutOfBoundsException ex) {
             Log.e("Database","Database: Failed to Find Duck with ID: " + birdID);
             bird = null;

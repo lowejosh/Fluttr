@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.charles.opencv.R;
@@ -26,7 +27,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdMaxSize;
     TextView mBirdDescription;
     ImageView mBirdImage;
-    ImageView mBirdSound;
+    LinearLayout mBirdSound;
     Bird bird;
     String date;
     MediaPlayer m;
@@ -49,7 +50,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdMaxSize = findViewById(R.id.max_size);
         mBirdImage = findViewById(R.id.bird_image);
         mBirdDescription = findViewById(R.id.bird_description);
-        mBirdSound = findViewById(R.id.bird_call);
+        mBirdSound = findViewById(R.id.sound_layout);
 
         updateBirdPage();
     }
@@ -74,8 +75,14 @@ public class IndividualBirdActivity extends AppCompatActivity {
     }
 
     private void loadSound() {
+        AssetFileDescriptor descriptor = bird.getSound(this);
+
+        if (descriptor == null) {
+            mBirdSound.setVisibility(View.GONE);
+            return;
+        }
+
         try {
-            AssetFileDescriptor descriptor = getAssets().openFd("sound/Australasian Shoveler.mp3");
             m.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
             descriptor.close();
 
@@ -83,6 +90,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
             m.setVolume(1f, 1f);
             m.setLooping(false);
         } catch (Exception e) {
+            Log.e("loadSound", "Failure to play bird call");
             e.printStackTrace();
         }
     }
