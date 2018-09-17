@@ -91,7 +91,8 @@
                     android:contentDescription="@string/image_of_bird"
                     android:cropToPadding="false"
                     android:paddingBottom="2sp"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/ic_launcher_background"
+                    android:onClick="playSound"/>
 
                 <TextView
                     android:id="@+id/tv_cry"

@@ -65,6 +65,10 @@ public class IndividualBirdActivity extends AppCompatActivity {
         super.finish();
     }
 
+    public void playSound(View v) {
+        
+    }
+
     /**
      * Updates the image view with a file stored in assets/icons
      * @param v ImageView
