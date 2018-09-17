@@ -59,7 +59,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         date = ListBirdAdapter.mDateOfBirdClicked;
 
         mBirdName.setText(bird.getName());
-        mBirdSeen.setText("Identified on " + date + "\n");
+        mBirdSeen.setText("Identified on " + date);
         mBirdMinSize.setText("Min size " + bird.getMinSize());
         mBirdMaxSize.setText("Max Size " + bird.getMaxSize());
         mBirdImage.setImageBitmap(bird.getImage(this));
