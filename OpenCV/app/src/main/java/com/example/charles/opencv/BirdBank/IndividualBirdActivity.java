@@ -1,6 +1,8 @@
 package com.example.charles.opencv.BirdBank;
 
+import android.content.res.AssetFileDescriptor;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     ImageView mBirdImage;
     Bird bird;
     String date;
+    MediaPlayer m;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class IndividualBirdActivity extends AppCompatActivity {
 
         updateImage((ImageView)findViewById(R.id.backButton), "Back Button.png");
         updateImage((ImageView)findViewById(R.id.bird_call), "Sound.png");
+
+        m = new MediaPlayer();
 
         mBirdName = (TextView) findViewById(R.id.bird_name);
         mBirdSeen = (TextView) findViewById(R.id.identification_date);
@@ -65,8 +70,29 @@ public class IndividualBirdActivity extends AppCompatActivity {
         super.finish();
     }
 
+    /**
+     * Play bird song on click
+     * @param v
+     */
     public void playSound(View v) {
-        
+        try {
+            if (m.isPlaying()) {
+                m.stop();
+                m.release();
+                m = new MediaPlayer();
+            }
+
+            AssetFileDescriptor descriptor = getAssets().openFd("sound/Australasian Shoveler.mp3");
+            m.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+
+            m.prepare();
+            m.setVolume(1f, 1f);
+            m.setLooping(true);
+            m.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
