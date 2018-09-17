@@ -40,6 +40,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         updateImage((ImageView)findViewById(R.id.bird_call), "Sound.png");
 
         m = new MediaPlayer();
+        loadSound();
 
         mBirdName = (TextView) findViewById(R.id.bird_name);
         mBirdSeen = (TextView) findViewById(R.id.identification_date);
@@ -70,18 +71,8 @@ public class IndividualBirdActivity extends AppCompatActivity {
         super.finish();
     }
 
-    /**
-     * Play bird song on click
-     * @param v
-     */
-    public void playSound(View v) {
+    private void loadSound() {
         try {
-            if (m.isPlaying()) {
-                m.stop();
-                m.release();
-                m = new MediaPlayer();
-            }
-
             AssetFileDescriptor descriptor = getAssets().openFd("sound/Australasian Shoveler.mp3");
             m.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
             descriptor.close();
@@ -89,10 +80,21 @@ public class IndividualBirdActivity extends AppCompatActivity {
             m.prepare();
             m.setVolume(1f, 1f);
             m.setLooping(true);
-            m.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Play bird song on click
+     * @param v
+     */
+    public void playSound(View v) {
+        if (m.isPlaying()) {
+            m.stop();
+        }
+
+        m.start();
     }
 
     /**
