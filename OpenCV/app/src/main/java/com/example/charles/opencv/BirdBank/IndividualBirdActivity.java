@@ -42,7 +42,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         updateImage((ImageView)findViewById(R.id.bird_call), "Sound.png");
 
         m = new MediaPlayer();
-        loadSound();
+
 
         mBirdName = findViewById(R.id.bird_name);
         mBirdSeen = findViewById(R.id.identification_date);
@@ -53,6 +53,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdSound = findViewById(R.id.sound_layout);
 
         updateBirdPage();
+        loadSound();
     }
 
     /**
@@ -67,7 +68,14 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdMinSize.setText("Min size " + bird.getMinSize() + "cm");
         mBirdMaxSize.setText("Max Size " + bird.getMaxSize() + "cm");
         mBirdImage.setImageBitmap(bird.getImage(this));
-        mBirdDescription.setText(bird.getDescription());
+
+        if (bird.getDescription() == null || bird.getDescription().trim() == "") {
+            mBirdDescription.setText("No description found");
+            mBirdDescription.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        } else {
+            mBirdDescription.setText(bird.getDescription());
+            mBirdDescription.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+        }
     }
 
     public void goBack(View v) {
