@@ -21,7 +21,6 @@ public class Bird {
     private String description;
     private String sound;
 
-
     /**
      * Bird object which contains all information stored inside the birds table.
      *
@@ -41,8 +40,13 @@ public class Bird {
         this.atlasNo = atlasNo;
         this.minSize = minSize;
         this.maxSize = maxSize;
-        this.description = description;
         this.sound = sound;
+
+        if (description != null) {
+            this.description = description.trim();
+        } else {
+            this.description = null;
+        }
 
         if (birdID < 1) {
             Log.e("Bird", "Bad ID Given: " + birdID);
