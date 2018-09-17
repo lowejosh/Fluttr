@@ -17,6 +17,7 @@ public class Bird {
     private short atlasNo;
     private byte minSize;
     private byte maxSize;
+    private String description;
 
 
     /**
@@ -28,14 +29,16 @@ public class Bird {
      * @param atlasNo Bird Atlas Number
      * @param minSize Bird Minimum Size (cm)
      * @param maxSize Bird Maximum Size (cm)
+     * @param description Bird Description
      */
-    public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize) {
+    public Bird(int birdID, String name, String image, short atlasNo, byte minSize, byte maxSize, String description) {
         this.birdID = birdID;
         this.name = name;
         this.image = "images/" + image;
         this.atlasNo = atlasNo;
         this.minSize = minSize;
         this.maxSize = maxSize;
+        this.description = description;
 
         if (birdID < 1) {
             Log.e("Bird", "Bad ID Given: " + birdID);
@@ -86,6 +89,14 @@ public class Bird {
     public int getMaxSize() {
         //Java stores bytes as signed, convert to int for 0-254 range
         return maxSize & 0xFF;
+    }
+
+    /**
+     * Returns the description of the bird
+     * @return Description of the bird
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

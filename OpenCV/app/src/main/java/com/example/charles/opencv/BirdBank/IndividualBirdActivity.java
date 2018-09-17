@@ -22,6 +22,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdSeen;
     TextView mBirdMinSize;
     TextView mBirdMaxSize;
+    TextView mBirdDescription;
     ImageView mBirdImage;
     Bird bird;
     String date;
@@ -40,6 +41,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdMinSize = (TextView) findViewById(R.id.min_size);
         mBirdMaxSize = (TextView) findViewById(R.id.max_size);
         mBirdImage = (ImageView) findViewById(R.id.bird_image);
+        mBirdDescription = findViewById(R.id.bird_description);
 
         updateBirdPage();
     }
@@ -56,6 +58,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
         mBirdMinSize.setText("Min size " + bird.getMinSize());
         mBirdMaxSize.setText("Max Size " + bird.getMaxSize());
         mBirdImage.setImageBitmap(bird.getImage(this));
+        mBirdDescription.setText(bird.getDescription());
     }
 
     public void goBack(View v) {

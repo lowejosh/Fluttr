@@ -45,6 +45,10 @@ public class Database extends SQLiteOpenHelper {
         //Check database exists
         File database = context.getDatabasePath(DBNAME);
 
+        //if (database.exists()) {
+        //    database.delete();
+        //}
+
         //If database does not exist, create it
         if (!database.exists()) {
             getReadableDatabase();
@@ -178,7 +182,8 @@ public class Database extends SQLiteOpenHelper {
                     cursor.getString(2),
                     cursor.getShort(3),
                     (byte) cursor.getInt(4),
-                    (byte) cursor.getInt(5));
+                    (byte) cursor.getInt(5),
+                    cursor.getString(6));
         } catch (CursorIndexOutOfBoundsException ex) {
             Log.e("Database","Database: Failed to Find Duck with ID: " + birdID);
             bird = null;
