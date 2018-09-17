@@ -26,6 +26,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdMaxSize;
     TextView mBirdDescription;
     ImageView mBirdImage;
+    ImageView mBirdSound;
     Bird bird;
     String date;
     MediaPlayer m;
@@ -42,12 +43,13 @@ public class IndividualBirdActivity extends AppCompatActivity {
         m = new MediaPlayer();
         loadSound();
 
-        mBirdName = (TextView) findViewById(R.id.bird_name);
-        mBirdSeen = (TextView) findViewById(R.id.identification_date);
-        mBirdMinSize = (TextView) findViewById(R.id.min_size);
-        mBirdMaxSize = (TextView) findViewById(R.id.max_size);
-        mBirdImage = (ImageView) findViewById(R.id.bird_image);
+        mBirdName = findViewById(R.id.bird_name);
+        mBirdSeen = findViewById(R.id.identification_date);
+        mBirdMinSize = findViewById(R.id.min_size);
+        mBirdMaxSize = findViewById(R.id.max_size);
+        mBirdImage = findViewById(R.id.bird_image);
         mBirdDescription = findViewById(R.id.bird_description);
+        mBirdSound = findViewById(R.id.bird_call);
 
         updateBirdPage();
     }
@@ -90,11 +92,20 @@ public class IndividualBirdActivity extends AppCompatActivity {
      * @param v
      */
     public void playSound(View v) {
+        mBirdSound.setOnClickListener(null);
+
         if (m.isPlaying()) {
             m.stop();
         }
 
         m.start();
+
+        mBirdSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playSound(v);
+            }
+        });
     }
 
     /**
