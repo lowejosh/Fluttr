@@ -79,7 +79,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
 
             m.prepare();
             m.setVolume(1f, 1f);
-            m.setLooping(true);
+            m.setLooping(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
