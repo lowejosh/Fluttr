@@ -1,6 +1,7 @@
 package com.example.charles.opencv.Achievements;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class AchievementAdapter extends BaseAdapter {
 
         if (achievement.isComplete()) {
             //Update completed imageview with green image
+            completed.setImageResource(R.drawable.positive_rounded_button);
         }
 
         return view;
