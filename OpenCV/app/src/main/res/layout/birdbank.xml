@@ -2,8 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/appBackground"
     android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginBottom="2sp"
+        android:contentDescription="@string/back_button"
+        android:background="@color/background"
+        app:srcCompat="@drawable/back_button"
+        android:onClick="goBack"/>
 
     <TextView
         android:id="@+id/no_birds"
@@ -23,7 +34,6 @@
         android:visibility="visible"/>
 
     <ListView
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:id="@+id/listview_birdbank"
         android:layout_height="match_parent"

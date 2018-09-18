@@ -38,11 +38,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
 
         setContentView(R.layout.bb_individual_bird_new);
 
-        updateImage((ImageView)findViewById(R.id.backButton), "Back Button.png");
-        updateImage((ImageView)findViewById(R.id.bird_call), "Sound.png");
-
         m = new MediaPlayer();
-
 
         mBirdName = findViewById(R.id.bird_name);
         mBirdSeen = findViewById(R.id.identification_date);
@@ -122,19 +118,5 @@ public class IndividualBirdActivity extends AppCompatActivity {
                 playSound(v);
             }
         });
-    }
-
-    /**
-     * Updates the image view with a file stored in assets/icons
-     * @param v ImageView
-     * @param filename Filename and extension of the icon
-     */
-    private void updateImage(ImageView v, String filename) {
-        //Update image for ImageView
-        try {
-            v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
-        } catch (IOException | IllegalArgumentException unused) {
-            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
-        }
     }
 }

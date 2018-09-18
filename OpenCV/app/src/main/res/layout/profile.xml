@@ -13,7 +13,7 @@
         android:layout_height="72dp"
         android:contentDescription="@string/back_button"
         android:background="@color/background"
-        app:srcCompat="?android:attr/actionModeCloseDrawable"
+        app:srcCompat="@drawable/back_button"
         android:onClick="goBack"/>
 
     <RelativeLayout
@@ -31,7 +31,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="20sp"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:contentDescription="@string/profile_picture"
+            app:srcCompat="@drawable/profile" />
 
         <TextView
             android:id="@+id/profile_name"
@@ -62,7 +63,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to Fluttr"
+            android:text="@string/login_title"
             android:textSize="24sp"
             android:textAlignment="center"/>
 
@@ -70,7 +71,7 @@
             android:id="@+id/email_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/email"
             android:textSize="18sp"
             android:textAlignment="center"/>
 
@@ -85,7 +86,7 @@
             android:id="@+id/pass_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Password"
+            android:text="@string/password"
             android:textSize="18sp"
             android:textAlignment="center"/>
 
@@ -101,14 +102,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="login"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <Button
             android:id="@+id/registerBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="register"
-            android:text="Register" />
+            android:text="@string/register" />
     </LinearLayout>
 
     <ProgressBar

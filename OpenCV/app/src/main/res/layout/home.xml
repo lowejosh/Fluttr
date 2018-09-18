@@ -36,7 +36,7 @@
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/birdAIDescription"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/brain" />
 
             <TextView
                 android:id="@+id/bird_ID_title"
@@ -70,6 +70,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:background="@color/white"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -93,7 +94,7 @@
                     android:layout_centerHorizontal="true"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/bird_finder_description"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/bird_finder" />
 
                 <TextView
                     android:id="@+id/bird_finder_title"
@@ -128,7 +129,7 @@
                     android:layout_centerHorizontal="true"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/bird_bank_description"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/bird_bank" />
 
                 <TextView
                     android:id="@+id/bird_bank_title"
@@ -167,7 +168,7 @@
                 android:layout_height="150sp"
                 android:contentDescription="@string/birds_news_description"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/news" />
 
         </LinearLayout>
 
@@ -201,7 +202,7 @@
                         android:layout_width="100sp"
                         android:layout_height="100sp"
                         android:contentDescription="@string/settings_description"
-                        app:srcCompat="@drawable/ic_launcher_background" />
+                        app:srcCompat="@drawable/settings" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -233,7 +234,7 @@
                         android:layout_height="100sp"
                         android:scaleType="fitXY"
                         android:contentDescription="@string/achievements_description"
-                        app:srcCompat="@drawable/ic_launcher_background" />
+                        app:srcCompat="@drawable/trophy" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -269,7 +270,7 @@
                     android:layout_marginEnd="10sp"
                     android:scaleType="fitXY"
                     android:contentDescription="@string/birds_news_description"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    app:srcCompat="@drawable/profile" />
 
             </LinearLayout>
 

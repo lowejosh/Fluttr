@@ -27,14 +27,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        updateImage((ImageView)findViewById(R.id.bird_ID_image), "Brain.png");
-        updateImage((ImageView)findViewById(R.id.bird_finder_image), "Bird Finder.png");
-        updateImage((ImageView)findViewById(R.id.bird_bank_image), "Bank 2.png");
-        updateImage((ImageView)findViewById(R.id.bird_news_image), "News.png");
-        updateImage((ImageView)findViewById(R.id.settings_image), "Settings 1.png");
-        updateImage((ImageView)findViewById(R.id.achievement_image), "Achievements.png");
-        updateImage((ImageView)findViewById(R.id.profile_image), "Profile.png");
-
         /*Bitmap image = null;
 
         try {
@@ -50,20 +42,6 @@ public class HomeScreen extends AppCompatActivity {
             Log.i("Birds", String.valueOf(ID));
         }
         ai.searchBirds(this);*/
-    }
-
-    /**
-     * Updates the image view with a file stored in assets/icons
-     * @param v ImageView
-     * @param filename Filename and extension of the icon
-     */
-    private void updateImage(ImageView v, String filename) {
-        //Update image for ImageView
-        try {
-            v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
-        } catch (IOException | IllegalArgumentException unused) {
-            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
-        }
     }
 
     /**

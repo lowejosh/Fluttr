@@ -22,7 +22,7 @@ public class AchievementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achievements);
 
-        updateImage((ImageView)findViewById(R.id.backButton), "Back Button.png");
+        updateImage((ImageView)findViewById(R.id.backButton), "back_button.png");
 
         AchievementManager manager = new AchievementManager(this);
         List<Achievement> achievements = manager.getAchievements();

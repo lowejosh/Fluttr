@@ -17,7 +17,7 @@
             android:layout_height="72dp"
             android:contentDescription="@string/back_button"
             android:background="@color/background"
-            app:srcCompat="?android:attr/actionModeCloseDrawable"
+            app:srcCompat="@drawable/back_button"
             android:onClick="goBack"/>
 
         <ImageView
@@ -104,7 +104,7 @@
                         android:contentDescription="@string/image_of_bird"
                         android:cropToPadding="false"
                         android:paddingBottom="2sp"
-                        app:srcCompat="@drawable/ic_launcher_background"
+                        app:srcCompat="@drawable/sound"
                         android:onClick="playSound"/>
 
                     <TextView

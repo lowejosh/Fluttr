@@ -29,7 +29,6 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.profile);
-        updateImage((ImageView)findViewById(R.id.backButton), "Back Button.png");
 
         auth = new Authentication(this, ProfileActivity.this, FirebaseAuth.getInstance());
         if (auth.loggedIn()) {
@@ -47,20 +46,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         auth.logout();*/
-    }
-
-    /**
-     * Updates the image view with a file stored in assets/icons
-     * @param v ImageView
-     * @param filename Filename and extension of the icon
-     */
-    private void updateImage(ImageView v, String filename) {
-        //Update image for ImageView
-        try {
-            v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
-        } catch (IOException | IllegalArgumentException unused) {
-            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
-        }
     }
 
     public void goBack(View v) {

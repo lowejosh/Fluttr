@@ -70,4 +70,12 @@ public class BirdBankActivity extends AppCompatActivity {
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
     }
+
+    /**
+     * OnClick function for bf_failure button and bf_topresults button
+     * @param v View attached to the onclick
+     */
+    public void goBack(View v) {
+        super.finish();
+    }
 }

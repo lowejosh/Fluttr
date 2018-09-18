@@ -167,4 +167,12 @@ public class AIActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * OnClick function for bf_failure button and bf_topresults button
+     * @param v View attached to the onclick
+     */
+    public void goBack(View v) {
+        super.finish();
+    }
+
 }

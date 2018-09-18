@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/appBackground"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/Title"
+    <ImageView
+        android:id="@+id/backButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2sp"
-        android:text="@string/settings"/>
+        android:layout_height="72dp"
+        android:layout_marginBottom="5sp"
+        android:contentDescription="@string/back_button"
+        android:background="@color/background"
+        app:srcCompat="@drawable/back_button"
+        android:onClick="homeOnClick"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="2">
         <Button
             android:id="@+id/resetButton"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginBottom="2sp"
+            android:layout_marginBottom="5sp"
             android:background="@color/background"
             android:onClick="resetBirdBankOnClick"
             android:text="@string/reset_bird_bank"/>
@@ -39,16 +40,6 @@
             android:layout_marginBottom="2sp"
             android:text="@string/show_references"
             android:onClick="referencesOnClick"
-            android:background="@color/background"
-            style="?android:attr/borderlessButtonStyle"/>
-
-        <Button
-            android:id="@+id/backButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="homeOnClick"
-            android:text="@string/go_back"
             android:background="@color/background"
             style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
