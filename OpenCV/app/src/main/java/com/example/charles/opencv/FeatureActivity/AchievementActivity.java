@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.charles.opencv.Achievements.Achievement;
 import com.example.charles.opencv.Achievements.AchievementAdapter;
@@ -22,31 +23,18 @@ public class AchievementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.achievements);
 
-        updateImage((ImageView)findViewById(R.id.backButton), "back_button.png");
-
         AchievementManager manager = new AchievementManager(this);
         List<Achievement> achievements = manager.getAchievements();
 
         ListView listView = findViewById(R.id.achievement_list);
         AchievementAdapter adapter = new AchievementAdapter(this, achievements);
         listView.setAdapter(adapter);
+
+        TextView percentage = findViewById(R.id.achievement_percentage);
+        percentage.setText(String.valueOf(manager.getCompletion()) + "%");
     }
 
     public void goBack(View v) {
         super.finish();
-    }
-
-    /**
-     * Updates the image view with a file stored in assets/icons
-     * @param v ImageView
-     * @param filename Filename and extension of the icon
-     */
-    private void updateImage(ImageView v, String filename) {
-        //Update image for ImageView
-        try {
-            v.setImageBitmap(BitmapFactory.decodeStream(this.getAssets().open("icons/" + filename)));
-        } catch (IOException | IllegalArgumentException unused) {
-            Log.e("AIActivity", "Failed to load image: " + "icons/" + filename);
-        }
     }
 }

@@ -25,6 +25,25 @@ public class AchievementManager {
     }
 
     /**
+     * Get percentage of achievements completed. Integer value between 0 and 100.
+     * @return Percentage of achievements completed
+     */
+    public int getCompletion() {
+        int percentage = 0;
+
+        for (Achievement ach : achievements) {
+            if (ach.isComplete()) {
+                percentage++;
+            }
+        }
+
+        percentage *= 100;
+        percentage /= achievements.size();
+
+        return percentage;
+    }
+
+    /**
      * Returns a list of achievements
      * @return List of achievements
      */

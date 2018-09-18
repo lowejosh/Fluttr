@@ -63,6 +63,11 @@ public class AchievementAdapter extends BaseAdapter {
             //Progress Bar
             bar.setMax(multi.getMaxValue());
             bar.setProgress(multi.getCurrentValue());
+
+            //If the achievement is only partially complete, display an orange circle
+            if (multi.partialComplete()) {
+                completed.setImageResource(R.drawable.orange_rounded_button);
+            }
         }
 
         if (achievement.isComplete()) {

@@ -11,5 +11,8 @@
     <color name="negative_btn">#CC0000</color>
     <color name="negative_pressed_btn">#7F0000</color>
     <color name="negative_outline_btn">#990000</color>
+    <color name="orange">#FF7F00</color>
+    <color name="orange_outline">#FF6000</color>
+
     <color name="title_color">#908981</color>
 </resources>
