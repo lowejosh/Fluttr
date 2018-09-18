@@ -76,6 +76,9 @@
         <activity
             android:name=".FeatureActivity.ProfileActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".FeatureActivity.AchievementActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

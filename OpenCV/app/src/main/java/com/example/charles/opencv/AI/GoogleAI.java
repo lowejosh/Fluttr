@@ -28,6 +28,9 @@ public class GoogleAI {
     private FirebaseVisionCloudLabelDetector cloudDetector;
     private SparseArray<String> entityTypes;
 
+    /**
+     * Populates the GoogleAI with the list of birds and matching entity types
+     */
     public GoogleAI() {
         entityTypes = new SparseArray<>();
         entityTypes.put(1, "/m/09ddx");
@@ -57,6 +60,11 @@ public class GoogleAI {
         entityTypes.put(88, "/m/0h02z");
     }
 
+    /**
+     * Returns a list of bird IDs matching the bitmap image
+     * @param bitmap_image Bitmap image of the bird to identify
+     * @return List of bird IDs
+     */
     public List<Integer> identify(Bitmap bitmap_image) {
         List<Integer> matchingBirds = new ArrayList<>();
 
@@ -99,13 +107,19 @@ public class GoogleAI {
         return matchingBirds;
     }
 
+    /**
+     * Unused, for debugging purposes only.
+     * Takes all bird images attached to birds in the database and identifies the attached labels.
+     * All output it made to the logcat.
+     * @param context Context of the application
+     */
     public void searchBirds(Context context) {
         cloudDetector = FirebaseVision.getInstance().getVisionCloudLabelDetector();
 
         BirdFinderDatabase db = new BirdFinderDatabase(context);
         List<Integer> birds = db.getBirdIDs();
 
-        for (int i = 4; i < birds.size(); i++) {
+        for (int i = 0; i < birds.size(); i++) {
             Bird bird = db.getBird(birds.get(i));
 
             try {
@@ -116,6 +130,11 @@ public class GoogleAI {
         }
     }
 
+    /**
+     * Returns a list of labels attached to an image using the cloud google AI
+     * @param image Bitmap image to identify
+     * @return List of labels matching the bird image
+     */
     private List<FirebaseVisionCloudLabel> cloudLabel(FirebaseVisionImage image) {
         Task<List<FirebaseVisionCloudLabel>> results =
                 cloudDetector.detectInImage(image)
@@ -136,6 +155,7 @@ public class GoogleAI {
             //Do Nothing
         }
 
+        //Used for debugging
         //for (FirebaseVisionCloudLabel label : results.getResult())
         //    Log.d("cloudlabel", String.format("Bird (%s) (%d) | Label: %s | Entity: %s | Confidence: %f", bird, id, label.getLabel(), label.getEntityId(), label.getConfidence()));
 
