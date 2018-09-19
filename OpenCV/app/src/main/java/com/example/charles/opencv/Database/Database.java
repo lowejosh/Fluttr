@@ -65,7 +65,9 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
+        String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
+        db.execSQL(createTable);
     }
 
     /**
@@ -91,7 +93,8 @@ public class Database extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
+        onCreate(db);
     }
 
     /**
