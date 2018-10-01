@@ -11,10 +11,19 @@ public class MultiStepAchievement extends Achievement {
      * @param maxValue Max value for achievement to hit
      * @param currentValue Current progress through the achievement
      */
-    MultiStepAchievement(String name, String description, int maxValue, int currentValue) {
-        super(name, description, maxValue == currentValue);
+    public MultiStepAchievement(String name, String description, int maxValue, int currentValue) {
+        super(name, description, currentValue >= maxValue);
         this.maxValue = maxValue;
         this.currentValue = currentValue;
+    }
+
+    /**
+     * Returns true if the achievement is a singular step
+     * @return True if the achievement is a singular step
+     */
+    @Override
+    public boolean isSingular() {
+        return false;
     }
 
     /**
@@ -34,17 +43,8 @@ public class MultiStepAchievement extends Achievement {
     }
 
     /**
-     * Returns true if the achievement is a singular step
-     * @return True if the achievement is a singular step
-     */
-    @Override
-    public boolean isSingular() {
-        return false;
-    }
-
-    /**
      * Returns true if the achievement is only partially complete
      * @return True if the achievement is only partially complete
      */
-    public boolean partialComplete() { return getCurrentValue() > 0 && getCurrentValue() != getMaxValue(); }
+    public boolean partialComplete() { return currentValue > 0 && currentValue < maxValue; }
 }

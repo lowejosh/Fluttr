@@ -11,7 +11,7 @@ public class Achievement {
      * @param description Description of the achievement
      * @param complete True if the achievement is completed
      */
-    Achievement(String name, String description, boolean complete) {
+    public Achievement(String name, String description, boolean complete) {
         this.name = name;
         this.description = description;
         this.complete = complete;
