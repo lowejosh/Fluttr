@@ -22,6 +22,15 @@ public class AchievementManager {
         achievements.add(firstSteps(bankDB));
         achievements.add(rookieHunter(bankDB));
         achievements.add(experiencedHunter(bankDB));
+        achievements.add(huntingArtist(bankDB, findDB));
+        achievements.add(makingFriends());
+        achievements.add(sharingMaster());
+        achievements.add(socialWarrior());
+        achievements.add(birdStudent());
+        achievements.add(birdScholar());
+        achievements.add(firstRecording());
+        achievements.add(recordingAddicts());
+        achievements.add(recordingKing());
     }
 
     /**
@@ -76,5 +85,79 @@ public class AchievementManager {
      */
     private Achievement experiencedHunter(BirdBankDatabase bankDB) {
         return new MultiStepAchievement("Experienced Hunter", "Find fifty different birds", 50, bankDB.getSeenBirdList().size());
+    }
+
+    /**
+     * Activates when the user has identified all birds in the app
+     * @param bankDB Bird Bank Database
+     * @param finderDB Bird Finder Database
+     * @return Hunting Artist Achievement
+     */
+    private Achievement huntingArtist(BirdBankDatabase bankDB, BirdFinderDatabase finderDB) {
+        return new MultiStepAchievement("Hunting Artist", "Discover all birds", finderDB.getBirdIDs().size(), bankDB.getSeenBirdList().size());
+    }
+
+    /**
+     * Activates when the user has shared 1 bird from the bird bank
+     * @return Making Friends Achievement
+     */
+    private Achievement makingFriends() {
+        return new Achievement("Making Friends", "Share 1 bird from the bird bank", false);
+    }
+
+    /**
+     * Activates when the user has shared 10 birds from the bird bank
+     * @return Sharing Master Achievement
+     */
+    private Achievement sharingMaster() {
+        return new MultiStepAchievement("Sharing Master", "Share 10 different birds from the bird bank", 10, 0);
+    }
+
+    /**
+     * Activates when the user has shared 25 birds from the bird bank
+     * @return Social Warrior Achievement
+     */
+    private Achievement socialWarrior() {
+        return new MultiStepAchievement("Social Warrior", "Share 25 different birds from the bird bank", 25, 0);
+    }
+
+    /**
+     * Activates when the user has opened a news article
+     * @return Bird Student Achievement
+     */
+    private Achievement birdStudent() {
+        return new Achievement("Bird Student", "Open 1 newspaper article", false);
+    }
+
+    /**
+     * Activates when the user has opened 5 news article
+     * @return Bird Scholar Achievement
+     */
+    private Achievement birdScholar() {
+        return new MultiStepAchievement("Bird Scholar", "Open 5 newspaper articles", 5, 0);
+    }
+
+    /**
+     * Activates when the user makes their first recording
+     * @return First Recording Achievement
+     */
+    private Achievement firstRecording() {
+        return new Achievement("First Recording", "Record your first bird song", false);
+    }
+
+    /**
+     * Activates when the user makes their first 10 recordings
+     * @return Recording Addicts Achievement
+     */
+    private Achievement recordingAddicts() {
+        return new MultiStepAchievement("Recording Addicts", "Record ten bird songs", 10, 0);
+    }
+
+    /**
+     * Activates when the user makes their first 50 recordings
+     * @return Recording Addicts Achievement
+     */
+    private Achievement recordingKing() {
+        return new MultiStepAchievement("Recording Addicts", "Record fifty bird songs", 50, 0);
     }
 }
