@@ -20,6 +20,12 @@
             android:textColor="@color/title_color"
             android:textSize="42sp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEST VOICE CONTROL"
+            android:onClick="voiceClick"/>
+
         <RelativeLayout
             android:id="@+id/birdID"
             android:layout_width="match_parent"

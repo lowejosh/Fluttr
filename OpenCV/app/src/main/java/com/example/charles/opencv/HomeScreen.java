@@ -3,6 +3,8 @@ package com.example.charles.opencv;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Main Menu Controls
@@ -91,4 +94,45 @@ public class HomeScreen extends AppCompatActivity {
     public void achievementOnClick(View v) {
         startActivity(new Intent(HomeScreen.this, AchievementActivity.class));
     }
+
+    public void voiceClick(View v) {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Choose Feature");
+        startActivityForResult(intent, 3432);
+    }
+
+//temp TODO abstract to another class (if possible)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 3432){
+            if (resultCode == RESULT_OK){
+                ArrayList<String> matches = data
+                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                if (matches.size() == 0) {
+                    // didn't hear anything
+                } else {
+                    String mostLikelyThingHeard = matches.get(0);
+                    // toUpperCase() used to make string comparison equal
+                    if(mostLikelyThingHeard.toUpperCase().contains("BANK")){
+                        startActivity(new Intent(this, BirdBankActivity.class));
+                    } else if(mostLikelyThingHeard.toUpperCase().contains("FINDER")){
+                        startActivity(new Intent(this, BirdFinderActivity.class));
+                    } else if(mostLikelyThingHeard.toUpperCase().contains("VISUAL")){
+                        startActivity(new Intent(this, AIActivity.class));
+                    } else if(mostLikelyThingHeard.toUpperCase().contains("SETTINGS")){
+                        startActivity(new Intent(this, SettingActivity.class));
+                    } else if(mostLikelyThingHeard.toUpperCase().contains("PROFILE")){
+                        startActivity(new Intent(this, ProfileActivity.class));
+                    } else if(mostLikelyThingHeard.toUpperCase().contains("ACHIEVEMENTS")){
+                        startActivity(new Intent(this, AchievementActivity.class));
+                    }
+                }
+            }
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }
