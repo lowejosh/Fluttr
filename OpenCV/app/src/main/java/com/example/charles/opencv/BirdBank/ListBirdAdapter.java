@@ -54,9 +54,9 @@ public class ListBirdAdapter extends BaseAdapter implements ListAdapter {
     }
 
     /**
-     * Get the row id associated with the specified position in the list.
+     * Get the news_row id associated with the specified position in the list.
      *
-     * @param position The position of the item within the adapter's data set whose row id we want.
+     * @param position The position of the item within the adapter's data set whose news_row id we want.
      * @return The id of the item at the specified position.
      */
     @Override

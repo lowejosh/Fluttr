@@ -16,6 +16,14 @@
         app:srcCompat="@drawable/back_button"
         android:onClick="goBack"/>
 
+    <!--     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@color/title_color"/> -->
+
     <TextView
         android:id="@+id/no_birds"
         android:layout_width="match_parent"

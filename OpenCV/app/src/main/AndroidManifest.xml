@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.charles.opencv">
 
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -39,26 +41,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FeatureActivity.AIActivity"></activity>
-        <activity android:name=".Gallery.GalleryActivity"></activity>
+        <activity android:name=".FeatureActivity.AIActivity" />
+        <activity android:name=".Gallery.GalleryActivity" />
         <activity
             android:name=".Gallery.GallerySelectedActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".FeatureActivity.BirdFinderActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings.ReferenceActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings.ResetActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".BirdBank.IndividualBirdActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FeatureActivity.SearchActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".FeatureActivity.BirdBankActivity"
             android:screenOrientation="portrait" />
@@ -71,7 +73,6 @@
         <activity
             android:name=".FeatureActivity.AchievementActivity"
             android:screenOrientation="portrait" />
-
         <activity android:name=".Voice.VoiceControlActivity">
             <intent-filter>
                 <action android:name="org.example.MY_ACTION_INTENT" />
@@ -80,6 +81,7 @@
                 <category android:name="android.intent.category.VOICE" />
             </intent-filter>
         </activity>
+        <activity android:name=".News.NewsActivity"></activity>
     </application>
 
 </manifest>

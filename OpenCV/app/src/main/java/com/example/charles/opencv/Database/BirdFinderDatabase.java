@@ -28,7 +28,6 @@ public class BirdFinderDatabase extends Database {
     private void loadFeatures() {
         if (Feature.isLoaded())
             return;
-
         SparseArray<String> featureNames = new SparseArray<>();
         SparseArray<String> featureImages = new SparseArray<>();
 

@@ -30,13 +30,25 @@ public class BirdBankActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.birdbank);
 
+        /*//toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Bird Bank");
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),HomeScreen.class));
+            }
+        });*/
+
+
         // Init vars
         BirdBankDatabase db = new BirdBankDatabase(this);
 
         try {
             mList = db.getSeenBirdList();
             dateList = db.getSeenBirdDateList();
-        } catch(RuntimeException e) {
+        } catch (RuntimeException e) {
             // If the table doesn't exist - create one
             db.onCreate(db.getWritableDatabase());
         }
@@ -61,8 +73,7 @@ public class BirdBankActivity extends AppCompatActivity {
         lvBird.setAdapter(adapter);
     }
 
-    public void onClickShare(View v)
-    {
+    public void onClickShare(View v) {
         int birdsFound = mList.size();
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
@@ -73,6 +84,7 @@ public class BirdBankActivity extends AppCompatActivity {
 
     /**
      * OnClick function for bf_failure button and bf_topresults button
+     *
      * @param v View attached to the onclick
      */
     public void goBack(View v) {

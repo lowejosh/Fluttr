@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
+import com.example.charles.opencv.News.NewsActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +31,20 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+
+        // toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Fluttr");
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_voice_black_24dp);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Choose Feature");
+                startActivityForResult(intent, 3432);
+            }
+        });
 
         /*Bitmap image = null;
 
@@ -95,6 +111,18 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(new Intent(HomeScreen.this, AchievementActivity.class));
     }
 
+    /**
+     * On Button Press, Change Screen to News Feed
+     * @param v Attached View Object (Unused)
+     */
+    public void newsOnClick(View v) {
+        startActivity(new Intent(HomeScreen.this, NewsActivity.class));
+    }
+
+    /**
+     * On Button Press, Start Voice Controls
+     * @param v Attached View Object (Unused)
+     */
     public void voiceClick(View v) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
