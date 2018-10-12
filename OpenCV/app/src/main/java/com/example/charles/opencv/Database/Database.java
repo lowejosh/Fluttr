@@ -167,6 +167,14 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Executes a query
+     * @param sql SQL query (update, delete, etc.)
+     */
+    void execSQL(String sql) {
+        mDatabase.execSQL(sql);
+    }
+
+    /**
      * Retrieve the bird attached to the BirdID. If bird does not exists, returns null
      *
      * @param birdID BirdID of the selected bird
