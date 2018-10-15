@@ -148,4 +148,14 @@ public class Bird {
         return null;
     }
 
+    public boolean imageExists(Context context) {
+        if (image.equals("images/")) return true;
+        try {
+            if (BitmapFactory.decodeStream(context.getAssets().open(image)) == null) return false;
+            else return true;
+        } catch(IOException e) {}
+
+        return false;
+    }
+
 }

@@ -7,6 +7,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
+import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.Tables.Bird;
 
 import org.junit.Before;
@@ -14,6 +15,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Unit tests for the Duck DataType, requires the physical or emulated machine to run.
@@ -163,5 +167,15 @@ public class BirdInstrumentedTest extends ActivityTestCase {
     public void birdSoundNull() {
         bird = new Bird(ID, name, image, atlasNo, minSize, maxSize, description, null);
         assertEquals(null, bird.getSound(context));
+    }
+
+    @Test
+    public void birdImageWorks() {
+        BirdFinderDatabase db = new BirdFinderDatabase(context);
+        List<Integer> birdList = db.getBirdIDs();
+        for (int i: birdList) {
+            Bird bird = db.getBird(i);
+            assertTrue(bird.imageExists(context));
+        }
     }
 }
