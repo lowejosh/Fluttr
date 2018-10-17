@@ -199,6 +199,40 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Retrieve the bird attached to the bird name. If bird does not exists, returns null. If two
+     * birds have the same name in the database, the first one will be returned. This shouldn't
+     * be an issue as the table has a UNIQUE constraint on the bird name.
+     *
+     * @param birdName Bird name of the selected bird
+     * @return Bird matching the BirdID
+     */
+    public Bird getBird(String birdName) {
+        Bird bird;
+
+        openDatabase();
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM Birds WHERE upper(Name) = ?", new String[] { String.valueOf(birdName).toUpperCase() });
+        cursor.moveToFirst();
+
+        try {
+            bird = new Bird(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getShort(3),
+                    (byte) cursor.getInt(4),
+                    (byte) cursor.getInt(5),
+                    cursor.getString(6),
+                    cursor.getString(7));
+        } catch (CursorIndexOutOfBoundsException ex) {
+            Log.e("Database","Database: Failed to Find Duck with Name: " + birdName);
+            bird = null;
+        }
+
+        cursor.close();
+        closeDatabase();
+        return bird;
+    }
+
+    /**
      * Add bird ID to the birds_seen table
      * @param birdID ID of the Bird
      * @return True if data is added
