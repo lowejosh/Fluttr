@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.charles.opencv.AI.AI;
 import com.example.charles.opencv.AI.GoogleAI;
 
 import com.example.charles.opencv.Gallery.GalleryActivity;
@@ -152,11 +153,10 @@ public class AIActivity extends AppCompatActivity {
                         Log.i("OnCreate", "Image didn't load.");
                     }
 
-                    GoogleAI ai = new GoogleAI();
-                    List<Integer> list = ai.identify(image);
-                    System.out.println("AI_LIST = " + list.toString());
-                    Toast.makeText(AIActivity.this, "[debug] Identified " + list.toString(), Toast.LENGTH_LONG).show();
-
+                    AI ai = new AI(this.getApplicationContext());
+                    Integer id = ai.identify(image);
+                    System.out.println("AI_LIST = " + id);
+                    Toast.makeText(AIActivity.this, "[debug] Identified " + id, Toast.LENGTH_LONG).show();
                 }
 
             // failure
