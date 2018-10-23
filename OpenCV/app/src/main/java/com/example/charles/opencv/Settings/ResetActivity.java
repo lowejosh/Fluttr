@@ -9,7 +9,7 @@ import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
 
 /**
- * Controls the resetting of the bird bank feature inside the settings feature.
+ * Controls the resetting of the bird_finder bird_bank feature inside the settings feature.
  */
 public class ResetActivity extends AppCompatActivity {
     @Override
@@ -19,7 +19,7 @@ public class ResetActivity extends AppCompatActivity {
     }
 
     /**
-     * Resets the bird bank table on button click
+     * Resets the bird_finder bird_bank table on button click
      * @param v View
      */
     public void resetBirdBankOnClick(View v) {

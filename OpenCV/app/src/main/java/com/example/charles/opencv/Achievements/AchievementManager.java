@@ -61,12 +61,12 @@ public class AchievementManager {
     }
 
     /**
-     * Activates when the user has identified one bird
+     * Activates when the user has identified one bird_finder
      * @param bankDB Bird Bank Database
      * @return First Steps Achievement
      */
     private Achievement firstSteps(BirdBankDatabase bankDB) {
-        return new Achievement("First Steps", "Find your first bird", bankDB.getSeenBirdList().size() >= 1);
+        return new Achievement("First Steps", "Find your first bird_finder", bankDB.getSeenBirdList().size() >= 1);
     }
 
     /**
@@ -98,27 +98,27 @@ public class AchievementManager {
     }
 
     /**
-     * Activates when the user has shared 1 bird from the bird bank
+     * Activates when the user has shared 1 bird_finder from the bird_finder bird_bank
      * @return Making Friends Achievement
      */
     private Achievement makingFriends() {
-        return new Achievement("Making Friends", "Share 1 bird from the bird bank", false);
+        return new Achievement("Making Friends", "Share 1 bird_finder from the bird_finder bird_bank", false);
     }
 
     /**
-     * Activates when the user has shared 10 birds from the bird bank
+     * Activates when the user has shared 10 birds from the bird_finder bird_bank
      * @return Sharing Master Achievement
      */
     private Achievement sharingMaster() {
-        return new MultiStepAchievement("Sharing Master", "Share 10 different birds from the bird bank", 10, 0);
+        return new MultiStepAchievement("Sharing Master", "Share 10 different birds from the bird_finder bird_bank", 10, 0);
     }
 
     /**
-     * Activates when the user has shared 25 birds from the bird bank
+     * Activates when the user has shared 25 birds from the bird_finder bird_bank
      * @return Social Warrior Achievement
      */
     private Achievement socialWarrior() {
-        return new MultiStepAchievement("Social Warrior", "Share 25 different birds from the bird bank", 25, 0);
+        return new MultiStepAchievement("Social Warrior", "Share 25 different birds from the bird_finder bird_bank", 25, 0);
     }
 
     /**
@@ -142,7 +142,7 @@ public class AchievementManager {
      * @return First Recording Achievement
      */
     private Achievement firstRecording() {
-        return new Achievement("First Recording", "Record your first bird song", false);
+        return new Achievement("First Recording", "Record your first bird_finder song", false);
     }
 
     /**
@@ -150,7 +150,7 @@ public class AchievementManager {
      * @return Recording Addicts Achievement
      */
     private Achievement recordingAddicts() {
-        return new MultiStepAchievement("Recording Addicts", "Record ten bird songs", 10, 0);
+        return new MultiStepAchievement("Recording Addicts", "Record ten bird_finder songs", 10, 0);
     }
 
     /**
@@ -158,6 +158,6 @@ public class AchievementManager {
      * @return Recording Addicts Achievement
      */
     private Achievement recordingKing() {
-        return new MultiStepAchievement("Recording Addicts", "Record fifty bird songs", 50, 0);
+        return new MultiStepAchievement("Recording Addicts", "Record fifty bird_finder songs", 50, 0);
     }
 }

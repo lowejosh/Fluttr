@@ -19,7 +19,7 @@ public class BirdBankDatabase extends Database {
 
     /**
      * Get the seen_bird table cursor
-     * @return Cursor of bird IDs
+     * @return Cursor of bird_finder IDs
      */
     private Cursor getSeenBirdCursor() {
         SQLiteDatabase db = this.getWritableDatabase();

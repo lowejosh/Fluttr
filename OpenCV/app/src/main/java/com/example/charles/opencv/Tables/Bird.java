@@ -100,15 +100,15 @@ public class Bird {
     }
 
     /**
-     * Returns the description of the bird
-     * @return Description of the bird
+     * Returns the description of the bird_finder
+     * @return Description of the bird_finder
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * Returns AssetFileDescriptor sound file of the bird
+     * Returns AssetFileDescriptor sound file of the bird_finder
      * @param context
      * @return
      */
@@ -136,7 +136,7 @@ public class Bird {
         } catch (IOException | IllegalArgumentException unused) {
             Log.e("AIActivity", "Failed to load image: " + image);
 
-            //If bird image does not exist, display noImage file
+            //If bird_finder image does not exist, display noImage file
             try {
                 return BitmapFactory.decodeStream(context.getAssets().open("images/noImage.jpg"));
             } catch (IOException | IllegalArgumentException ex){

@@ -167,9 +167,9 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieve the bird attached to the BirdID. If bird does not exists, returns null
+     * Retrieve the bird_finder attached to the BirdID. If bird_finder does not exists, returns null
      *
-     * @param birdID BirdID of the selected bird
+     * @param birdID BirdID of the selected bird_finder
      * @return Bird matching the BirdID
      */
     public Bird getBird(int birdID) {
@@ -199,11 +199,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieve the bird attached to the bird name. If bird does not exists, returns null. If two
+     * Retrieve the bird_finder attached to the bird_finder name. If bird_finder does not exists, returns null. If two
      * birds have the same name in the database, the first one will be returned. This shouldn't
-     * be an issue as the table has a UNIQUE constraint on the bird name.
+     * be an issue as the table has a UNIQUE constraint on the bird_finder name.
      *
-     * @param birdName Bird name of the selected bird
+     * @param birdName Bird name of the selected bird_finder
      * @return Bird matching the BirdID
      */
     public Bird getBird(String birdName) {
@@ -233,7 +233,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Add bird ID to the birds_seen table
+     * Add bird_finder ID to the birds_seen table
      * @param birdID ID of the Bird
      * @return True if data is added
      */
@@ -254,7 +254,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Add bird IDs to the birds_seen table
+     * Add bird_finder IDs to the birds_seen table
      * @param birdIDs List of Bird IDs
      * @return True if data is added
      */

@@ -128,7 +128,7 @@ public class BirdFinderActivity extends AppCompatActivity {
     }
 
     /**
-     * If one bird is left, this will display the bird in bf_result
+     * If one bird_finder is left, this will display the bird_finder in bf_result
      */
     private void showAnswer() {
         //Change the View to bf_result
@@ -393,7 +393,7 @@ public class BirdFinderActivity extends AppCompatActivity {
 
     /**
      * Adds birdID to birdSeen table
-     * @param birdID ID of the bird identified
+     * @param birdID ID of the bird_finder identified
      */
     public static void AddBird(String birdID, Database dbHandler, Context c) {
         Bird bird = dbHandler.getBird(Integer.parseInt(birdID));

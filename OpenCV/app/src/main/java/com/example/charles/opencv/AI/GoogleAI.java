@@ -26,9 +26,9 @@ import java.util.List;
 
 public class GoogleAI {
     /**
-     * Determines using the local API whether a bitmap image contains a bird.
+     * Determines using the local API whether a bitmap image contains a bird_finder.
      * @param bitmap_image Image to be processed
-     * @return True if a bird is found
+     * @return True if a bird_finder is found
      */
     static boolean isBird(Bitmap bitmap_image) {
         FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector();
