@@ -47,7 +47,7 @@ public class Database extends SQLiteOpenHelper {
 
         //if (database.exists()) {
         //    database.delete();
-        //}
+        //edge }
 
         //If database does not exist, create it
         if (!database.exists()) {

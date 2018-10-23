@@ -54,6 +54,9 @@ public class AI {
         //Retrieve top value
         Classifier.Recognition result = results.get(0);
 
+        if (result == null)
+            return null;
+
         //Convert result to bird_finder id
         Database db = new Database(mContext);
         return db.getBird(result.getTitle()).getBirdID();
