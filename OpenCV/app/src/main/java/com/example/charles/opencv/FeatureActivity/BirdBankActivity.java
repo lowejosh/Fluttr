@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.charles.opencv.BirdBank.ListBirdAdapter;
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Tables.Bird;
@@ -80,6 +81,9 @@ public class BirdBankActivity extends AppCompatActivity {
         sendIntent.putExtra(Intent.EXTRA_TEXT, "Hey! I have identified " + birdsFound + " birds with Fluttr!\nCheck it out here: (placeholder for link)");
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+
+        AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
+        db.updateAchievement(db.SHARE, birdsFound);
     }
 
     /**

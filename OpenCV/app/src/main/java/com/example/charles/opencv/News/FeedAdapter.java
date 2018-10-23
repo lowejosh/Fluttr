@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.News.Model.RSS;
 import com.example.charles.opencv.R;
 
@@ -40,6 +41,9 @@ class FeedViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     public void onClick(View v) {
 
         itemClickListener.onClick(v, getAdapterPosition(), false);
+
+        AchievementsDatabase db = new AchievementsDatabase(v.getContext());
+        db.incrementAchievement(AchievementsDatabase.NEWS);
 
     }
 

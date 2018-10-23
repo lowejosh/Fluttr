@@ -68,6 +68,8 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
         String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
+
+        createAchievements(db);
     }
 
     /**
@@ -98,6 +100,20 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Create Achievements table
+     * @param db The database.
+     */
+    private void createAchievements(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS Achievements");
+        String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
+        db.execSQL(createAchievements);
+
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 3)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 3)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 3)");
+    }
+
+    /**
      * Open the sqlite database
      */
     void openDatabase() {
@@ -107,7 +123,7 @@ public class Database extends SQLiteOpenHelper {
             return;
         }
 
-        mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);
+        mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     /**
@@ -167,7 +183,15 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieve the bird_finder attached to the BirdID. If bird_finder does not exists, returns null
+     * Executes a query
+     * @param sql SQL query (update, delete, etc.)
+     */
+    void execSQL(String sql) {
+        mDatabase.execSQL(sql);
+    }
+
+    /**
+     * Retrieve the bird attached to the BirdID. If bird does not exists, returns null
      *
      * @param birdID BirdID of the selected bird_finder
      * @return Bird matching the BirdID
