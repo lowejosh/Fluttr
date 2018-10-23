@@ -11,6 +11,7 @@ import com.example.charles.opencv.Tables.Bird;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabel;
 import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabelDetector;
@@ -24,18 +25,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public class GoogleAI {
-    static private FirebaseVisionLabelDetector localDetector;
-    static private FirebaseVisionCloudLabelDetector cloudDetector;
-
     /**
      * Determines using the local API whether a bitmap image contains a bird.
      * @param bitmap_image Image to be processed
      * @return True if a bird is found
      */
     static boolean isBird(Bitmap bitmap_image) {
+        FirebaseVisionLabelDetector detector = FirebaseVision.getInstance().getVisionLabelDetector();
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap_image);
         Task<List<FirebaseVisionLabel>> results =
-                localDetector.detectInImage(image)
+                detector.detectInImage(image)
                         .addOnSuccessListener(
                                 new OnSuccessListener<List<FirebaseVisionLabel>>() {
                                     @Override
