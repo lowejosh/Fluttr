@@ -83,7 +83,7 @@ public class BirdBankActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
 
         AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
-        db.incrementAchievement(db.SHARE);
+        db.updateAchievement(db.SHARE, birdsFound);
     }
 
     /**

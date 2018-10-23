@@ -82,6 +82,6 @@ public class AchievementsDatabase extends Database {
      */
     public void incrementAchievement(int ID) {
         Achievements ach = getAchievement(ID);
-        updateAchievement(ID, ach.getProgress());
+        updateAchievement(ID, ach.getProgress() + 1);
     }
 }
