@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.charles.opencv.AI.AI;
 import com.example.charles.opencv.AI.GoogleAI;
 
+import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.Gallery.GalleryActivity;
 import com.example.charles.opencv.R;
 
@@ -152,13 +154,16 @@ public class AIActivity extends AppCompatActivity {
                         Log.i("OnCreate", "Image didn't load.");
                     }
 
-                    GoogleAI ai = new GoogleAI();
-                    List<Integer> list = ai.identify(image);
-                    System.out.println("AI_LIST = " + list.toString());
-                    Toast.makeText(AIActivity.this, "[debug] Identified " + list.toString(), Toast.LENGTH_LONG).show();
-
+                    AI ai = new AI(this);
+                    Integer birdID = ai.identify(image);
+                    Database db = new Database(this);
+                    if(birdID != null) {
+                        Toast.makeText(AIActivity.this, "You have identified a " + db.getBird(birdID).getName() + ". Adding to Bird Bank", Toast.LENGTH_LONG).show();
+                        db.addData(birdID.toString());
+                    } else {
+                        Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird in this image. Please try again.", Toast.LENGTH_LONG).show();
+                    }
                 }
-
             // failure
             } else {
                 Toast.makeText(AIActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
