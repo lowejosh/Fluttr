@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.HomeScreen;
 import com.example.charles.opencv.News.Model.RSS;
 import com.example.charles.opencv.R;

@@ -18,7 +18,7 @@ import com.example.charles.opencv.Tables.Bird;
 import java.io.IOException;
 
 /**
- * Displays detailed information about the bird on the app screen.
+ * Displays detailed information about the bird_finder on the app screen.
  */
 public class IndividualBirdActivity extends AppCompatActivity {
     TextView mBirdName;
@@ -53,7 +53,7 @@ public class IndividualBirdActivity extends AppCompatActivity {
     }
 
     /**
-     * Updates the bird page with stored information about the bird
+     * Updates the bird_finder page with stored information about the bird_finder
      */
     private void updateBirdPage() {
         bird = ListBirdAdapter.mBirdClicked;
@@ -94,13 +94,13 @@ public class IndividualBirdActivity extends AppCompatActivity {
             m.setVolume(1f, 1f);
             m.setLooping(false);
         } catch (Exception e) {
-            Log.e("loadSound", "Failure to play bird call");
+            Log.e("loadSound", "Failure to play bird_finder call");
             e.printStackTrace();
         }
     }
 
     /**
-     * Play bird song on click
+     * Play bird_finder song on click
      * @param v
      */
     public void playSound(View v) {

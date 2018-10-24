@@ -75,7 +75,7 @@ public class BirdFinderDatabase extends Database {
     /**
      * Updates the List of Integers containing the IDs of all birds matching the goal feature
      *
-     * @param goalFeature FeatureOption containing the goal bird feature
+     * @param goalFeature FeatureOption containing the goal bird_finder feature
      * @param feature Feature name
      * @param birdIDs List of BirdIDs to refine search
      */
@@ -166,7 +166,7 @@ public class BirdFinderDatabase extends Database {
         //Add Unknown to Feature List
         featureList.add(Feature.UNKNOWN);
 
-        //Create query to find all features that any bird in the list of birdIDs has
+        //Create query to find all features that any bird_finder in the list of birdIDs has
         String query = "SELECT DISTINCT(FeatureID) FROM " + table +
                 " WHERE BirdID IN (VALUES" + listIDs(birdIDs) + " ORDER BY FeatureID";
 
@@ -191,7 +191,7 @@ public class BirdFinderDatabase extends Database {
             return new ArrayList<>();
         }
 
-        //Determine if a bird has none of the listed features
+        //Determine if a bird_finder has none of the listed features
         Log.d("getListFeatures", "SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + table + ")");
         cursor = rawQuery("SELECT birdID FROM Birds WHERE birdID NOT IN (SELECT birdID FROM " + table + ")");
         cursor.moveToFirst();
@@ -273,12 +273,12 @@ public class BirdFinderDatabase extends Database {
     }
 
     /**
-     * Get a list of at most 5 birds closest in attributes to the wrong bird
+     * Get a list of at most 5 birds closest in attributes to the wrong bird_finder
      *
      * @param questions List of Questions Asked
      * @param answers List of Answers to the Questions Asked
      * @param wrongBirdID ID of the Bird which has been Identified as Incorrect by the User
-     * @return List of at most 5 birdIDs matching closest to the bird
+     * @return List of at most 5 birdIDs matching closest to the bird_finder
      */
     public List<Integer> getClosestBirds(List<Question> questions, List<Integer> answers, Integer wrongBirdID) {
         List<Integer> birdIDs;
@@ -293,7 +293,7 @@ public class BirdFinderDatabase extends Database {
             return new ArrayList<>();
         }
 
-        //Populate bird matches
+        //Populate bird_finder matches
         birdMatches = getMatchingBirdIDs(questions, answers, wrongBirdID);
 
         //Get Birds that Match Multiple Questions
@@ -383,7 +383,7 @@ public class BirdFinderDatabase extends Database {
                 Log.e("Database", "getMatchingBirdIDs: Invalid Table: " + question.getTable());
             }
 
-            //Remove wrong bird and add list to bird matches
+            //Remove wrong bird_finder and add list to bird_finder matches
             match.remove(wrongBirdID);
             birdMatches.add(match);
         }

@@ -165,7 +165,7 @@ public class AIActivity extends AppCompatActivity {
                         Toast.makeText(AIActivity.this, "You have identified a " + db.getBird(birdID).getName() + ". Adding to Bird Bank", Toast.LENGTH_LONG).show();
                         db.addData(birdID.toString());
                     } else {
-                        Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird in this image. Please try again.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird_finder in this image. Please try again.", Toast.LENGTH_LONG).show();
                     }
                 }
             // failure

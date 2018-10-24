@@ -47,7 +47,7 @@ public class Database extends SQLiteOpenHelper {
 
         //if (database.exists()) {
         //    database.delete();
-        //}
+        //edge }
 
         //If database does not exist, create it
         if (!database.exists()) {
@@ -68,6 +68,8 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
         String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
+
+        createAchievements(db);
     }
 
     /**
@@ -98,6 +100,20 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Create Achievements table
+     * @param db The database.
+     */
+    private void createAchievements(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS Achievements");
+        String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
+        db.execSQL(createAchievements);
+
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 3)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 3)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 3)");
+    }
+
+    /**
      * Open the sqlite database
      */
     void openDatabase() {
@@ -107,7 +123,7 @@ public class Database extends SQLiteOpenHelper {
             return;
         }
 
-        mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READONLY);
+        mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     /**
@@ -167,9 +183,17 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Executes a query
+     * @param sql SQL query (update, delete, etc.)
+     */
+    void execSQL(String sql) {
+        mDatabase.execSQL(sql);
+    }
+
+    /**
      * Retrieve the bird attached to the BirdID. If bird does not exists, returns null
      *
-     * @param birdID BirdID of the selected bird
+     * @param birdID BirdID of the selected bird_finder
      * @return Bird matching the BirdID
      */
     public Bird getBird(int birdID) {
@@ -199,11 +223,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Retrieve the bird attached to the bird name. If bird does not exists, returns null. If two
+     * Retrieve the bird_finder attached to the bird_finder name. If bird_finder does not exists, returns null. If two
      * birds have the same name in the database, the first one will be returned. This shouldn't
-     * be an issue as the table has a UNIQUE constraint on the bird name.
+     * be an issue as the table has a UNIQUE constraint on the bird_finder name.
      *
-     * @param birdName Bird name of the selected bird
+     * @param birdName Bird name of the selected bird_finder
      * @return Bird matching the BirdID
      */
     public Bird getBird(String birdName) {
@@ -233,7 +257,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Add bird ID to the birds_seen table
+     * Add bird_finder ID to the birds_seen table
      * @param birdID ID of the Bird
      * @return True if data is added
      */
@@ -254,7 +278,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * Add bird IDs to the birds_seen table
+     * Add bird_finder IDs to the birds_seen table
      * @param birdIDs List of Bird IDs
      * @return True if data is added
      */

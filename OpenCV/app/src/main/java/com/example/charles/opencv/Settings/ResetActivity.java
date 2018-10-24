@@ -5,11 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.R;
 
 /**
- * Controls the resetting of the bird bank feature inside the settings feature.
+ * Controls the resetting of the bird_finder bird_bank feature inside the settings feature.
  */
 public class ResetActivity extends AppCompatActivity {
     @Override
@@ -19,7 +20,7 @@ public class ResetActivity extends AppCompatActivity {
     }
 
     /**
-     * Resets the bird bank table on button click
+     * Resets the bird_finder bird_bank table on button click
      * @param v View
      */
     public void resetBirdBankOnClick(View v) {
@@ -27,6 +28,10 @@ public class ResetActivity extends AppCompatActivity {
 
         db.clearBirdsSeen();
         Toast.makeText(getApplicationContext(), "Bird Bank Reset", Toast.LENGTH_SHORT).show();
+
+        AchievementsDatabase achDB = new AchievementsDatabase(this.getApplicationContext());
+        achDB.updateAchievement(achDB.SHARE, 0);
+
         super.finish();
     }
 

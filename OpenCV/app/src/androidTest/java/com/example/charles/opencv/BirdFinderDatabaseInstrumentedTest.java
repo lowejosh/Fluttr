@@ -86,7 +86,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         //List of successful birds
         Integer success = 2; //Australasian Shoveler
 
-        //Update bird list
+        //Update bird_finder list
         db.updateBirdIDs(goalFeature, feature, birdIDs);
 
         //Check function has run correctly
@@ -112,7 +112,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         success.add(2);
         success.add(3);
 
-        //Update bird list
+        //Update bird_finder list
         db.updateBirdIDs(goalFeature, feature, birdIDs);
 
         //Check function has run correctly
@@ -134,7 +134,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         String feature = "Cheek";
         int goalFeature = 5;
 
-        //Update bird list
+        //Update bird_finder list
         db.updateBirdIDs(goalFeature, feature, birdIDs);
 
         //Check function has run correctly
@@ -145,7 +145,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
     public void updateBirdIDsInvalidBird() {
         //List of birds
         List<Integer> birdIDs = new ArrayList<>();
-        birdIDs.add(0); //Invalid bird
+        birdIDs.add(0); //Invalid bird_finder
 
         //Prominent Bill
         String feature = "Bill";
@@ -180,7 +180,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         String feature = "Bill";
         int goalFeature = 1;
 
-        //bird Should be Filtered Out I
+        //bird_finder Should be Filtered Out I
         db.updateBirdIDs(goalFeature, feature, birdIDs);
         assertEquals(0, birdIDs.size());
     }
@@ -198,7 +198,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         //List of successful birds
         Integer success = 1; //Australasian Shoveler
 
-        //Update bird list
+        //Update bird_finder list
         db.updateBirdIDs(goalFeature, feature, birdIDs);
 
         //Check function has run correctly

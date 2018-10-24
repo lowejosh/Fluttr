@@ -90,7 +90,7 @@ public final class Feature {
         try {
             return BitmapFactory.decodeStream(context.getAssets().open("features/" + featureImage.get(option)));
         } catch (IOException | IllegalArgumentException unused) {
-            //If bird image does not exist, display noImage file
+            //If bird_finder image does not exist, display noImage file
             Log.e("AIActivity", "Failed to load image: " + featureName.get(option) + " " + featureImage.get(option));
 
             try {

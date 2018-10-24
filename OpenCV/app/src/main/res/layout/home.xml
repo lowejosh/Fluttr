@@ -44,13 +44,13 @@
 
             <ImageView
                 android:id="@+id/bird_ID_image"
-                android:layout_width="150sp"
-                android:layout_height="150sp"
+                android:layout_width="116sp"
+                android:layout_height="128sp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/birdAIDescription"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/brain" />
+                app:srcCompat="@drawable/ai" />
 
             <TextView
                 android:id="@+id/bird_ID_title"
@@ -103,7 +103,7 @@
 
                 <ImageView
                     android:id="@+id/bird_finder_image"
-                    android:layout_width="124sp"
+                    android:layout_width="100sp"
                     android:layout_height="100sp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
@@ -183,11 +183,11 @@
 
             <ImageView
                 android:id="@+id/bird_news_image"
-                android:layout_width="150sp"
-                android:layout_height="150sp"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
                 android:contentDescription="@string/birds_news_description"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/news" />
+                app:srcCompat="@drawable/bird_news" />
 
         </LinearLayout>
 
@@ -254,7 +254,7 @@
                         android:layout_height="100sp"
                         android:scaleType="fitXY"
                         android:contentDescription="@string/achievements_description"
-                        app:srcCompat="@drawable/trophy" />
+                        app:srcCompat="@drawable/achievements" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -288,10 +288,12 @@
                     android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
                     android:layout_marginEnd="10sp"
-                    android:scaleType="fitXY"
+                    android:scaleType="center"
                     android:contentDescription="@string/birds_news_description"
-                    app:srcCompat="@drawable/profile" />
+                    app:srcCompat="@drawable/profile_icon" />
 
             </LinearLayout>
 

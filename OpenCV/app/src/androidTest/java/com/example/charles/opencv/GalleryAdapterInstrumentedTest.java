@@ -29,7 +29,7 @@ public class GalleryAdapterInstrumentedTest extends ActivityTestCase {
     public void setup() {
         db = new BirdBankDatabase(InstrumentationRegistry.getTargetContext());
 
-        // clear bird-bank
+        // clear bird_finder-bird_bank
         db.clearBirdsSeen();
     }
 

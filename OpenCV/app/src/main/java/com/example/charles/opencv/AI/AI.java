@@ -36,25 +36,28 @@ public class AI {
     }
 
     /**
-     * Returns the bird identified in the image. If not bird is found, null is returned.
-     * @param bitmap_image Bitmap image containing the bird
+     * Returns the bird_finder identified in the image. If not bird_finder is found, null is returned.
+     * @param bitmap_image Bitmap image containing the bird_finder
      * @return Bird or null
      */
     public Integer identify(Bitmap bitmap_image) {
         Bitmap croppedBitmap = Bitmap.createScaledBitmap(bitmap_image, INPUT_SIZE, INPUT_SIZE, false);
 
-        //Determine if the image contains a bird
+        //Determine if the image contains a bird_finder
         if (!GoogleAI.isBird(croppedBitmap)) {
             return null;
         }
 
-        //Return the bird from custom bird identifier
+        //Return the bird_finder from custom bird_finder identifier
         List<Classifier.Recognition> results = classifier.recogniseImage(croppedBitmap);
 
         //Retrieve top value
         Classifier.Recognition result = results.get(0);
 
-        //Convert result to bird id
+        if (result == null)
+            return null;
+
+        //Convert result to bird_finder id
         Database db = new Database(mContext);
         return db.getBird(result.getTitle()).getBirdID();
     }

@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 
 /**
- * Unit tests for the Achievement Class, requires the physical or emulated machine to run.
+ * Unit tests for the Achievements Class, requires the physical or emulated machine to run.
  */
 @RunWith(AndroidJUnit4.class)
 public class AchievementInstrumentedTest extends ActivityTestCase {
