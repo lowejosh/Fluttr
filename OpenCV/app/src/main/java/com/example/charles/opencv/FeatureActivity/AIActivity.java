@@ -26,6 +26,8 @@ import com.example.charles.opencv.Gallery.GalleryActivity;
 import com.example.charles.opencv.R;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,7 @@ import java.util.List;
 public class AIActivity extends AppCompatActivity {
 
     private static final int CAPTURE_IMAGE_REQUEST_CODE=1000;
+    private final int SELECT_PHOTO = 1;
     Button takePhoto;
     Button uploadPhoto;
     Button viewGallery;
@@ -84,7 +87,8 @@ public class AIActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(pickPhoto , 1);
+                pickPhoto.setType("image/*");
+                startActivityForResult(pickPhoto , SELECT_PHOTO);
             }
         });
         // start view gallery activity
@@ -168,6 +172,29 @@ public class AIActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(AIActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == SELECT_PHOTO) {
+             try {
+                 final Uri imageUri = data.getData();
+                 if (imageUri == null) {
+                     Toast.makeText(AIActivity.this, "Error in uploading image.", Toast.LENGTH_LONG).show();
+                 } else {
+                     final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                     final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                     AI ai = new AI(this);
+                     Integer birdID = ai.identify(selectedImage);
+                     Database db = new Database(this);
+                     if(birdID != null) {
+                         Toast.makeText(AIActivity.this, "You have identified a " + db.getBird(birdID).getName() + ". Adding to Bird Bank", Toast.LENGTH_LONG).show();
+                         db.addData(birdID.toString());
+                     } else {
+                         Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird in this image. Please try again.", Toast.LENGTH_LONG).show();
+                     }
+                 }
+             } catch (FileNotFoundException e) {
+                 e.printStackTrace();
+                 Toast.makeText(AIActivity.this, "Error in uploading image.", Toast.LENGTH_LONG).show();
+             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
