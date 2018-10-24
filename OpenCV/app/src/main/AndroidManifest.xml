@@ -71,6 +71,9 @@
             android:name=".FeatureActivity.ProfileActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".FeatureActivity.RecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".FeatureActivity.AchievementActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".Voice.VoiceControlActivity">

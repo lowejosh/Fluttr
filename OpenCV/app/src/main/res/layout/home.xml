@@ -195,6 +195,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="2sp"
+            android:paddingBottom="2sp"
             android:background="@color/white"
             android:orientation="horizontal"
             android:weightSum="1">
@@ -296,6 +297,33 @@
                     app:srcCompat="@drawable/profile_icon" />
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="10sp"
+            android:onClick="recordOnClick">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5sp"
+                android:layout_gravity="center"
+                android:text="@string/recordings_title"
+                android:textColor="@color/title_color"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/recordings_image"
+                android:layout_width="75sp"
+                android:layout_height="75sp"
+                android:contentDescription="@string/birds_news_description"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/recording" />
 
         </LinearLayout>
 

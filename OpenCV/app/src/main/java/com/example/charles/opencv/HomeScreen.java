@@ -16,6 +16,7 @@ import com.example.charles.opencv.FeatureActivity.AchievementActivity;
 import com.example.charles.opencv.FeatureActivity.BirdBankActivity;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
+import com.example.charles.opencv.FeatureActivity.RecordActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
 import com.example.charles.opencv.News.NewsActivity;
 
@@ -117,6 +118,14 @@ public class HomeScreen extends AppCompatActivity {
      */
     public void newsOnClick(View v) {
         startActivity(new Intent(HomeScreen.this, NewsActivity.class));
+    }
+
+    /**
+     * On Button Press, Change Screen to Recordings
+     * @param v Attached View Object (Unused)
+     */
+    public void recordOnClick(View v) {
+        startActivity(new Intent(HomeScreen.this, RecordActivity.class));
     }
 
     /**

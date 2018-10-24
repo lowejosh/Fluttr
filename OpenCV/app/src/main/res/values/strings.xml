@@ -59,4 +59,5 @@
     <string name="take_photo">Take Photo</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="view_gallery">View Gallery</string>
+    <string name="recordings_title">Recordings</string>
 </resources>
