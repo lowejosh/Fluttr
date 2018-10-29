@@ -64,7 +64,7 @@ public class BirdFinderDatabaseInstrumentedTest extends ActivityTestCase {
         List<Integer> birdIDs = db.getBirdIDs();
 
         //Check size of array contains all the birds currently in the database
-        assertTrue(birdIDs.size() == 89);
+        assertEquals(91, birdIDs.size());
 
         for (Integer birdID : birdIDs) {
             assertNotNull(db.getBird(birdID));

@@ -104,7 +104,12 @@ public class TensorFlowImageClassifier implements Classifier {
     @Override
     public List<Recognition> recogniseImage(final Bitmap bitmap) {
         //Convert bitmap to pixel array
-        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+        bitmap.getPixels(intValues,
+                0, bitmap.getWidth(),
+                0,
+                0,
+                bitmap.getWidth(),
+                bitmap.getHeight());
         for (int i = 0; i < intValues.length; i++) {
             final int val = intValues[i];
             floatValues[i * 3 + 0] = (((val >> 16) & 0xFF) - imageMean) / imageStd;
@@ -131,7 +136,9 @@ public class TensorFlowImageClassifier implements Classifier {
         //Populate queue with outputs higher than threshold
         for (int i = 0; i < outputs.length; ++i) {
             if (outputs[i] > THRESHOLD) {
-                pq.add(new Recognition(String.valueOf(i), labels.size() > i ? labels.get(i) : "unknown", outputs[i], null));
+                pq.add(new Recognition(String.valueOf(i),
+                        labels.size() > i ? labels.get(i) : "unknown",
+                        outputs[i], null));
             }
         }
 
