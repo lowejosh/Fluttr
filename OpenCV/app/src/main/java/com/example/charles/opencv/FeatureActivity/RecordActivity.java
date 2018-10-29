@@ -106,6 +106,9 @@ public class RecordActivity extends AppCompatActivity {
 
         updateAudioFiles();
         Toast.makeText(RecordActivity.this, "Recording Completed", Toast.LENGTH_LONG).show();
+
+        AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
+        db.incrementAchievement(AchievementsDatabase.RECORD);
     }
 
     private void stopPlaying() {
@@ -117,9 +120,6 @@ public class RecordActivity extends AppCompatActivity {
         mediaPlayer.stop();
         mediaPlayer.release();
         mediaPlayer = null;
-
-        AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
-        db.incrementAchievement(AchievementsDatabase.RECORD);
     }
 
     public void playAudio(View v, File file) {

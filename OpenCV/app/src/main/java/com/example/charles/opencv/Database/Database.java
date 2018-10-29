@@ -69,8 +69,6 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
         String createTable = "CREATE TABLE " + BS_TABLE_NAME + " (" + BS_COL1 + " INTEGER PRIMARY KEY, " + BS_COL2 + " TEXT)";
         db.execSQL(createTable);
-
-        createAchievements(db);
     }
 
     /**
@@ -98,20 +96,6 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + BS_TABLE_NAME);
         onCreate(db);
-    }
-
-    /**
-     * Create Achievements table
-     * @param db The database.
-     */
-    private void createAchievements(SQLiteDatabase db) {
-        //db.execSQL("DROP TABLE IF EXISTS Achievements");
-        //String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
-        //db.execSQL(createAchievements);
-
-        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 0)");
-        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 0)");
-        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 0)");
     }
 
     /**
