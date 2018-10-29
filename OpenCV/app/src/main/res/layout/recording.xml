@@ -51,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Stop"
-                android:enabled="false"
                 android:onClick="stopAudio"/>
         </LinearLayout>
     </LinearLayout>
@@ -71,8 +70,7 @@
         android:text="Currently Playing"
         android:textSize="16sp"
         android:textAlignment="center"
-        android:background="@color/background"
-        android:visibility="gone"/>
+        android:background="@color/background"/>
 
     <TextView
         android:id="@+id/currently_playing_audio"
@@ -81,8 +79,7 @@
         android:text="audio"
         android:textSize="16sp"
         android:textAlignment="center"
-        android:background="@color/background"
-        android:visibility="gone"/>
+        android:background="@color/background"/>
 
     <TextView
         android:id="@+id/no_recordings"
@@ -91,8 +88,7 @@
         android:text="No Recordings Saved Yet"
         android:textSize="16sp"
         android:textAlignment="center"
-        android:background="@color/background"
-        android:visibility="gone"/>
+        android:background="@color/background"/>
 
     <ListView
         android:id="@+id/list_recordings"
