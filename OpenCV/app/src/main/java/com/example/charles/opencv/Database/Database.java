@@ -45,6 +45,7 @@ public class Database extends SQLiteOpenHelper {
         //Check database exists
         File database = context.getDatabasePath(DBNAME);
 
+        //Uncomment when changes to database are made
         //if (database.exists()) {
         //    database.delete();
         //}
@@ -104,13 +105,13 @@ public class Database extends SQLiteOpenHelper {
      * @param db The database.
      */
     private void createAchievements(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS Achievements");
-        String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
-        db.execSQL(createAchievements);
+        //db.execSQL("DROP TABLE IF EXISTS Achievements");
+        //String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
+        //db.execSQL(createAchievements);
 
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 0)");
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 0)");
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 0)");
+        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 0)");
+        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 0)");
+        //db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 0)");
     }
 
     /**

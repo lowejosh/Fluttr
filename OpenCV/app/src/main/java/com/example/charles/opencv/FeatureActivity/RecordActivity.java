@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Recording.RecordingAdapter;
 
@@ -116,6 +117,9 @@ public class RecordActivity extends AppCompatActivity {
         mediaPlayer.stop();
         mediaPlayer.release();
         mediaPlayer = null;
+
+        AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
+        db.incrementAchievement(AchievementsDatabase.RECORD);
     }
 
     public void playAudio(View v, File file) {
