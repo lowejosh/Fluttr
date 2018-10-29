@@ -1,14 +1,17 @@
 package com.example.charles.opencv.FeatureActivity;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -28,14 +31,17 @@ import com.example.charles.opencv.R;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.lang.String;
 
 public class AIActivity extends AppCompatActivity {
 
     private static final int CAPTURE_IMAGE_REQUEST_CODE=1000;
     private final int SELECT_PHOTO = 1;
+    final int PIC_CROP = 2;
     Button takePhoto;
     Button uploadPhoto;
     Button viewGallery;
@@ -53,6 +59,15 @@ public class AIActivity extends AppCompatActivity {
         uploadPhoto = findViewById(R.id.uploadphoto);
         viewGallery = findViewById(R.id.viewgallery);
 
+        if(Build.VERSION.SDK_INT>=24) {
+            try {
+                Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                m.invoke(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         // for getting screen dimensions
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -66,6 +81,7 @@ public class AIActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(checkIfCameraAvailable()) {
 
+                    Toast.makeText(AIActivity.this, "Please hold your phone in landscape when taking photos", Toast.LENGTH_LONG).show();
 
                     // permissions
                     String storagePerm = "android.permission.WRITE_EXTERNAL_STORAGE";
@@ -123,11 +139,13 @@ public class AIActivity extends AppCompatActivity {
 
         // image
         img = new File(fluttrFolder, "Fluttr_" + timeStamp + ".png");  // create image
-        Uri uriSavedImage = FileProvider.getUriForFile(                          // get uri
+        Uri uri = FileProvider.getUriForFile(                          // get uri
                 AIActivity.this,
                 "com.example.charles.opencv.provider",
                 img);
-        imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);              // save image
+        imgIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);              // save image
+        imgIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        imgIntent.putExtra("uri",uri.toString());
         startActivityForResult(imgIntent, CAPTURE_IMAGE_REQUEST_CODE);
     }
 
@@ -143,8 +161,12 @@ public class AIActivity extends AppCompatActivity {
         if (requestCode == CAPTURE_IMAGE_REQUEST_CODE) {
             // success
             if (resultCode == RESULT_OK) {
-                //Toast.makeText(AIActivity.this, "Image Captured Successfully", Toast.LENGTH_SHORT).show();
-
+                if (img != null) {
+                    Uri uri = Uri.fromFile(img);
+                    crop(uri);
+                }
+            }
+                /*
                 // AI STUFF
                 if (img == null) {
                     Toast.makeText(AIActivity.this, "Error Processing Image! Please Retry", Toast.LENGTH_LONG).show();
@@ -168,16 +190,22 @@ public class AIActivity extends AppCompatActivity {
                         Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird_finder in this image. Please try again.", Toast.LENGTH_LONG).show();
                     }
                 }
+
             // failure
             } else {
                 Toast.makeText(AIActivity.this, "Error Capturing Image! Please Retry", Toast.LENGTH_SHORT).show();
             }
+            */
         } else if (requestCode == SELECT_PHOTO) {
+            /*
              try {
+             */
                  final Uri imageUri = data.getData();
                  if (imageUri == null) {
                      Toast.makeText(AIActivity.this, "Error in uploading image.", Toast.LENGTH_LONG).show();
                  } else {
+                     crop(imageUri);
+                     /*
                      final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                      final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
 
@@ -190,11 +218,31 @@ public class AIActivity extends AppCompatActivity {
                      } else {
                          Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird in this image. Please try again.", Toast.LENGTH_LONG).show();
                      }
+                     */
                  }
-             } catch (FileNotFoundException e) {
+             /* } catch (FileNotFoundException e) {
                  e.printStackTrace();
                  Toast.makeText(AIActivity.this, "Error in uploading image.", Toast.LENGTH_LONG).show();
              }
+             */
+        } else if (requestCode == PIC_CROP) {
+            if (data != null) {
+                // get the returned data
+                Bundle extras = data.getExtras();
+                // get the cropped bitmap
+                Bitmap selectedBitmap = extras.getParcelable("data");
+
+                AI ai = new AI(this);
+                Integer birdID = ai.identify(selectedBitmap);
+                Database db = new Database(this);
+                if(birdID != null) {
+                    Toast.makeText(AIActivity.this, "You have identified a " + db.getBird(birdID).getName() + ". Adding to Bird Bank", Toast.LENGTH_LONG).show();
+                    db.addData(birdID.toString());
+                } else {
+                    Toast.makeText(AIActivity.this, "Sorry, we could not identify a bird in this image. Please try again.", Toast.LENGTH_LONG).show();
+                }
+            }
+
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -205,6 +253,28 @@ public class AIActivity extends AppCompatActivity {
      */
     public void goBack(View v) {
         super.finish();
+    }
+
+    private void crop(Uri picUri) {
+        try {
+            // Use android cropping intent
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+
+            // Retrieve the values and place them in the returned data
+            cropIntent.setDataAndType(picUri, "image/*");
+            cropIntent.putExtra("crop", true);
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            cropIntent.putExtra("outputX", 128);
+            cropIntent.putExtra("outputY", 128);
+            cropIntent.putExtra("return-data", true);
+            startActivityForResult(cropIntent, PIC_CROP);
+        }
+        catch (ActivityNotFoundException e) {
+            String errorMessage = "Error: your device doesn't support image cropping";
+            Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
 }

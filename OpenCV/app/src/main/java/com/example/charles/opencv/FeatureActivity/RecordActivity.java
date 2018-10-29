@@ -100,7 +100,11 @@ public class RecordActivity extends AppCompatActivity {
 
     public void stopAudio(View v) {
         stopButton.setEnabled(false);
-        mediaRecorder.stop();
+        try {
+            mediaRecorder.stop();
+        } catch(RuntimeException stopE) {
+            Toast.makeText(RecordActivity.this, "Error in recording audio. Please try again", Toast.LENGTH_LONG).show();
+        }
         mediaRecorder.release();
         mediaRecorder = null;
         recordButton.setEnabled(true);

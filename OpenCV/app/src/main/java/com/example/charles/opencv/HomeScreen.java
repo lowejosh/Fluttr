@@ -2,6 +2,7 @@ package com.example.charles.opencv;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
@@ -164,6 +165,8 @@ public class HomeScreen extends AppCompatActivity {
                         startActivity(new Intent(this, ProfileActivity.class));
                     } else if(mostLikelyThingHeard.toUpperCase().contains("ACHIEVEMENTS")){
                         startActivity(new Intent(this, AchievementActivity.class));
+                    }else if(mostLikelyThingHeard.toUpperCase().contains("RECORDING") || mostLikelyThingHeard.toUpperCase().contains("RECORDINGS")) {
+                        startActivity(new Intent(this, RecordActivity.class));
                     }
                 }
             }
