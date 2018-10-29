@@ -1,7 +1,5 @@
 package com.example.charles.opencv.FeatureActivity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -18,18 +16,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charles.opencv.Database.AchievementsDatabase;
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Recording.RecordingAdapter;
-
-import static android.Manifest.permission.RECORD_AUDIO;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Shows the settings available to the user, this currently only displays the references for information
@@ -111,6 +110,9 @@ public class RecordActivity extends AppCompatActivity {
 
         updateAudioFiles();
         Toast.makeText(RecordActivity.this, "Recording Completed", Toast.LENGTH_LONG).show();
+
+        AchievementsDatabase db = new AchievementsDatabase(this.getApplicationContext());
+        db.incrementAchievement(AchievementsDatabase.RECORD);
     }
 
     private void stopPlaying() {

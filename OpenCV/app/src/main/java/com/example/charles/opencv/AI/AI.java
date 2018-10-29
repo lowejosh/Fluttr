@@ -3,9 +3,7 @@ package com.example.charles.opencv.AI;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.example.charles.opencv.Database.BirdFinderDatabase;
 import com.example.charles.opencv.Database.Database;
-import com.example.charles.opencv.Tables.Bird;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.example.charles.opencv.BirdBank;
 
 import android.content.res.AssetFileDescriptor;
-import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.charles.opencv.R;
 import com.example.charles.opencv.Tables.Bird;
-
-import java.io.IOException;
 
 /**
  * Displays detailed information about the bird_finder on the app screen.

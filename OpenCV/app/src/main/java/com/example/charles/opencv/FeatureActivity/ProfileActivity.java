@@ -1,15 +1,12 @@
 package com.example.charles.opencv.FeatureActivity;
 
 import android.app.Activity;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import com.example.charles.opencv.Profile.Authentication;
 import com.example.charles.opencv.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.IOException;
 
 public class ProfileActivity extends AppCompatActivity {
     Authentication auth;

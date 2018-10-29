@@ -1,11 +1,8 @@
 package com.example.charles.opencv.FeatureActivity;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,7 +11,6 @@ import com.example.charles.opencv.Achievements.AchievementAdapter;
 import com.example.charles.opencv.Achievements.AchievementManager;
 import com.example.charles.opencv.R;
 
-import java.io.IOException;
 import java.util.List;
 
 public class AchievementActivity extends AppCompatActivity {

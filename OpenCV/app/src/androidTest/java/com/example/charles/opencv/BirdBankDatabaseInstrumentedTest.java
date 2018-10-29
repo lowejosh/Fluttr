@@ -5,9 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityTestCase;
 
-import com.example.charles.opencv.Tables.Bird;
 import com.example.charles.opencv.Database.BirdBankDatabase;
 import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
+import com.example.charles.opencv.Tables.Bird;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;

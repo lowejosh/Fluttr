@@ -82,7 +82,7 @@
                 <category android:name="android.intent.category.VOICE" />
             </intent-filter>
         </activity>
-        <activity android:name=".News.NewsActivity"></activity>
+        <activity android:name=".FeatureActivity.NewsActivity"></activity>
     </application>
 
 </manifest>

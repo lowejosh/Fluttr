@@ -15,9 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
-
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Unit tests for the Duck DataType, requires the physical or emulated machine to run.
