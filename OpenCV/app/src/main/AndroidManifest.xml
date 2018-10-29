@@ -57,9 +57,6 @@
             android:name=".BirdBank.IndividualBirdActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".FeatureActivity.SearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".FeatureActivity.BirdBankActivity"
             android:screenOrientation="portrait" />
         <activity

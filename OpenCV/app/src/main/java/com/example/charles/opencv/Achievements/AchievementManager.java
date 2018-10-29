@@ -162,9 +162,9 @@ public class AchievementManager {
 
     /**
      * Activates when the user makes their first 50 recordings
-     * @return Recording Addicts Achievements
+     * @return Recording King Achievements
      */
-    private Achievement recordingKing(List<Achievements> achievementsList) {
-        return new MultiStepAchievement("Recording Addicts", "Record fifty bird songs", 50, achievementsList.get(AchievementsDatabase.RECORD - 1).getProgress());
+    private Achievement recordingKing(AchievementsDatabase achDB, List<Achievements> achievementsList) {
+        return new MultiStepAchievement("Recording King", "Record fifty bird songs", 50, achievementsList.get(achDB.RECORD - 1).getProgress());
     }
 }
