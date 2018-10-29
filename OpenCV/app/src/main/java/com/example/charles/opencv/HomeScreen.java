@@ -1,11 +1,8 @@
 package com.example.charles.opencv;
 
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.BitmapFactory;
 import android.icu.text.AlphabeticIndex;
-=======
->>>>>>> aeaf5d8ef7d1edd4c125139b22b485e91c96ad9d
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
