@@ -1,15 +1,11 @@
 package com.example.charles.opencv;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.example.charles.opencv.FeatureActivity.AIActivity;
 import com.example.charles.opencv.FeatureActivity.AchievementActivity;
@@ -18,9 +14,8 @@ import com.example.charles.opencv.FeatureActivity.BirdFinderActivity;
 import com.example.charles.opencv.FeatureActivity.ProfileActivity;
 import com.example.charles.opencv.FeatureActivity.RecordActivity;
 import com.example.charles.opencv.FeatureActivity.SettingActivity;
-import com.example.charles.opencv.News.NewsActivity;
+import com.example.charles.opencv.FeatureActivity.NewsActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

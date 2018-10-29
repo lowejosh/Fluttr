@@ -108,9 +108,9 @@ public class Database extends SQLiteOpenHelper {
         String createAchievements = "CREATE TABLE 'Achievements' ('AchievementID' INTEGER PRIMARY KEY AUTOINCREMENT, 'Name' TEXT NOT NULL UNIQUE, 'Progress', INTEGER NOT NULL DEFAULT 0)";
         db.execSQL(createAchievements);
 
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 3)");
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 3)");
-        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 3)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (1, 'Share', 0)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (2, 'News', 0)");
+        db.execSQL("INSERT INTO Achievements (AchievementID, Name, Progress) VALUES (3, 'Record', 0)");
     }
 
     /**

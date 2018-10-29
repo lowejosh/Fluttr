@@ -1,30 +1,19 @@
 package com.example.charles.opencv.Recording;
 
 import android.content.Context;
-import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.charles.opencv.Achievements.Achievement;
-import com.example.charles.opencv.Achievements.MultiStepAchievement;
-import com.example.charles.opencv.BirdBank.IndividualBirdActivity;
 import com.example.charles.opencv.FeatureActivity.RecordActivity;
 import com.example.charles.opencv.R;
-import com.example.charles.opencv.Tables.Bird;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RecordingAdapter extends BaseAdapter {

@@ -19,8 +19,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.charles.opencv.AI.AI;
-import com.example.charles.opencv.AI.GoogleAI;
-
 import com.example.charles.opencv.Database.Database;
 import com.example.charles.opencv.Gallery.GalleryActivity;
 import com.example.charles.opencv.R;
@@ -30,7 +28,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class AIActivity extends AppCompatActivity {
 
